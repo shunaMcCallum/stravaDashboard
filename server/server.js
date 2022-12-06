@@ -14,11 +14,15 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(cors());
 
-app.get('/', async(req, res) => {
+app.get('/api', async(req, res) => {
     console.log('called');
     const result = await dbOperation.getActivities();
-    res.send(result.recordset);
+    res.send(result);
 })
+
+// dbOperation.getActivities()
+// .then(res => res.json())
+// .then(data => console.log(data));
 
 
 app.listen(API_PORT, function() {
