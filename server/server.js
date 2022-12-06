@@ -14,8 +14,14 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(cors());
 
-app.get('/api', async(req, res) => {
-    console.log('called');
+app.get('/user', async(req, res) => {
+    console.log('called userDetails');
+    const result = await dbOperation.getUserDetails();
+    res.send(result);
+})
+
+app.get('/activities', async(req, res) => {
+    console.log('called activities');
     const result = await dbOperation.getActivities();
     res.send(result);
 })
