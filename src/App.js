@@ -20,7 +20,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Hello Strava!</h1>
+      <h1>Strava Dashboard</h1>
         <HomeContainer userDetails={userDetails}/>
     </div>
   );

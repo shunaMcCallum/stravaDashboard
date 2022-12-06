@@ -6,12 +6,13 @@ const UserDetailsList = ({userDetails}) => {
     return(
 
     <div>
-    {console.log(userDetails)}
+    <h3>Welcome, {userDetails.Firstname}!</h3>
+    <p>Here are your latest statistics:</p>
     <p>User Id: {userDetails.UserId}</p>    
     <p>Username: {userDetails.Username}</p>
     <p>First name: {userDetails.Firstname}</p>
     <p>Last name: {userDetails.Lastname}</p>
-    <p>FTP: {userDetails.Ftp}</p>
+    <p>FTP: {userDetails.Ftp}W</p>
     <p>Weight: {userDetails.Weight}kg</p>
     <p>Account created: {userDetails.AccountCreatedAt}</p>
 

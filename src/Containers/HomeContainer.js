@@ -6,7 +6,6 @@ const HomeContainer = ({userDetails}) => {
     return(
 
     <div>
-        <h2>USER DETAILS</h2>
         <UserDetailsContainer userDetails={userDetails}/>
     </div>
     
