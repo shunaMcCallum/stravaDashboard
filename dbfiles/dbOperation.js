@@ -4,7 +4,7 @@ const sql = require('mssql/msnodesqlv8');
 const getUserDetails = async() => {
     try {
         let pool = await sql.connect(config);
-        let userDetails = await pool.request().query('SELECT UserId, Username, Firstname, Lastname, FORMAT(AccountCreatedAt, \'dd/MM/yyyy\') As AccountCreatedAt, Weight, Ftp FROM dbo.UserDetails_Live')
+        let userDetails = await pool.request().query('SELECT Firstname, FORMAT(AccountCreatedAt, \'dd/MM/yyyy\') As AccountCreatedAt, Weight, Ftp FROM dbo.UserDetails_Live')
         // console.log(userDetails);
         return userDetails;
     }

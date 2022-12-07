@@ -9,9 +9,11 @@ const ActivitiesList = ({activities}) => {
     })
 
     return (
-        <div>
-            {activitiesItems}
-        </div>
+
+    <div>
+        {activitiesItems}
+    </div>
+    
     );
 }
 
