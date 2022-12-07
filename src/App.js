@@ -11,7 +11,6 @@ function App() {
   useEffect(() => {
     fetch('http://localhost:5000/user')
       .then(res => res.json())
-      // .then(data => (console.log(data.recordset[0])));
        .then(data => setUserDetails(data.recordset[0]));
   }, [])
 
@@ -25,7 +24,6 @@ function App() {
   useEffect(() => {
     fetch('http://localhost:5000/userStats')
       .then(res => res.json())
-      // .then(data => (console.log(data)));
       .then(data => setUserStats(data.recordsets[0]));
   }, [])
 

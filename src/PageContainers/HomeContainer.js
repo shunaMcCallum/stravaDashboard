@@ -15,7 +15,7 @@ const HomeContainer = ({userDetails, userStats}) => {
     <div>
         <SectionHeader text={text} />
         <StatsList title={title} list={list}/>
-        <StatsChartsContainer />
+        <StatsChartsContainer userStats={userStats}/>
     </div>
     
     );
