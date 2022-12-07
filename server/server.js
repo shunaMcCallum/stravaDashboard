@@ -20,13 +20,37 @@ app.get('/user', async(req, res) => {
     res.send(result);
 })
 
-app.get('/activities', async(req, res) => {
-    console.log('called activities');
-    const result = await dbOperation.getActivities();
+// app.get('/activities', async(req, res) => {
+//     console.log('called activities');
+//     const result = await dbOperation.getActivities();
+//     res.send(result);
+// })
+
+app.get('/userStats', async(req, res) => {
+    console.log('called userStats');
+    const result = await dbOperation.getUserStats();
     res.send(result);
 })
 
-// dbOperation.getActivities()
+// app.get('/userStatsAll', async(req, res) => {
+//     console.log('called userStatsAll');
+//     const resultAll = await dbOperation.getUserStatsAll();
+//     res.send(resultAll);
+// })
+
+// app.get('/userStatsRecent', async(req, res) => {
+//     console.log('called userStatsRecent');
+//     const resultRecent = await dbOperation.getUserStatsRecent();
+//     res.send(resultRecent);
+// })
+
+// app.get('/userStatsYtd', async(req, res) => {
+//     console.log('called userStatsYtd');
+//     const resultYtd = await dbOperation.getUserStatsYtd();
+//     res.send(resultYtd);
+// })
+
+// dbOperation.getUserStats()
 // .then(res => res.json())
 // .then(data => console.log(data));
 

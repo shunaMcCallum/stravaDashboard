@@ -1,7 +1,6 @@
 import React from 'react';
 import ActivityListItem from './ActivityListItem';
 
-// onCountryClick function not actually used in this component but is passed down to ListItem
 const ActivitiesList = ({activities}) => {
 
     const activitiesItems = activities.map((activity, index) => {
@@ -13,7 +12,7 @@ const ActivitiesList = ({activities}) => {
     <div>
         {activitiesItems}
     </div>
-    
+
     );
 }
 
