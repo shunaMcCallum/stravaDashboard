@@ -1,11 +1,12 @@
 import React from 'react';
 import PieChart from './PieChart.js';
 
-const PieChartsContainer = ({ item }) => {
+const PieChartsContainer = ({ chartArray, chartOptions, title }) => {
 
     return (
         <div>
-            <PieChart item={item} />
+            <p>{title}</p>
+            <PieChart chartArray={chartArray} chartOptions={chartOptions} />
         </div>
     );
 

@@ -1,14 +1,20 @@
 import React from 'react';
+import { Chart } from 'react-google-charts';
 
-const FilmDetails = ({ item }) => {
+const PieChart = ({ chartArray, chartOptions }) => {
 
     return (
-        <div>
-            <p>Stats for: {item.Header}</p>
-            <p>Activities: {item.Activities}</p>
-        </div>
+        <>
+            <Chart className="chart1"
+                    chartType="PieChart"
+                    data={chartArray}
+                    options={chartOptions}
+                    width={"100vh"}
+                    height={"50vh"}
+            />
+        </>
     );
 
 }
 
-export default FilmDetails;
+export default PieChart;
