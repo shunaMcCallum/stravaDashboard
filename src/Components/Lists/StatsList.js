@@ -1,6 +1,6 @@
 import React from "react";
 
-const StatsList = ({title, list}) => {
+const StatsList = ({list}) => {
 
     const listItems = list.map((item) => {
         return(
@@ -10,8 +10,7 @@ const StatsList = ({title, list}) => {
 
     return(
         <div>
-            <h3>{title}</h3>
-                {listItems}
+            {listItems}
         </div>
     );
     

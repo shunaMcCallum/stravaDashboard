@@ -1,6 +1,6 @@
 import React from "react";
 import SectionHeader from '../Components/Headers/SectionHeader.js';
-import StatsList from '../Components/Lists/StatsList.js';
+import ListContainer from "../Components/Lists/ListContainer.js";
 import StatsChartsContainer from '../PageComponents/StatsChartsContainer.js';
 
 const HomeContainer = ({userDetails, userStats}) => {
@@ -14,7 +14,8 @@ const HomeContainer = ({userDetails, userStats}) => {
 
     <div>
         <SectionHeader text={text} />
-        <StatsList title={title} list={list}/>
+        <h3>{title}</h3>
+        <ListContainer title={title} list={list}/>
         <StatsChartsContainer userStats={userStats}/>
     </div>
     
