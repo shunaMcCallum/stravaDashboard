@@ -7,15 +7,14 @@ const HomeContainer = ({userDetails, userStats}) => {
 
     const text = `Welcome, ${userDetails.Firstname}!`;
 
-    const title = 'Current Statistics';
-    const list = [`FTP: ${userDetails.Ftp}W`, `Weight: ${userDetails.Weight}kg`, `Account Created: ${userDetails.AccountCreatedAt}`]
+    const headlineTitle = 'Current Statistics';
+    const headlineList = [`FTP: ${userDetails.Ftp}W`, `Weight: ${userDetails.Weight}kg`, `Account Created: ${userDetails.AccountCreatedAt}`]
 
     return(
 
     <div>
         <SectionHeader text={text} />
-        <h3>{title}</h3>
-        <ListContainer title={title} list={list}/>
+        <ListContainer title={headlineTitle} list={headlineList}/>
         <StatsChartsContainer userStats={userStats}/>
     </div>
     

@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import Filter from '../Components/Lists/Filter.js';
 import PieChart from "../Components/Charts/PieChart.js";
+import ListContainer from "../Components/Lists/ListContainer.js";
 
 const StatsChartsContainer = ({userStats}) => {
 
@@ -16,6 +17,9 @@ const StatsChartsContainer = ({userStats}) => {
     const [rideTimePieChartArray, setRideTimePieChartArray] = useState([]);
     const [rideTimePieChartTitle, setRideTimePieChartTitle] = useState(null);
     const [rideTimePieChartOptions, setRideTimePieChartOptions] = useState({});
+
+    const [rideTotalsTitle, setRideTotalsTitle] = useState(null);
+    const [rideTotalsArray, setRideTotalsArray] = useState([]);
 
     const populateRideTypesPieChart = ((item) => {
         setRideTypesPieChartArray([["Total number of rides", "Number of rides"], ["Workout rides", item.RideWorkout], 
@@ -54,6 +58,19 @@ const StatsChartsContainer = ({userStats}) => {
                 populateRideTypesPieChart(item);
                 populateWorkoutScoresPieChart(item);
                 populateRideTimePieChart(item);
+                populateRideTotalsList(item);
+    })
+
+    const populateRideTotalsList = ((item) => {
+        setRideTotalsTitle(`Ride Totals for ${item.Header}`)
+        setRideTotalsArray([
+            `Total distance ridden (miles): ${item.DistanceMiles}`,
+            `Total distance ridden (kilometers): ${item.DistanceKM}`,
+            `Total moving time: ${item.MovingTime}`,
+            `Total elapsed time: ${item.ElapsedTime}`,
+            `Total ascent (ft): ${item.ElevationGainFt}`,
+            `Total ascent (metres): ${item.ElevationGainMetres}`
+        ])
     })
 
     return(
@@ -67,6 +84,7 @@ const StatsChartsContainer = ({userStats}) => {
             <PieChart chartArray={rideTimePieChartArray} chartOptions={rideTimePieChartOptions} title={rideTimePieChartTitle} />
             </>
              : null}
+             <ListContainer title={rideTotalsTitle} list={rideTotalsArray} />
         </>
     
     );
