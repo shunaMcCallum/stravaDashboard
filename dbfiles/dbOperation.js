@@ -28,7 +28,7 @@ const getActivities = async() => {
 const getUserStatsAll = async() => {
     try {
         let pool = await sql.connect(config);
-        let userStats = await pool.request().query('SELECT * FROM dbo.App_UserStats_All')
+        let userStats = await pool.request().query('SELECT * FROM dbo.App_UserStats')
         // console.log(userStats);
         return userStats;
     }

@@ -9,10 +9,13 @@ const StatsChartsContainer = ({userStats}) => {
     const [rideTypesPieChartTitle, setRideTypesPieChartTitle] = useState(null);
     const [rideTypesPieChartOptions, setRideTypesPieChartOptions] = useState({});
 
-
     const [workoutScoresPieChartArray, setWorkoutScoresPieChartArray] = useState([]);
     const [workoutScoresPieChartTitle, setWorkoutScoresPieChartTitle] = useState(null);
     const [workoutScoresPieChartOptions, setWorkoutScoresPieChartOptions] = useState({});
+
+    const [rideTimePieChartArray, setRideTimePieChartArray] = useState([]);
+    const [rideTimePieChartTitle, setRideTimePieChartTitle] = useState(null);
+    const [rideTimePieChartOptions, setRideTimePieChartOptions] = useState({});
 
     const populateRideTypesPieChart = ((item) => {
         setRideTypesPieChartArray([["Total number of rides", "Number of rides"], ["Workout rides", item.RideWorkout], 
@@ -31,23 +34,26 @@ const StatsChartsContainer = ({userStats}) => {
                 setWorkoutScoresPieChartOptions ({         
                     title: "Workout ride scores",
                     is3D: true})
-                setRideTypesPieChartTitle(`Stats for: ${item.Header}`)
+                setWorkoutScoresPieChartTitle(`Stats for: ${item.Header}`)
+    })
+
+    const populateRideTimePieChart = ((item) => {
+        setRideTimePieChartArray([["Total Time", "Time Spent on Each Ride Type"], ["Workout ride time", item.RideWorkout_Time], 
+                ["Commute ride time", item.RideCommute_Time], ["Virtual fun ride time", item.RideVirtual_Time],
+                ["Outdoor fun ride time", item.RideOutdoor_Time]])
+                setRideTimePieChartOptions ({         
+                    title: "Time spent on each ride type",
+                    is3D: true})
+                setRideTimePieChartTitle(`Stats for: ${item.Header}`)
     })
 
     const handleListSelect = ((item) => {
                 setSelectedItem(item);
-                console.log(item)
-
-                // setRideTypesPieChartArray([["Total number of rides", "Number of rides"], ["Workout rides", item.RideWorkout], 
-                // ["Commutes", item.RideCommute], ["Virtual fun rides", item.RideVirtual],
-                // ["Outdoor fun rides", item.RideOutdoor]])
-                // setRideTypesPieChartOptions ({         
-                //     title: "Types of bike rides",
-                //     is3D: true})
-                // setRideTypesPieChartTitle(`Stats for: ${item.Header}`)
+                console.log(item);
 
                 populateRideTypesPieChart(item);
                 populateWorkoutScoresPieChart(item);
+                populateRideTimePieChart(item);
     })
 
     return(
@@ -58,6 +64,7 @@ const StatsChartsContainer = ({userStats}) => {
             <>
             <PieChart chartArray={rideTypesPieChartArray} chartOptions={rideTypesPieChartOptions} title={rideTypesPieChartTitle} />
             <PieChart chartArray={workoutScoresPieChartArray} chartOptions={workoutScoresPieChartOptions} title={workoutScoresPieChartTitle} />
+            <PieChart chartArray={rideTimePieChartArray} chartOptions={rideTimePieChartOptions} title={rideTimePieChartTitle} />
             </>
              : null}
         </>
