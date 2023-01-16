@@ -21,6 +21,12 @@ const StatsChartsContainer = ({userStats}) => {
     const [rideTotalsTitle, setRideTotalsTitle] = useState(null);
     const [rideTotalsArray, setRideTotalsArray] = useState([]);
 
+    const [longestRideTitle, setLongestRideTitle] = useState(null);
+    const [longestRideArray, setLongestRideArray] = useState([]);
+
+    const [farthestRideTitle, setFarthestRideTitle] = useState(null);
+    const [farthestRideArray, setFarthestRideArray] = useState([]);
+
     const populateRideTypesPieChart = ((item) => {
         setRideTypesPieChartArray([["Total number of rides", "Number of rides"], ["Workout rides", item.RideWorkout], 
                 ["Commutes", item.RideCommute], ["Virtual fun rides", item.RideVirtual],
@@ -51,16 +57,6 @@ const StatsChartsContainer = ({userStats}) => {
                 setRideTimePieChartTitle(`Stats for: ${item.Header}`)
     })
 
-    const handleListSelect = ((item) => {
-                setSelectedItem(item);
-                console.log(item);
-
-                populateRideTypesPieChart(item);
-                populateWorkoutScoresPieChart(item);
-                populateRideTimePieChart(item);
-                populateRideTotalsList(item);
-    })
-
     const populateRideTotalsList = ((item) => {
         setRideTotalsTitle(`Ride Totals for ${item.Header}`)
         setRideTotalsArray([
@@ -72,6 +68,42 @@ const StatsChartsContainer = ({userStats}) => {
             `Total ascent (metres): ${item.ElevationGainMetres}`
         ])
     })
+
+    const populateLongestRideList = ((item) => {
+        setLongestRideTitle(`Longest Ride for ${item.Header}`)
+        setLongestRideArray([
+            `Date: ${item.LongestRideDate}`,
+            `Title: ${item.LongestRideTitle}`,
+            `Distance: ${item.LongestRideDistance}`,
+            `Time: ${item.LongestRideTime}`
+        ])
+    })
+
+    const populateFarthestRideList = ((item) => {
+        setFarthestRideTitle(`Farthest Ride for ${item.Header}`)
+        setFarthestRideArray([
+            `Date: ${item.FarthestRideDate}`,
+            `Title: ${item.FarthestRideTitle}`,
+            `Distance: ${item.FarthestRideDistance}`,
+            `Time: ${item.FarthestRideTime}`
+        ])
+    })
+    
+
+    const handleListSelect = ((item) => {
+                setSelectedItem(item);
+                console.log(item);
+
+                populateRideTypesPieChart(item);
+                populateWorkoutScoresPieChart(item);
+                populateRideTimePieChart(item);
+                populateRideTotalsList(item);
+                populateLongestRideList(item);
+                populateFarthestRideList(item);
+
+    })
+
+    
 
     return(
         <>
@@ -85,6 +117,8 @@ const StatsChartsContainer = ({userStats}) => {
             </>
              : null}
              <ListContainer title={rideTotalsTitle} list={rideTotalsArray} />
+             <ListContainer title={longestRideTitle} list={longestRideArray} />
+             <ListContainer title={farthestRideTitle} list={farthestRideArray} />
         </>
     
     );
