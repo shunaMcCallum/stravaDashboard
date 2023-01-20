@@ -24,7 +24,7 @@ const config = {
     server: "localhost\\MSSQLSERVER",
     port: 1433,
     user: "strava2",
-    password: "tttt",
+    password: "strava1910#",
     database: "TrainingDB",
     driver: 'msnodesqlv8',
     options: {

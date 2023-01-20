@@ -2,6 +2,9 @@ import React, {useState, useEffect} from "react";
 import Filter from '../Components/Lists/Filter.js';
 import PieChart from "../Components/Charts/PieChart.js";
 import ListContainer from "../Components/Lists/ListContainer.js";
+import Map from "../Components/Maps/Map.js";
+
+import polyline from '@mapbox/polyline'
 
 const StatsChartsContainer = ({userStats}) => {
 
@@ -88,7 +91,8 @@ const StatsChartsContainer = ({userStats}) => {
             `Time: ${item.FarthestRideTime}`
         ])
     })
-    
+
+    const [polylineArray, setPolylineArray] = useState([]);
 
     const handleListSelect = ((item) => {
                 setSelectedItem(item);
@@ -101,6 +105,7 @@ const StatsChartsContainer = ({userStats}) => {
                 populateLongestRideList(item);
                 populateFarthestRideList(item);
 
+                setPolylineArray(polyline.decode('}}atIl{}XnBFjBGrITnBCvBDpRj@hBn@lBnAbBtAzC|C_@`CfAv@r@b@GxAJNbBxAhATdC_@bFi@tB]vAa@b@EZv@h@?OdEF`BAx@DVJ@ZKx@g@`AU`CAtBKtBe@rAoCFmAQuFPe@zAa@@_@KiFa@_EHg@DE|EkBlBMbBhAfBl@fB`ArBHxAx@l@NrBZjB`@lIbCJArBRjBh@bAm@MjDpBz@bDlAnEl@R?`Fz@rBn@jBh@hBl@lBt@vE|@lBh@jB`@vElAhBl@jBd@|LtCfI`C`FhAdBtAzApBrAxBnAhCpD`FbBrAbB|A|AnBlDnDxAhBbBtAt@z@fAtCpArCrAfCnAjCvAnClAnCpA|BjF~KpCrGlBtDh@BxAmClAuCzAEfB|AhBhB`BhBxAzBnAjCjAjCrCrHzAfCt@f@jBt@r@@jBaA|AsBhA_DhB_Jn@oDn@}DXsBHw@'))
     })
 
     
@@ -118,6 +123,7 @@ const StatsChartsContainer = ({userStats}) => {
              : null}
              <ListContainer title={rideTotalsTitle} list={rideTotalsArray} />
              <ListContainer title={longestRideTitle} list={longestRideArray} />
+             <Map polyline={polylineArray} />
              <ListContainer title={farthestRideTitle} list={farthestRideArray} />
         </>
     
