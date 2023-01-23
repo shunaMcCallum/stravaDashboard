@@ -29,6 +29,9 @@ const StatsChartsContainer = ({userStats}) => {
     const [farthestRideTitle, setFarthestRideTitle] = useState(null);
     const [farthestRideArray, setFarthestRideArray] = useState([]);
 
+    const [longestPolylineArray, setLongestPolylineArray] = useState([]);
+    const [farthestPolylineArray, setFarthestPolylineArray] = useState([]);
+
     const populateRideTypesPieChart = ((item) => {
         setRideTypesPieChartArray([["Total number of rides", "Number of rides"], ["Workout rides", item.RideWorkout], 
                 ["Commutes", item.RideCommute], ["Virtual fun rides", item.RideVirtual],
@@ -91,12 +94,8 @@ const StatsChartsContainer = ({userStats}) => {
         ])
     })
 
-    const [polylineArray, setPolylineArray] = useState([]);
-    const [centre, setCentre] = useState([]);
-
     const handleListSelect = ((item) => {
                 setSelectedItem(item);
-                //console.log(item);
                 
                 populateRideTypesPieChart(item);
                 populateWorkoutScoresPieChart(item);
@@ -104,9 +103,8 @@ const StatsChartsContainer = ({userStats}) => {
                 populateRideTotalsList(item);
                 populateLongestRideList(item);
                 populateFarthestRideList(item);
-
-                setCentre(polyline.decode(item.LongestRidePolyline)[0]);
-                setPolylineArray(polyline.decode(item.LongestRidePolyline));
+                setLongestPolylineArray(polyline.decode(item.LongestRidePolyline));
+                setFarthestPolylineArray(polyline.decode(item.FarthestRidePolyline));
     })
 
     return(
@@ -120,8 +118,9 @@ const StatsChartsContainer = ({userStats}) => {
             <PieChart chartArray={rideTimePieChartArray} chartOptions={rideTimePieChartOptions} title={rideTimePieChartTitle} />
             <ListContainer title={rideTotalsTitle} list={rideTotalsArray} />
             <ListContainer title={longestRideTitle} list={longestRideArray} />
-            <Map polyline={polylineArray} centre={centre} />
+            <Map polyline={longestPolylineArray} />
             <ListContainer title={farthestRideTitle} list={farthestRideArray} />
+            <Map polyline={farthestPolylineArray} />
             </>
              : null }
         </>
