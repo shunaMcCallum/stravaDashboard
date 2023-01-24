@@ -1,0 +1,19 @@
+#pie-charts-container {
+    /* border-style: solid;
+    border-width: 2px;
+    border-color: red; */
+
+    margin-top: 2rem;
+
+    display: flex;
+    justify-content: center;
+}
+
+.pie-chart-header {
+    /* border-style: solid;
+    border-width: 2px;
+    border-color: green; */
+
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+}

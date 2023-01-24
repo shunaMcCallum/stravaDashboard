@@ -9,7 +9,7 @@ const StatsList = ({list}) => {
     })
 
     return(
-        <div>
+        <div id="stats-list-container">
             {listItems}
         </div>
     );

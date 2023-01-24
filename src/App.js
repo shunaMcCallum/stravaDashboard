@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import './App.css';
+import NavBar from "./PageComponents/NavBar";
 import HomeContainer from './PageContainers/HomeContainer.js';
 // import ActivitiesContainer from './PageContainers/ActivitiesContainer.js';
 
@@ -30,7 +31,8 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Strava Dashboard</h1>
+      {/* <h1 id="app-header">Strava Dashboard</h1> */}
+        <NavBar />
         <HomeContainer userDetails={userDetails} userStats={userStats}/>
         {/* <ActivitiesContainer activities={activities}/> */}
     </div>

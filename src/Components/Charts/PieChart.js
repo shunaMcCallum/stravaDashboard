@@ -1,18 +1,29 @@
 import React from 'react';
 import { Chart } from 'react-google-charts';
+import '../../Styling/PieChart.css'
 
-const PieChart = ({ chartArray, chartOptions }) => {
+const PieChart = ({ chartArray}) => {
+
+    const chartOptions = {
+        backgroundColor: "transparent",
+        titleTextStyle: {
+            color: "white"
+        },
+        legend: {position: "none"},
+        width: "25rem",
+        height: "20rem",
+        chartArea: {
+            width: "90%", 
+            height: "90%",
+        },
+    }
 
     return (
-        <>
-            <Chart className="chart1"
+            <Chart className="chart"
                     chartType="PieChart"
                     data={chartArray}
                     options={chartOptions}
-                    width={"100vh"}
-                    height={"50vh"}
             />
-        </>
     );
 
 }

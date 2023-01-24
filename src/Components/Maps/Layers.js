@@ -4,7 +4,7 @@ import { TileLayer, LayersControl} from 'react-leaflet'
 const Layers = () => {
  
     return(
-        <div>
+        <div id="map-layers">
             <LayersControl position='topright'>
                 <LayersControl.BaseLayer checked name='Basic Map'>
                     <TileLayer

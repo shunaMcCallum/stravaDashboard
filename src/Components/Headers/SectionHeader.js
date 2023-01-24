@@ -2,10 +2,8 @@ import React from "react";
 
 const SectionHeader = ({text}) => {
 
-
     return(
-
-    <div>
+    <div id="section-header-container">
         <h3>{text}</h3>
     </div>
     

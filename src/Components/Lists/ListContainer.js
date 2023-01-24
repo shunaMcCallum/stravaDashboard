@@ -4,7 +4,7 @@ import StatsList from "./StatsList";
 const ListContainer = ({title, list}) => {
 
     return(
-        <div>
+        <div id="list-container">
             <h3>{title}</h3>
             <StatsList list={list}/>
         </div>
