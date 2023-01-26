@@ -5,7 +5,7 @@ import '../../Styling/PieChart.css'
 const PieChart = ({ chartArray}) => {
 
     const chartOptions = {
-        backgroundColor: "transparent",
+        backgroundColor: "rgb(39, 34, 52)",
         titleTextStyle: {
             color: "white"
         },

@@ -1,10 +1,11 @@
 import React from "react";
+import '../../Styling/SectionHeader.css';
 
 const SectionHeader = ({text}) => {
 
     return(
     <div id="section-header-container">
-        <h3>{text}</h3>
+        <h2>{text}</h2>
     </div>
     
     ); 

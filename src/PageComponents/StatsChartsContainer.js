@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import Filter from '../Components/Lists/Filter.js';
 import PieChart from "../Components/Charts/PieChart.js";
-import ListContainer from "../Components/Lists/ListContainer.js";
+import StatsChartsListContainer from "./StatsChartsListContainer.js";
 import Map from "../Components/Maps/Map.js";
 import polyline from '@mapbox/polyline'
 import '../Styling/StatsChartsContainer.css'
@@ -91,8 +91,10 @@ const StatsChartsContainer = ({userStats}) => {
 
     return(
         <div>
-            <p>Choose a time period to view stats</p>
-            <Filter list={userStats} handleListSelect={handleListSelect} />
+            <div id="stats-charts-container-header">
+                <h3>All-Time / YTD / Recent Ride Stats</h3>
+                <Filter list={userStats} handleListSelect={handleListSelect} />
+            </div>
             {selectedItem ? 
             <div>
                 <div id="pie-charts-container">
@@ -109,10 +111,10 @@ const StatsChartsContainer = ({userStats}) => {
                         <PieChart chartArray={rideTimePieChartArray} />
                     </div>
                 </div>
-                <ListContainer title={rideTotalsTitle} list={rideTotalsArray} />
-                <ListContainer title={longestRideTitle} list={longestRideArray} />
+                <StatsChartsListContainer title={rideTotalsTitle} list={rideTotalsArray} />
+                <StatsChartsListContainer title={longestRideTitle} list={longestRideArray} />
                 <Map polyline={longestPolylineArray} />
-                <ListContainer title={farthestRideTitle} list={farthestRideArray} />
+                <StatsChartsListContainer title={farthestRideTitle} list={farthestRideArray} />
                 <Map polyline={farthestPolylineArray} />
             </div>
              : null }

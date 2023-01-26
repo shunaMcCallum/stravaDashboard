@@ -1,3 +1,22 @@
+#stats-charts-container-header {
+    margin-top: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+    width: 20rem;
+    
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 0;
+
+    background-color: rgb(39, 34, 52);
+    box-shadow: 0rem 0.15rem 1.5rem black;
+    color: #FC5200;
+}
+
+#stats-charts-container-header>h3 {
+    margin-top: 0;
+}
+
 #pie-charts-container {
     /* border-style: solid;
     border-width: 2px;
@@ -17,3 +36,11 @@
     margin-top: 0rem;
     margin-bottom: 0rem;
 }
+
+.pie-chart-with-header {
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+    background-color: rgb(39, 34, 52);
+    box-shadow: 0rem 0.15rem 1.5rem black;
+}
+
