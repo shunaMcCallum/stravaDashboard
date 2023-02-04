@@ -1,5 +1,5 @@
 import React from "react";
-import '../Styling/NavBar.css'
+import '../../Styling/NavBar.css'
 
 const NavBar = () => {
 

@@ -1,6 +1,6 @@
 import React from "react";
-import StatsList from "../Components/Lists/StatsList";
-import '../Styling/HomePageHeaderListContainer.css';
+import StatsList from "../../components/lists/statsList";
+import '../../Styling/HomePageHeaderListContainer.css';
 
 const HomePageHeaderListContainer = ({title, list}) => {
 
