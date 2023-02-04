@@ -4,7 +4,7 @@ import PieChart from "../../components/charts/pieChart.jsx";
 import HomeStatsChartsListContainer from "./homeStatsChartsListContainer.js";
 import Map from "../../components/maps/map.js";
 import polyline from '@mapbox/polyline'
-import '../../Styling/StatsChartsContainer.css'
+import '../../Styling/HomeStatsChartsContainer.css'
 
 const HomeStatsChartsContainer = ({userStats, initialRideTypesPieChartArray, initialWorkoutScoresPieChartArray, initialRideTimePieChartArray, initialRideTotalsTitle, initialRideTotalsArray, initialLongestRideTitle, initialLongestRideArray, initialFarthestRideTitle, initialFarthestRideArray, initialLongestRidePolyline, initialFarthestRidePolyline}) => {
 
@@ -112,11 +112,17 @@ const HomeStatsChartsContainer = ({userStats, initialRideTypesPieChartArray, ini
                         <PieChart chartArray={rideTimePieChartArray} />
                     </div>
                 </div>
-                <HomeStatsChartsListContainer title={rideTotalsTitle} list={rideTotalsArray} />
-                <HomeStatsChartsListContainer title={longestRideTitle} list={longestRideArray} />
-                <Map polyline={longestPolylineArray} />
-                <HomeStatsChartsListContainer title={farthestRideTitle} list={farthestRideArray} />
-                <Map polyline={farthestPolylineArray} />
+                <div id="bottom-charts-container">
+                    <HomeStatsChartsListContainer title={rideTotalsTitle} list={rideTotalsArray} />
+                    <div className="list-and-map">
+                        <HomeStatsChartsListContainer title={longestRideTitle} list={longestRideArray} />
+                        <Map polyline={longestPolylineArray} />
+                    </div>
+                    <div className="list-and-map">
+                        <HomeStatsChartsListContainer title={farthestRideTitle} list={farthestRideArray} />
+                        <Map polyline={farthestPolylineArray} />
+                    </div>
+                </div>
             </div> :
             <div>
                 <div id="pie-charts-container">
@@ -133,11 +139,13 @@ const HomeStatsChartsContainer = ({userStats, initialRideTypesPieChartArray, ini
                         <PieChart chartArray={initialRideTimePieChartArray} />
                     </div>
                 </div>
-                <HomeStatsChartsListContainer title={initialRideTotalsTitle} list={initialRideTotalsArray} />
-                <HomeStatsChartsListContainer title={initialLongestRideTitle} list={initialLongestRideArray} />
-                {/* <Map polyline={initialLongestRidePolyline} /> */}
-                <HomeStatsChartsListContainer title={initialFarthestRideTitle} list={initialFarthestRideArray} />
-                {/* <Map polyline={farthestPolylineArray} /> */}
+                <div id="bottom-charts-container">
+                    <HomeStatsChartsListContainer title={initialRideTotalsTitle} list={initialRideTotalsArray} />
+                    <HomeStatsChartsListContainer title={initialLongestRideTitle} list={initialLongestRideArray} />
+                    {/* <Map polyline={initialLongestRidePolyline} /> */}
+                    <HomeStatsChartsListContainer title={initialFarthestRideTitle} list={initialFarthestRideArray} />
+                    {/* <Map polyline={farthestPolylineArray} /> */}
+                </div>
             </div>
             }
         </div>
