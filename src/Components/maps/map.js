@@ -1,7 +1,5 @@
-import {useEffect, useState} from "react";
 import '../../Styling/Map.css'
 import { MapContainer, Polyline, ZoomControl, useMap } from 'react-leaflet'
-import polyline from '@mapbox/polyline';
 import Layers from './layers.jsx';
 
 const Map = ({polyline}) => {
@@ -27,6 +25,7 @@ const Map = ({polyline}) => {
                 <Polyline positions={polyline} />
             </MapContainer>
         </div>
+
     
     );
     

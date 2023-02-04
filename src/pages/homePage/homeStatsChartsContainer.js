@@ -1,12 +1,12 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import Filter from '../../components/lists/filter.jsx';
 import PieChart from "../../components/charts/pieChart.jsx";
-import HomeStatsChartsListContainer from "./homeStatsChartsListContainer.jsx";
-import Map from "../../components/maps/map.jsx";
+import HomeStatsChartsListContainer from "./homeStatsChartsListContainer.js";
+import Map from "../../components/maps/map.js";
 import polyline from '@mapbox/polyline'
 import '../../Styling/StatsChartsContainer.css'
 
-const HomeStatsChartsContainer = ({userStats}) => {
+const HomeStatsChartsContainer = ({userStats, initialRideTypesPieChartArray, initialWorkoutScoresPieChartArray, initialRideTimePieChartArray, initialRideTotalsTitle, initialRideTotalsArray, initialLongestRideTitle, initialLongestRideArray, initialFarthestRideTitle, initialFarthestRideArray, initialLongestRidePolyline, initialFarthestRidePolyline}) => {
 
     const [selectedItem, setSelectedItem] = useState(null);
 
@@ -27,22 +27,22 @@ const HomeStatsChartsContainer = ({userStats}) => {
     const [farthestPolylineArray, setFarthestPolylineArray] = useState([]);
 
     const populateRideTypesPieChart = ((item) => {
-        setRideTypesPieChartArray([["Total number of rides", "Number of rides"], ["Workout rides", item.RideWorkout], 
+        setRideTypesPieChartArray([["Total number of rides", "Number of rides"], ["Workout rides", item.RideWorkout],
                 ["Commutes", item.RideCommute], ["Virtual fun rides", item.RideVirtual],
-                ["Outdoor fun rides", item.RideOutdoor]])
-    })
+                ["Outdoor fun rides", item.RideOutdoor]]);
+    });
 
     const populateWorkoutScoresPieChart = ((item) => {
-        setWorkoutScoresPieChartArray([["Total Number of Scores", "Score"], ["Score 0 - 70", item.Score0to70], 
+        setWorkoutScoresPieChartArray([["Total Number of Scores", "Score"], ["Score 0 - 70", item.Score0to70],
                 ["Score 71 - 90", item.Score71to90], ["Score 91 - 110", item.Score91to110],
-                ["Score 111 and above", item.Score111Plus]])
-    })
+                ["Score 111 and above", item.Score111Plus]]);
+    });
 
     const populateRideTimePieChart = ((item) => {
-        setRideTimePieChartArray([["Total Time", "Time Spent on Each Ride Type"], ["Workout ride time", item.RideWorkout_Time], 
+        setRideTimePieChartArray([["Total Time", "Time Spent on Each Ride Type"], ["Workout ride time", item.RideWorkout_Time],
                 ["Commute ride time", item.RideCommute_Time], ["Virtual fun ride time", item.RideVirtual_Time],
-                ["Outdoor fun ride time", item.RideOutdoor_Time]])
-    })
+                ["Outdoor fun ride time", item.RideOutdoor_Time]]);
+    });
 
     const populateRideTotalsList = ((item) => {
         setRideTotalsTitle(`Ride Totals for ${item.Header}`)
@@ -53,8 +53,8 @@ const HomeStatsChartsContainer = ({userStats}) => {
             `Total elapsed time: ${item.ElapsedTime}`,
             `Total ascent (ft): ${item.ElevationGainFt}`,
             `Total ascent (metres): ${item.ElevationGainMetres}`
-        ])
-    })
+        ]);
+    });
 
     const populateLongestRideList = ((item) => {
         setLongestRideTitle(`Longest Ride for ${item.Header}`)
@@ -63,8 +63,8 @@ const HomeStatsChartsContainer = ({userStats}) => {
             `Title: ${item.LongestRideTitle}`,
             `Distance: ${item.LongestRideDistance}`,
             `Time: ${item.LongestRideTime}`
-        ])
-    })
+        ]);
+    });
 
     const populateFarthestRideList = ((item) => {
         setFarthestRideTitle(`Farthest Ride for ${item.Header}`)
@@ -73,12 +73,12 @@ const HomeStatsChartsContainer = ({userStats}) => {
             `Title: ${item.FarthestRideTitle}`,
             `Distance: ${item.FarthestRideDistance}`,
             `Time: ${item.FarthestRideTime}`
-        ])
-    })
+        ]);
+    });
 
     const handleListSelect = ((item) => {
                 setSelectedItem(item);
-                
+
                 populateRideTypesPieChart(item);
                 populateWorkoutScoresPieChart(item);
                 populateRideTimePieChart(item);
@@ -87,7 +87,8 @@ const HomeStatsChartsContainer = ({userStats}) => {
                 populateFarthestRideList(item);
                 setLongestPolylineArray(polyline.decode(item.LongestRidePolyline));
                 setFarthestPolylineArray(polyline.decode(item.FarthestRidePolyline));
-    })
+    });
+
 
     return(
         <div>
@@ -95,7 +96,7 @@ const HomeStatsChartsContainer = ({userStats}) => {
                 <h3>All-Time / YTD / Recent Ride Stats</h3>
                 <Filter list={userStats} handleListSelect={handleListSelect} />
             </div>
-            {selectedItem ? 
+            {selectedItem ?
             <div>
                 <div id="pie-charts-container">
                     <div className="pie-chart-with-header">
@@ -116,8 +117,29 @@ const HomeStatsChartsContainer = ({userStats}) => {
                 <Map polyline={longestPolylineArray} />
                 <HomeStatsChartsListContainer title={farthestRideTitle} list={farthestRideArray} />
                 <Map polyline={farthestPolylineArray} />
+            </div> :
+            <div>
+                <div id="pie-charts-container">
+                    <div className="pie-chart-with-header">
+                        <h3 className="pie-chart-header">Ride Types</h3>
+                        <PieChart chartArray={initialRideTypesPieChartArray} />
+                    </div>
+                    <div className="pie-chart-with-header">
+                        <h3 className="pie-chart-header">Ride Workout Scores</h3>
+                        <PieChart chartArray={initialWorkoutScoresPieChartArray} />
+                    </div>
+                    <div className="pie-chart-with-header">
+                         <h3 className="pie-chart-header">Ride Time by Type</h3>
+                        <PieChart chartArray={initialRideTimePieChartArray} />
+                    </div>
+                </div>
+                <HomeStatsChartsListContainer title={initialRideTotalsTitle} list={initialRideTotalsArray} />
+                <HomeStatsChartsListContainer title={initialLongestRideTitle} list={initialLongestRideArray} />
+                {/* <Map polyline={initialLongestRidePolyline} /> */}
+                <HomeStatsChartsListContainer title={initialFarthestRideTitle} list={initialFarthestRideArray} />
+                {/* <Map polyline={farthestPolylineArray} /> */}
             </div>
-             : null }
+            }
         </div>
     );
 }
