@@ -1,16 +1,23 @@
-import React from "react";
-import ActivitiesList from '../../components2/ActivitiesList.js';
+import React, { useState, useEffect } from "react";
+import SectionHeader from "../../components/headers/sectionHeader";
+import ActivitiesPageGrid from "./activitiesPageGrid";
+import "../../Styling/ActivitiesPageHeader.css";
 
-const ActivitiesContainer = ({activities}) => {
+const ActivitiesPage = ({activitiesList, activityHeaders}) => {
+
+    const text = "Activities List"
+
+    let columnHeaders = Object.keys(activityHeaders).map((x, i) => {
+        return {field: x};
+    });
+    
 
     return(
-        <div>
-            {console.log(activities)}
-            <br></br>
-            <h3>Your Activities to Date:</h3>
-            <ActivitiesList activities={activities}/>
+        <div id="activities-page-header-container">
+            <SectionHeader text={text} />
+            <ActivitiesPageGrid columnHeaders={columnHeaders} rowData={activitiesList} />
         </div>
     );
 }
 
-export default ActivitiesContainer;
+export default ActivitiesPage;

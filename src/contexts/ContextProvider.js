@@ -7,6 +7,7 @@ export const ContextProvider = ({ children }) => {
 
     const [userDetails, setUserDetails] = useState([]);
     const [userStats, setUserStats] = useState([]);
+    const [activities, setActivities] = useState([]);
   
     useEffect(() => {
       fetch('http://localhost:5000/user')
@@ -21,9 +22,15 @@ export const ContextProvider = ({ children }) => {
         });
       }, []);
 
+    useEffect(() => {
+    fetch('http://localhost:5000/activities')
+      .then(res => res.json())
+      .then(data => setActivities(data.recordset));
+      }, [])
+
     return (
         <StateContext.Provider
-          value={{ userDetails: userDetails, userStats: userStats, initialStats: userStats[0] 
+          value={{ userDetails: userDetails, userStats: userStats, initialStats: userStats[0], activities: activities 
           }}
         >
           {children}

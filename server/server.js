@@ -20,11 +20,11 @@ app.get('/user', async(req, res) => {
     res.send(result);
 })
 
-// app.get('/activities', async(req, res) => {
-//     console.log('called activities');
-//     const result = await dbOperation.getActivities();
-//     res.send(result);
-// })
+app.get('/activities', async(req, res) => {
+    console.log('called activities');
+    const result = await dbOperation.getActivities();
+    res.send(result);
+})
 
 app.get('/userStats', async(req, res) => {
     console.log('called userStats');

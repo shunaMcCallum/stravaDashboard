@@ -1,14 +1,16 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import '../../Styling/NavBar.css'
 
 const NavBar = () => {
+    const navigate = useNavigate();
 
     const handleHomeButtonClick = () => {
-        //navigate("/shunamccallum.github.io")
+        navigate("/")
     }
 
     const handleActivitiesButtonClick = () => {
-
+        navigate("/activities")
     }
 
     return (

@@ -4,7 +4,7 @@ import HomePageHeaderListContainer from "./homePageHeaderListContainer.js";
 import HomeStatsChartsContainer from './homeStatsChartsContainer.js';
 
 const HomePage = ({userDetails, userStats, initialStats}) => {
-    console.log(userDetails);
+
     const text = `Welcome, ${userDetails.Firstname}!`;
     const headlineTitle = 'Current Statistics';
     const headlineList = [`FTP: ${userDetails.Ftp}W`, `Weight: ${userDetails.Weight}kg`, `Account Created: ${userDetails.AccountCreatedAt}`]
