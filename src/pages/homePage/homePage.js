@@ -1,7 +1,8 @@
 import React from "react";
-import SectionHeader from '../../components/headers/sectionHeader.jsx';
+import SectionHeader from '../../components/headers/sectionHeader.js';
 import HomePageHeaderListContainer from "./homePageHeaderListContainer.js";
 import HomeStatsChartsContainer from './homeStatsChartsContainer.js';
+import polyline from '@mapbox/polyline'
 
 const HomePage = ({userDetails, userStats, initialStats}) => {
 
@@ -59,6 +60,24 @@ const HomePage = ({userDetails, userStats, initialStats}) => {
             `Time: ${initialStats.FarthestRideTime}`
     ];
 
+    const initialLongestRidePolyline = () => {
+        if (initialStats.LongestRidePolyline) {
+                console.log("initialStats")
+                return polyline.decode(initialStats.LongestRidePolyline);
+        } else {
+                console.log("noStats")
+                return null
+        }
+    };
+
+    const initialFarthestRidePolyline = () => {
+        if (initialStats.FarthestRidePolyline) {
+                return polyline.decode(initialStats.FarthestRidePolyline);
+        } else {
+                return null
+        }
+    };
+
 
     return(
     <div id="homepage-container">
@@ -75,8 +94,8 @@ const HomePage = ({userDetails, userStats, initialStats}) => {
           initialLongestRideArray={longestRideArray}
           initialFarthestRideTitle={farthestRideTitle}
           initialFarthestRideArray={farthestRideArray}
-          initialLongestRidePolyline={initialStats.LongestRidePolyline}
-          initialFarthestRidePolyline={initialStats.FarthestRidePolyline}
+          initialLongestRidePolyline={initialLongestRidePolyline()}
+          initialFarthestRidePolyline={initialFarthestRidePolyline()}
         />
     </div>
     

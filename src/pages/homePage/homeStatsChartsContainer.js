@@ -1,6 +1,6 @@
 import React, {useState} from "react";
-import Filter from '../../components/lists/filter.jsx';
-import PieChart from "../../components/charts/pieChart.jsx";
+import Filter from '../../components/lists/filter.js';
+import PieChart from "../../components/charts/pieChart.js";
 import HomeStatsChartsListContainer from "./homeStatsChartsListContainer.js";
 import Map from "../../components/maps/map.js";
 import polyline from '@mapbox/polyline'
@@ -142,9 +142,9 @@ const HomeStatsChartsContainer = ({userStats, initialRideTypesPieChartArray, ini
                 <div id="bottom-charts-container">
                     <HomeStatsChartsListContainer title={initialRideTotalsTitle} list={initialRideTotalsArray} />
                     <HomeStatsChartsListContainer title={initialLongestRideTitle} list={initialLongestRideArray} />
-                    {/* <Map polyline={initialLongestRidePolyline} /> */}
+                    <Map polyline={initialLongestRidePolyline} />
                     <HomeStatsChartsListContainer title={initialFarthestRideTitle} list={initialFarthestRideArray} />
-                    {/* <Map polyline={farthestPolylineArray} /> */}
+                    <Map polyline={initialFarthestRidePolyline} />
                 </div>
             </div>
             }

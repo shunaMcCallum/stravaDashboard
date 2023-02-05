@@ -1,5 +1,5 @@
 import React from "react";
-import StatsList from "../../components/lists/statsList.jsx";
+import StatsList from "../../components/lists/statsList.js";
 import "../../Styling/HomeStatsChartsListContainer.css"
 
 const HomeStatsChartsListContainer = ({title, list}) => {
