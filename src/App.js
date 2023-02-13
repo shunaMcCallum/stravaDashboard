@@ -13,34 +13,14 @@ function App() {
   const [userStats, setUserStats] = useState([]);
   const [activities, setActivities] = useState([]);
 
-  // const [initialStats, setInitialStats] = useState({});
-  // const [activityHeaders, setActivityHeaders] = useState({});
-
   const initialStats = { ...userStats[0] };
   const activityHeaders = { ...activities[0] };
 
-  const fetchUserStats = () => {
-    fetch('http://localhost:5000/userStats')
-      .then(res => res.json())
-        .then(data => setUserStats(data.recordsets[0]));
-  }
-
-  // async function fetchData() {
-  //   const result = await fetchUserStats();
-
-    
-  //   setInitialStats({ ...userStats[0]} );
-  //   setActivityHeaders({ ...activities[0] });
-    
-  // };
-
-  // useEffect(() => {
-  //   fetchData();
-
-  // }, []);
-
-
-
+  // const fetchUserStats = () => {
+  //   fetch('http://localhost:5000/userStats')
+  //     .then(res => res.json())
+  //       .then(data => setUserStats(data.recordsets[0]));
+  // }
 
   useEffect(() => {
     fetch('http://localhost:5000/user')
@@ -51,7 +31,7 @@ function App() {
   useEffect(() => {
     fetch('http://localhost:5000/activities')
       .then(res => res.json())
-      // .then(data => (console.log(data.recordset[0])));
+      //.then(data => (console.log(data.recordset)));
       .then(data => setActivities(data.recordset));
 }, [])
 

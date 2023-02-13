@@ -62,10 +62,10 @@ const HomePage = ({userDetails, userStats, initialStats}) => {
 
     const initialLongestRidePolyline = () => {
         if (initialStats.LongestRidePolyline) {
-                console.log("initialStats")
+                //console.log("initialStats")
                 return polyline.decode(initialStats.LongestRidePolyline);
         } else {
-                console.log("noStats")
+                //console.log("noStats")
                 return null
         }
     };

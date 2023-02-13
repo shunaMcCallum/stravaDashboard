@@ -1,39 +1,43 @@
-import React, { useState, useEffect } from "react";
+import {Box} from "@mui/material";
 import clsx from 'clsx';
 import SectionHeader from "../../components/headers/sectionHeader";
 import ActivitiesPageGrid from "./activitiesPageGrid";
-import "../../Styling/ActivitiesPageHeader.css";
+import "../../Styling/ActivitiesPage.css";
 
 const ActivitiesPage = ({activitiesList, activityHeaders}) => {
 
     const text = "Activities List"
 
-    // let columnHeaders = Object.keys(activityHeaders).map((x, i) => {
+    // let columns = Object.keys(activityHeaders).map((x, i) => {
     //     return {field: x};
     // });
 
     let columnValues = Object.entries(activityHeaders);
 
     let columns = columnValues.map((x, i) => {
-        if (x[0] == "elapsed_time") {
+        if (x[0] == "StressScore") {
+            console.log(x[1])
             return {
                 field: x[0],
-                type: typeof(x[1]),
+                //type: typeof(x[1]),
+                type: 'number',
+                headerAlign: "left",
                 cellClassName: (params) => {
                     if (params.value == null) {
                         return '';
                     }
                     return clsx("suffer-score", {
-                        high: params.value >= 2000,
-                        medium: params.value >= 1500 && params.value <= 1999,
-                        low: params.value >= 1000 && params.value <= 1499
+                        high: parseInt(params.value) >= 110,
+                        medium: parseInt(params.value) >= 90 && params.value <= 109,
+                        low: parseInt(params.value) >= 70 && params.value <= 89
                     })
                 }       
             }
         } else {
             return {
                 field: x[0],
-                type: typeof(x[1])    
+                type: typeof(x[1]),
+                headerAlign: "left"
             }   
         }
     })

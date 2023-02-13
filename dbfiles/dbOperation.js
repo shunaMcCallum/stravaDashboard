@@ -16,7 +16,9 @@ const getUserDetails = async() => {
 const getActivities = async() => {
     try {
         let pool = await sql.connect(config);
-        let activities = await pool.request().query('SELECT * FROM dbo.Activities_Live')
+        let activities = await pool.request().query('SELECT * FROM dbo.Activities_Live_New ORDER BY [start_date_local] DESC')
+        //let activities = await pool.request().query('SELECT * FROM dbo.Activities_Live')
+        //let activities = await pool.request().query('SELECT * FROM dbo.Activities_Live_New')
         //console.log(activities);
         return activities;
     }
