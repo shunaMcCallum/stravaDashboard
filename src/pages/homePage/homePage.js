@@ -81,7 +81,7 @@ const HomePage = ({userDetails, userStats, initialStats}) => {
 
     return(
     <div id="homepage-container">
-        <SectionHeader text={text} />
+        {/* <SectionHeader text={text} /> */}
         <HomePageHeaderListContainer title={headlineTitle} list={headlineList} />
         <HomeStatsChartsContainer 
           userStats={userStats} 

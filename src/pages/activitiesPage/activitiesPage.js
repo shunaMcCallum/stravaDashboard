@@ -14,14 +14,18 @@ const ActivitiesPage = ({activitiesList, activityHeaders}) => {
 
     let columnValues = Object.entries(activityHeaders);
 
+    const handleSubmit = async () => {
+
+    }
+
     let columns = columnValues.map((x, i) => {
         if (x[0] == "StressScore") {
-            console.log(x[1])
             return {
                 field: x[0],
-                //type: typeof(x[1]),
                 type: 'number',
                 headerAlign: "left",
+                align: "left",
+                flex: 0.5,
                 cellClassName: (params) => {
                     if (params.value == null) {
                         return '';
@@ -33,19 +37,111 @@ const ActivitiesPage = ({activitiesList, activityHeaders}) => {
                     })
                 }       
             }
-        } else {
+        } else if (x[0] == "AvgHeartRate") {
+            return {
+                field: x[0],
+                type: 'number',
+                headerAlign: "left",
+                align: "left",
+                flex: 0.5,
+                cellClassName: (params) => {
+                    if (params.value == null) {
+                        return '';
+                    }
+                    return clsx("avg-heart-rate", {
+                        high: parseInt(params.value) >= 140,
+                        medium: parseInt(params.value) >= 130 && params.value <= 139,
+                        low: parseInt(params.value) >= 120 && params.value <= 129
+                    })
+                }       
+            }
+        } else if (x[0] == "MaxHeartRate") {
+            return {
+                field: x[0],
+                type: 'number',
+                headerAlign: "left",
+                align: "left",
+                flex: 0.5,
+                cellClassName: (params) => {
+                    if (params.value == null) {
+                        return '';
+                    }
+                    return clsx("max-heart-rate", {
+                        high: parseInt(params.value) >= 160,
+                        medium: parseInt(params.value) >= 150 && params.value <= 159,
+                        low: parseInt(params.value) >= 140 && params.value <= 149
+                    })
+                }       
+            }
+        } else if (x[0] == "MaxWatts") {
+            return {
+                field: x[0],
+                type: 'number',
+                headerAlign: "left",
+                align: "left",
+                flex: 0.5,
+                cellClassName: (params) => {
+                    if (params.value == null) {
+                        return '';
+                    }
+                    return clsx("max-watts", {
+                        high: parseInt(params.value) >= 250,
+                        medium: parseInt(params.value) >= 220 && params.value <= 249,
+                        low: parseInt(params.value) >= 200 && params.value <= 219
+                    })
+                }       
+            }
+        } else if (x[0] == "AvgPower") {
+            return {
+                field: x[0],
+                type: 'number',
+                headerAlign: "left",
+                align: "left",
+                flex: 0.5,
+                cellClassName: (params) => {
+                    if (params.value == null) {
+                        return '';
+                    }
+                    return clsx("avg-power", {
+                        high: parseInt(params.value) >= 160,
+                        medium: parseInt(params.value) >= 150 && params.value <= 159,
+                        low: parseInt(params.value) >= 140 && params.value <= 149
+                    })
+                }       
+            }
+        } else if (x[0] == "Name") {
+            return {
+                field: x[0],
+                headerAlign: "left",
+                align: "left",
+                flex: 2
+            }
+        } else if (x[0] == "Notes") {
+            return {
+                field: x[0],
+                headerAlign: "left",
+                align: "left",
+                flex: 1,
+                editable: true,
+                //onsubmit: handleSubmit(),
+                onCellEditCommit: (params) => {handleSubmit(params.id)}
+            }
+        }
+        else {
             return {
                 field: x[0],
                 type: typeof(x[1]),
-                headerAlign: "left"
+                headerAlign: "left",
+                align: "left",
+                flex: 0.5,
             }   
         }
     })
     
 
     return(
-        <div id="activities-page-header-container">
-            <SectionHeader text={text} />
+        <div id="activities-page-container">
+            {/* <SectionHeader text={text} /> */}
             <ActivitiesPageGrid columns={columns} rowData={activitiesList} />
         </div>
     );
