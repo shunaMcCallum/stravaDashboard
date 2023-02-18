@@ -40,9 +40,9 @@ const ActivitiesPageGrid = ({columns, rowData}) => {
                     "& .MuiDataGrid-footerContainer": {borderTop: "none", color: "white", height: "50%", backgroundColor: "#332240"},
                     "& .MuiTablePagination-root": {color: "white"},
                     "& .MuiDataGrid-toolbarContainer .MuiButton-text": {color: "white"},
-                    "& .suffer-score.high": {backgroundColor: "red", color: "black"},
-                    "& .suffer-score.medium": {backgroundColor: "orange", color: "black"},
-                    "& .suffer-score.low": {backgroundColor: "yellow", color: "black"},
+                    "& .suffer-score.high": {backgroundColor: "red", color: "black", height: "2rem", width: "5rem"},
+                    "& .suffer-score.medium": {backgroundColor: "orange", color: "black", height: "2rem", width: "5rem"},
+                    "& .suffer-score.low": {backgroundColor: "yellow", color: "black", height: "2rem", width: "5rem"},
                     "& .max-heart-rate.high": {backgroundColor: "red", color: "black"},
                     "& .max-heart-rate.medium": {backgroundColor: "orange", color: "black"},
                     "& .max-heart-rate.low": {backgroundColor: "yellow", color: "black"},
@@ -86,8 +86,6 @@ const ActivitiesPageGrid = ({columns, rowData}) => {
                     }
                   }}}
                   onCellEditCommit={onCellValueChanged}
-                  //onCellValueChanged={onCellValueChanged}
-
                 />
             </Box>
 

@@ -3,14 +3,11 @@ import clsx from 'clsx';
 import SectionHeader from "../../components/headers/sectionHeader";
 import ActivitiesPageGrid from "./activitiesPageGrid";
 import "../../Styling/ActivitiesPage.css";
+import ColourCodeBox from "../../components/dataGridFeatures/colourCodeBox";
 
 const ActivitiesPage = ({activitiesList, activityHeaders}) => {
 
     const text = "Activities List"
-
-    // let columns = Object.keys(activityHeaders).map((x, i) => {
-    //     return {field: x};
-    // });
 
     let columnValues = Object.entries(activityHeaders);
 
@@ -22,16 +19,7 @@ const ActivitiesPage = ({activitiesList, activityHeaders}) => {
                 headerAlign: "left",
                 align: "left",
                 flex: 0.5,
-                cellClassName: (params) => {
-                    if (params.value == null) {
-                        return '';
-                    }
-                    return clsx("suffer-score", {
-                        high: parseInt(params.value) >= 110,
-                        medium: parseInt(params.value) >= 90 && params.value <= 109,
-                        low: parseInt(params.value) >= 70 && params.value <= 89
-                    })
-                }       
+                renderCell: (params) => <ColourCodeBox params={params} high={110} mediumBottom={90} mediumTop={109} lowBottom={70} lowTop={89} />
             }
         } else if (x[0] == "AvgHeartRate") {
             return {
@@ -40,16 +28,7 @@ const ActivitiesPage = ({activitiesList, activityHeaders}) => {
                 headerAlign: "left",
                 align: "left",
                 flex: 0.5,
-                cellClassName: (params) => {
-                    if (params.value == null) {
-                        return '';
-                    }
-                    return clsx("avg-heart-rate", {
-                        high: parseInt(params.value) >= 140,
-                        medium: parseInt(params.value) >= 130 && params.value <= 139,
-                        low: parseInt(params.value) >= 120 && params.value <= 129
-                    })
-                }       
+                renderCell: (params) => <ColourCodeBox params={params} high={140} mediumBottom={130} mediumTop={139} lowBottom={120} lowTop={129} />      
             }
         } else if (x[0] == "MaxHeartRate") {
             return {
@@ -58,16 +37,7 @@ const ActivitiesPage = ({activitiesList, activityHeaders}) => {
                 headerAlign: "left",
                 align: "left",
                 flex: 0.5,
-                cellClassName: (params) => {
-                    if (params.value == null) {
-                        return '';
-                    }
-                    return clsx("max-heart-rate", {
-                        high: parseInt(params.value) >= 160,
-                        medium: parseInt(params.value) >= 150 && params.value <= 159,
-                        low: parseInt(params.value) >= 140 && params.value <= 149
-                    })
-                }       
+                renderCell: (params) => <ColourCodeBox params={params} high={160} mediumBottom={150} mediumTop={159} lowBottom={140} lowTop={149} />         
             }
         } else if (x[0] == "MaxWatts") {
             return {
@@ -76,16 +46,7 @@ const ActivitiesPage = ({activitiesList, activityHeaders}) => {
                 headerAlign: "left",
                 align: "left",
                 flex: 0.5,
-                cellClassName: (params) => {
-                    if (params.value == null) {
-                        return '';
-                    }
-                    return clsx("max-watts", {
-                        high: parseInt(params.value) >= 250,
-                        medium: parseInt(params.value) >= 220 && params.value <= 249,
-                        low: parseInt(params.value) >= 200 && params.value <= 219
-                    })
-                }       
+                renderCell: (params) => <ColourCodeBox params={params} high={250} mediumBottom={220} mediumTop={249} lowBottom={200} lowTop={219} />            
             }
         } else if (x[0] == "AvgPower") {
             return {
@@ -94,16 +55,40 @@ const ActivitiesPage = ({activitiesList, activityHeaders}) => {
                 headerAlign: "left",
                 align: "left",
                 flex: 0.5,
-                cellClassName: (params) => {
-                    if (params.value == null) {
-                        return '';
+                renderCell: (params) => <ColourCodeBox params={params} high={160} mediumBottom={150} mediumTop={159} lowBottom={140} lowTop={149} />          
+            }
+        } else if (x[0] == "AvgCadence"){
+            return {
+                field: x[0],
+                type: 'number',
+                headerAlign: "left",
+                align: "left",
+                flex: 0.5,
+                renderCell: (params) => {
+                    if (params.value === null) {
+                        return <Box 
+                        sx={{            
+                        height: "1.8rem",
+                        width: "5.5rem",
+                        color: "white",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center"}}
+                        >{'---'}
+                        </Box>
+                    } else {
+                        return <Box 
+                        sx={{            
+                        height: "1.8rem",
+                        width: "5.5rem",
+                        color: "white",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center"}}
+                        >{params.value}
+                        </Box>
                     }
-                    return clsx("avg-power", {
-                        high: parseInt(params.value) >= 160,
-                        medium: parseInt(params.value) >= 150 && params.value <= 159,
-                        low: parseInt(params.value) >= 140 && params.value <= 149
-                    })
-                }       
+                }
             }
         } else if (x[0] == "Name") {
             return {

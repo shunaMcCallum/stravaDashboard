@@ -35,7 +35,7 @@ app.get('/userStats', async(req, res) => {
 
 app.put('/activities/:id', async(req, res) => {
     console.log('called updateActivity');
-    const result = await dbOperation.updateActivity(req);
+    const result = await dbOperation.updateActivityNotes(req);
 })
 
 
