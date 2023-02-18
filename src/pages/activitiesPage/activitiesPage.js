@@ -14,10 +14,6 @@ const ActivitiesPage = ({activitiesList, activityHeaders}) => {
 
     let columnValues = Object.entries(activityHeaders);
 
-    const handleSubmit = async () => {
-
-    }
-
     let columns = columnValues.map((x, i) => {
         if (x[0] == "StressScore") {
             return {
@@ -123,8 +119,6 @@ const ActivitiesPage = ({activitiesList, activityHeaders}) => {
                 align: "left",
                 flex: 1,
                 editable: true,
-                //onsubmit: handleSubmit(),
-                onCellEditCommit: (params) => {handleSubmit(params.id)}
             }
         }
         else {

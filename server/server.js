@@ -13,6 +13,7 @@ const sql = require('mssql');
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(cors());
+app.use(bodyParser.json());
 
 app.get('/user', async(req, res) => {
     console.log('called userDetails');
@@ -31,6 +32,12 @@ app.get('/userStats', async(req, res) => {
     const result = await dbOperation.getUserStats();
     res.send(result);
 })
+
+app.put('/activities/:id', async(req, res) => {
+    console.log('called updateActivity');
+    const result = await dbOperation.updateActivity(req);
+})
+
 
 // app.get('/userStatsAll', async(req, res) => {
 //     console.log('called userStatsAll');

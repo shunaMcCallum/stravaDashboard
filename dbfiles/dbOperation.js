@@ -75,6 +75,17 @@ const getUserStats = async() => {
     }
 }
 
+const updateActivityNotes = async(req) => {
+    try {
+        let pool = await sql.connect(config);
+        let query = await pool.request().query(`UPDATE dbo.Activities_Live_New SET Notes = '${req.body.Notes}' WHERE id = ${req.body.Id}`);
+        return query;
+    }
+    catch(error) {
+        console.log(error);
+    }
+}
 
 
-module.exports = {getUserDetails, getActivities, getUserStats, getUserStatsAll, getUserStatsRecent, getUserStatsYtd}
+
+module.exports = {getUserDetails, getActivities, getUserStats, getUserStatsAll, getUserStatsRecent, getUserStatsYtd, updateActivityNotes}
