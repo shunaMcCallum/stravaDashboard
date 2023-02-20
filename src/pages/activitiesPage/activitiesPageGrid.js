@@ -24,12 +24,14 @@ const ActivitiesPageGrid = ({columns, rowData}) => {
     handleSubmit(event.id, { Id: event.id, Notes: event.value });
   }, []);
 
+//<button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall MuiDataGrid-menuIconButton css-1pe4mpk-MuiButtonBase-root-MuiIconButton-root" tabindex="-1" type="button" aria-label="Menu" title="Menu" aria-haspopup="true" aria-controls=":rg:" id=":rh:"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="TripleDotsVerticalIcon"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path></svg><span class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"></span></button>
+
     return (
             <Box
                  m="0.4rem 0 0 0"
                  sx={{
                     height: '100%', width: '100%',
-                    "& .MuiDataGrid-root": {border: "none"},
+                    "& .MuiDataGrid-root": {border: "none", color: "white"},
                     "& .name-column--cell": {color: "white"},
                     "& .MuiDataGrid-columnHeaders": {color: "white"},
                     "& .MuiDataGrid-virtualScroller": {color: "white"},
@@ -39,27 +41,11 @@ const ActivitiesPageGrid = ({columns, rowData}) => {
                     "& .MuiDataGrid-virtualScroller::-webkit-scrollbar-thumb:hover": {background: '#555'},
                     "& .MuiDataGrid-footerContainer": {borderTop: "none", color: "white", height: "50%", backgroundColor: "#332240"},
                     "& .MuiTablePagination-root": {color: "white"},
-                    "& .MuiDataGrid-toolbarContainer .MuiButton-text": {color: "white"},
-                    "& .suffer-score.high": {backgroundColor: "red", color: "black", height: "2rem", width: "5rem"},
-                    "& .suffer-score.medium": {backgroundColor: "orange", color: "black", height: "2rem", width: "5rem"},
-                    "& .suffer-score.low": {backgroundColor: "yellow", color: "black", height: "2rem", width: "5rem"},
-                    "& .max-heart-rate.high": {backgroundColor: "red", color: "black"},
-                    "& .max-heart-rate.medium": {backgroundColor: "orange", color: "black"},
-                    "& .max-heart-rate.low": {backgroundColor: "yellow", color: "black"},
-                    "& .avg-heart-rate.high": {backgroundColor: "red", color: "black"},
-                    "& .avg-heart-rate.medium": {backgroundColor: "orange", color: "black"},
-                    "& .avg-heart-rate.low": {backgroundColor: "yellow", color: "black"},
-                    "& .max-watts.high": {backgroundColor: "red", color: "black"},
-                    "& .max-watts.medium": {backgroundColor: "orange", color: "black"},
-                    "& .max-watts.low": {backgroundColor: "yellow", color: "black"},
-                    "& .avg-power.high": {backgroundColor: "red", color: "black"},
-                    "& .avg-power.medium": {backgroundColor: "orange", color: "black"},
-                    "& .avg-power.low": {backgroundColor: "yellow", color: "black"}
+                    "& .MuiDataGrid-toolbarContainer .MuiButton-text": {color: "white"}
                   }}
                   
             >
                <DataGrid
-                  disableColumnMenu
                   rows={rowData}
                   columns={columns}
                   rowHeight={38}

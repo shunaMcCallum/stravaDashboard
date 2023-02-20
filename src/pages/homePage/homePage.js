@@ -1,14 +1,16 @@
 import React from "react";
+import { Box } from "@mui/material";
 import SectionHeader from '../../components/headers/sectionHeader.js';
 import HomePageHeaderListContainer from "./homePageHeaderListContainer.js";
 import HomeStatsChartsContainer from './homeStatsChartsContainer.js';
-import polyline from '@mapbox/polyline'
+import polyline from '@mapbox/polyline';
+import "../../Styling/HomePage.css";
 
 const HomePage = ({userDetails, userStats, initialStats}) => {
 
     const text = `Welcome, ${userDetails.Firstname}!`;
     const headlineTitle = 'Current Statistics';
-    const headlineList = [`FTP: ${userDetails.Ftp}W`, `Weight: ${userDetails.Weight}kg`, `Account Created: ${userDetails.AccountCreatedAt}`]
+    const headlineList = [`FTP: 200W`, `Weight: ${userDetails.Weight}kg`, `Account Created: ${userDetails.AccountCreatedAt}`]
     
     const rideTypesPieChartArray = [
             ["Total number of rides", "Number of rides"], 
@@ -80,9 +82,9 @@ const HomePage = ({userDetails, userStats, initialStats}) => {
 
 
     return(
-    <div id="homepage-container">
+    <div id="home-page-container">
         {/* <SectionHeader text={text} /> */}
-        <HomePageHeaderListContainer title={headlineTitle} list={headlineList} />
+        {/* <HomePageHeaderListContainer title={headlineTitle} list={headlineList} />
         <HomeStatsChartsContainer 
           userStats={userStats} 
           initialRideTypesPieChartArray={rideTypesPieChartArray} 
@@ -96,7 +98,10 @@ const HomePage = ({userDetails, userStats, initialStats}) => {
           initialFarthestRideArray={farthestRideArray}
           initialLongestRidePolyline={initialLongestRidePolyline()}
           initialFarthestRidePolyline={initialFarthestRidePolyline()}
-        />
+        /> */}
+
+        {/* ROW 1 */}
+          <HomePageHeaderListContainer title={headlineTitle} list={headlineList} />          
     </div>
     
     );

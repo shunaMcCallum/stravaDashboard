@@ -1,5 +1,4 @@
 import {Box} from "@mui/material";
-import clsx from 'clsx';
 import SectionHeader from "../../components/headers/sectionHeader";
 import ActivitiesPageGrid from "./activitiesPageGrid";
 import "../../Styling/ActivitiesPage.css";
