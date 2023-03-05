@@ -5,8 +5,10 @@ import HomePageHeaderListContainer from "./homePageHeaderListContainer.js";
 import HomeStatsChartsContainer from './homeStatsChartsContainer.js';
 import polyline from '@mapbox/polyline';
 import "../../Styling/HomePage.css";
+import LineChart from "../../components/charts/lineChart/lineChart.js";
+import LineChart2 from "../../components/charts/lineChart/lineChart2.js";
 
-const HomePage = ({userDetails, userStats, initialStats}) => {
+const HomePage = ({userDetails, userStats, initialStats, activities}) => {
 
     const text = `Welcome, ${userDetails.Firstname}!`;
     const headlineTitle = 'Current Statistics';
@@ -80,12 +82,35 @@ const HomePage = ({userDetails, userStats, initialStats}) => {
         }
     };
 
+    const data = []
+
+    const setData = () => {
+        for(var activity of activities) {
+                if (activity.RideType = "Commute") {
+                
+                var array = activity.ElapsedTime.split(":");
+                var seconds = (parseInt(array[0], 10) * 60 * 60) + (parseInt(array[1], 10) * 60) + parseInt(array[2], 10)
+
+                        data.push({
+                             x: activity.Date,
+                             y: seconds
+                        })
+                }
+        }
+    };
+
+    setData();
+
 
     return(
     <div id="home-page-container">
         {/* <SectionHeader text={text} /> */}
-        {/* <HomePageHeaderListContainer title={headlineTitle} list={headlineList} />
-        <HomeStatsChartsContainer 
+
+        {/* ROW 1 */}
+        <HomePageHeaderListContainer title={headlineTitle} list={headlineList} />          
+        
+        {/* ROW 2 */}
+        {/* <HomeStatsChartsContainer 
           userStats={userStats} 
           initialRideTypesPieChartArray={rideTypesPieChartArray} 
           initialWorkoutScoresPieChartArray={workoutScoresPieChartArray} 
@@ -99,9 +124,15 @@ const HomePage = ({userDetails, userStats, initialStats}) => {
           initialLongestRidePolyline={initialLongestRidePolyline()}
           initialFarthestRidePolyline={initialFarthestRidePolyline()}
         /> */}
-
-        {/* ROW 1 */}
-          <HomePageHeaderListContainer title={headlineTitle} list={headlineList} />          
+        <Box
+         height="20rem"
+         width="45rem"
+         overflow="scroll"
+         marginTop="2rem"
+         >
+           {/* <LineChart data={data} /> */}
+           <LineChart2 data={data} />
+        </Box>
     </div>
     
     );

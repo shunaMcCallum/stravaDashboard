@@ -31,7 +31,6 @@ function App() {
   useEffect(() => {
     fetch('http://localhost:5000/activities')
       .then(res => res.json())
-      //.then(data => (console.log(data.recordset)));
       .then(data => setActivities(data.recordset));
 }, [])
 
@@ -48,7 +47,7 @@ function App() {
         <NavBar />
         <Routes>
         {/* <Route path="/" element={<SectionHeader text="Hello World" />} /> */}
-        <Route path="/" element={<HomePage userDetails={userDetails} userStats={userStats} initialStats={initialStats} />} />
+        <Route path="/" element={<HomePage userDetails={userDetails} userStats={userStats} initialStats={initialStats} activities={activities} />} />
         <Route path="/activities" element={<ActivitiesPage activitiesList={activities} activityHeaders={activityHeaders} />} />
         </Routes>
     </div>
