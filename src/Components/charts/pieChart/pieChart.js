@@ -1,11 +1,10 @@
 import React from 'react';
 import { Chart } from 'react-google-charts';
-import '../../Styling/PieChart.css'
 
 const PieChart = ({ chartArray}) => {
 
     const chartOptions = {
-        backgroundColor: "rgb(39, 34, 52)",
+        backgroundColor: "#332240",
         titleTextStyle: {
             color: "white"
         },

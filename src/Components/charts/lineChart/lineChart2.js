@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Typography } from "@mui/material";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
 
 const LineChart2 = ({header, data}) => {

@@ -5,7 +5,6 @@ import HomePageHeaderListContainer from "./homePageHeaderListContainer.js";
 import HomeStatsChartsContainer from './homeStatsChartsContainer.js';
 import polyline from '@mapbox/polyline';
 import "../../Styling/HomePage.css";
-import LineChart from "../../components/charts/lineChart/lineChart.js";
 import LineChart2 from "../../components/charts/lineChart/lineChart2.js";
 
 const HomePage = ({userDetails, userStats, initialStats, activities}) => {
@@ -121,30 +120,33 @@ const HomePage = ({userDetails, userStats, initialStats, activities}) => {
 
     return(
     <div id="home-page-container">
-        {/* <SectionHeader text={text} /> */}
+        <SectionHeader text={text} />
 
         {/* ROW 1 */}
         <HomePageHeaderListContainer title={headlineTitle} list={headlineList} />          
         
         {/* ROW 2 */}
-        {/* <HomeStatsChartsContainer 
+        <HomeStatsChartsContainer 
           userStats={userStats} 
           initialRideTypesPieChartArray={rideTypesPieChartArray} 
           initialWorkoutScoresPieChartArray={workoutScoresPieChartArray} 
           initialRideTimePieChartArray={rideTimePieChartArray}
           initialRideTotalsTitle={rideTotalsTitle} 
           initialRideTotalsArray={rideTotalsArray}
-          initialLongestRideTitle={longestRideTitle}
-          initialLongestRideArray={longestRideArray}
-          initialFarthestRideTitle={farthestRideTitle}
-          initialFarthestRideArray={farthestRideArray}
-          initialLongestRidePolyline={initialLongestRidePolyline()}
-          initialFarthestRidePolyline={initialFarthestRidePolyline()}
-        /> */}
+        //   initialLongestRideTitle={longestRideTitle}
+        //   initialLongestRideArray={longestRideArray}
+        //   initialFarthestRideTitle={farthestRideTitle}
+        //   initialFarthestRideArray={farthestRideArray}
+        //   initialLongestRidePolyline={initialLongestRidePolyline()}
+        //   initialFarthestRidePolyline={initialFarthestRidePolyline()}
+        />
+      
+        {/* ROW 3 */}
         <Box
            sx={{
                 display: "flex",
-                height: "100%"
+                height: "100%",
+                marginTop: "2rem"
            }}
            >
         <Box
@@ -153,7 +155,6 @@ const HomePage = ({userDetails, userStats, initialStats, activities}) => {
                 width: "45%",
                 //backgroundColor: "#332240",
                 overflow: "auto",
-                marginTop: "2rem",
                 marginLeft: "1.5rem",
                 '&:hover::-webkit-scrollbar': {
                         display: 'block',
@@ -180,7 +181,6 @@ const HomePage = ({userDetails, userStats, initialStats, activities}) => {
                 height: "57%",
                 width: "45%",
                 overflow: "auto",
-                marginTop: "2rem",
                 marginLeft: "1.5rem",
                 '&:hover::-webkit-scrollbar': {
                         display: 'block',

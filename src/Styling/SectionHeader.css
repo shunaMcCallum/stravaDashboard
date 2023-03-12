@@ -11,7 +11,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(39, 34, 52);
+    background-color: #332240;
     box-shadow: 0rem 0.15rem 1.5rem black;
+    border-radius: 1rem;
     color: #FC5200;
 }

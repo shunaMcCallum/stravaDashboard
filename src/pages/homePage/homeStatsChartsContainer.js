@@ -1,12 +1,13 @@
 import React, {useState} from "react";
 import Filter from '../../components/lists/filter.js';
-import PieChart from "../../components/charts/pieChart.js";
+import PieChart from "../../components/charts/pieChart/pieChart.js";
 import HomeStatsChartsListContainer from "./homeStatsChartsListContainer.js";
 import Map from "../../components/maps/map.js";
 import polyline from '@mapbox/polyline'
 import '../../Styling/HomeStatsChartsContainer.css'
 
-const HomeStatsChartsContainer = ({userStats, initialRideTypesPieChartArray, initialWorkoutScoresPieChartArray, initialRideTimePieChartArray, initialRideTotalsTitle, initialRideTotalsArray, initialLongestRideTitle, initialLongestRideArray, initialFarthestRideTitle, initialFarthestRideArray, initialLongestRidePolyline, initialFarthestRidePolyline}) => {
+// const HomeStatsChartsContainer = ({userStats, initialRideTypesPieChartArray, initialWorkoutScoresPieChartArray, initialRideTimePieChartArray, initialRideTotalsTitle, initialRideTotalsArray, initialLongestRideTitle, initialLongestRideArray, initialFarthestRideTitle, initialFarthestRideArray, initialLongestRidePolyline, initialFarthestRidePolyline}) => {
+    const HomeStatsChartsContainer = ({userStats, initialRideTypesPieChartArray, initialWorkoutScoresPieChartArray, initialRideTimePieChartArray, initialRideTotalsTitle, initialRideTotalsArray}) => {
 
     const [selectedItem, setSelectedItem] = useState(null);
 
@@ -112,7 +113,7 @@ const HomeStatsChartsContainer = ({userStats, initialRideTypesPieChartArray, ini
                         <PieChart chartArray={rideTimePieChartArray} />
                     </div>
                 </div>
-                <div id="bottom-charts-container">
+                {/* <div id="bottom-charts-container">
                     <HomeStatsChartsListContainer title={rideTotalsTitle} list={rideTotalsArray} />
                     <div className="list-and-map">
                         <HomeStatsChartsListContainer title={longestRideTitle} list={longestRideArray} />
@@ -122,7 +123,7 @@ const HomeStatsChartsContainer = ({userStats, initialRideTypesPieChartArray, ini
                         <HomeStatsChartsListContainer title={farthestRideTitle} list={farthestRideArray} />
                         <Map polyline={farthestPolylineArray} />
                     </div>
-                </div>
+                </div> */}
             </div> :
             <div>
                 <div id="pie-charts-container">
@@ -139,13 +140,13 @@ const HomeStatsChartsContainer = ({userStats, initialRideTypesPieChartArray, ini
                         <PieChart chartArray={initialRideTimePieChartArray} />
                     </div>
                 </div>
-                <div id="bottom-charts-container">
+                {/* <div id="bottom-charts-container">
                     <HomeStatsChartsListContainer title={initialRideTotalsTitle} list={initialRideTotalsArray} />
                     <HomeStatsChartsListContainer title={initialLongestRideTitle} list={initialLongestRideArray} />
                     <Map polyline={initialLongestRidePolyline} />
                     <HomeStatsChartsListContainer title={initialFarthestRideTitle} list={initialFarthestRideArray} />
                     <Map polyline={initialFarthestRidePolyline} />
-                </div>
+                </div> */}
             </div>
             }
         </div>
