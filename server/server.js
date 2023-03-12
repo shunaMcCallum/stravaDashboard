@@ -33,6 +33,12 @@ app.get('/userStats', async(req, res) => {
     res.send(result);
 })
 
+app.get('/alpeDuZwift', async(req, res) => {
+    console.log('called alpeZuZwift');
+    const result = await dbOperation.getAlpeDuZwiftEfforts();
+    res.send(result);
+})
+
 app.put('/activities/:id', async(req, res) => {
     console.log('called updateActivity');
     const result = await dbOperation.updateActivityNotes(req);

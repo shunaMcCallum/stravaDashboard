@@ -7,7 +7,7 @@ import polyline from '@mapbox/polyline';
 import "../../Styling/HomePage.css";
 import LineChart2 from "../../components/charts/lineChart/lineChart2.js";
 
-const HomePage = ({userDetails, userStats, initialStats, activities}) => {
+const HomePage = ({userDetails, userStats, initialStats, activities, alpeDuZwiftEfforts}) => {
 
     const text = `Welcome, ${userDetails.Firstname}!`;
     const headlineTitle = 'Current Statistics';
@@ -83,6 +83,7 @@ const HomePage = ({userDetails, userStats, initialStats, activities}) => {
 
     const morningCommutes = []
     const afternoonCommutes = []
+    const alpes = []
 
     const setMorningData = () => {
         for(var activity of activities) {
@@ -114,8 +115,22 @@ const HomePage = ({userDetails, userStats, initialStats, activities}) => {
         }
     };
 
+    const setAlpeDuZwiftData = () => {
+        for(var alpe of alpeDuZwiftEfforts) {
+                
+                var array = alpe.ElapsedTime.split(":");
+                var seconds = (parseInt(array[0], 10) * 60 * 60) + (parseInt(array[1], 10) * 60) + parseInt(array[2], 10)
+
+                        alpes.push({
+                             Date: alpe.Date,
+                             Time: seconds
+                        })
+                }
+        };
+
     setMorningData();
     setAfternoonData();
+    setAlpeDuZwiftData();
 
 
     return(
@@ -145,6 +160,72 @@ const HomePage = ({userDetails, userStats, initialStats, activities}) => {
         <Box
            sx={{
                 display: "flex",
+                height: "60%",
+                marginTop: "2rem",
+                marginBottom: "0rem"
+           }}
+           >
+        <Box
+         sx={{
+                height: "100%",
+                width: "45%",
+                //backgroundColor: "#332240",
+                overflow: "auto",
+                marginLeft: "1.5rem",
+                marginBottom: "0rem",
+                '&:hover::-webkit-scrollbar': {
+                        display: 'block',
+                        },
+                        '&::-webkit-scrollbar': {
+                        display: 'none',
+                        width: '0.512rem',
+                        },
+                        '&::-webkit-scrollbar-track': {
+                        boxShadow: 'inset 0 0 2rem rgba(0,0,0,0.00)',
+                        webkitBoxShadow: 'inset 0 0 2rem rgba(0,0,0,0.00)',
+                        },
+                        '&::-webkit-scrollbar-thumb': {
+                        backgroundColor: '#8d8e90',
+                        height: '3rem',
+                        borderRadius: '1rem',
+                        },
+         }}
+         >
+           <LineChart2 header={"Morning Commute Times"} data={morningCommutes} chartWidth={8000} />
+        </Box>
+        <Box
+         sx={{
+                height: "100%",
+                width: "45%",
+                overflow: "auto",
+                marginLeft: "1.5rem",
+                marginBottom: "0rem",
+                '&:hover::-webkit-scrollbar': {
+                        display: 'block',
+                        },
+                        '&::-webkit-scrollbar': {
+                        display: 'none',
+                        width: '0.512rem',
+                        },
+                        '&::-webkit-scrollbar-track': {
+                        boxShadow: 'inset 0 0 2rem rgba(0,0,0,0.00)',
+                        webkitBoxShadow: 'inset 0 0 2rem rgba(0,0,0,0.00)',
+                        },
+                        '&::-webkit-scrollbar-thumb': {
+                        backgroundColor: '#8d8e90',
+                        height: '3rem',
+                        borderRadius: '1rem',
+                        },
+         }}
+         >
+           <LineChart2 header={"Afternoon Commute Times"} data={afternoonCommutes} chartWidth={8000} />
+        </Box>
+        </Box>
+
+         {/* ROW 4 */}
+         <Box
+           sx={{
+                display: "flex",
                 height: "100%",
                 marginTop: "2rem"
            }}
@@ -153,7 +234,6 @@ const HomePage = ({userDetails, userStats, initialStats, activities}) => {
          sx={{
                 height: "57%",
                 width: "45%",
-                //backgroundColor: "#332240",
                 overflow: "auto",
                 marginLeft: "1.5rem",
                 '&:hover::-webkit-scrollbar': {
@@ -174,33 +254,7 @@ const HomePage = ({userDetails, userStats, initialStats, activities}) => {
                         },
          }}
          >
-           <LineChart2 header={"Morning Commute Times"} data={morningCommutes} />
-        </Box>
-        <Box
-         sx={{
-                height: "57%",
-                width: "45%",
-                overflow: "auto",
-                marginLeft: "1.5rem",
-                '&:hover::-webkit-scrollbar': {
-                        display: 'block',
-                        },
-                        '&::-webkit-scrollbar': {
-                        display: 'none',
-                        width: '0.512rem',
-                        },
-                        '&::-webkit-scrollbar-track': {
-                        boxShadow: 'inset 0 0 2rem rgba(0,0,0,0.00)',
-                        webkitBoxShadow: 'inset 0 0 2rem rgba(0,0,0,0.00)',
-                        },
-                        '&::-webkit-scrollbar-thumb': {
-                        backgroundColor: '#8d8e90',
-                        height: '3rem',
-                        borderRadius: '1rem',
-                        },
-         }}
-         >
-           <LineChart2 header={"Afternoon Commute Times"} data={afternoonCommutes} />
+           <LineChart2 header={"Alpe Du Zwift Segment Times"} data={alpes} chartWidth={650} />
         </Box>
         </Box>
     </div>

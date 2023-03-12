@@ -75,6 +75,18 @@ const getUserStats = async() => {
     }
 }
 
+const getAlpeDuZwiftEfforts = async() => {
+    try {
+        let pool = await sql.connect(config);
+        let userStats = await pool.request().query('SELECT * FROM dbo.AlpeDuZwift_Live ORDER BY [start_date_local] DESC')
+        // console.log(userStats);
+        return userStats;
+    }
+    catch(error) {
+        console.log(error);
+    }
+}
+
 const updateActivityNotes = async(req) => {
     try {
         let pool = await sql.connect(config);
@@ -88,4 +100,4 @@ const updateActivityNotes = async(req) => {
 
 
 
-module.exports = {getUserDetails, getActivities, getUserStats, getUserStatsAll, getUserStatsRecent, getUserStatsYtd, updateActivityNotes}
+module.exports = {getUserDetails, getActivities, getUserStats, getUserStatsAll, getUserStatsRecent, getUserStatsYtd, getAlpeDuZwiftEfforts, updateActivityNotes}

@@ -1,12 +1,12 @@
 import React, { PureComponent } from 'react';
-import { Typography } from "@mui/material";
+import { Typography, Box } from "@mui/material";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
 
-const LineChart2 = ({header, data}) => {
+const LineChart2 = ({header, data, chartWidth}) => {
 
     return (
-      <div>
+      <Box>
         <Typography 
           variant="h5"
           lineHeight="2"
@@ -14,7 +14,7 @@ const LineChart2 = ({header, data}) => {
           {header}
         </Typography>
         <LineChart 
-          width={20000} 
+          width={chartWidth} 
           height={290} 
           margin={{
             top: 6
@@ -31,7 +31,7 @@ const LineChart2 = ({header, data}) => {
           activeDot={{ r: 6 }}
           strokewidth={2} />
         </LineChart>
-      </div>
+      </Box>
 
     );
 
