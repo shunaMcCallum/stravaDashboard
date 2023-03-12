@@ -82,24 +82,41 @@ const HomePage = ({userDetails, userStats, initialStats, activities}) => {
         }
     };
 
-    const data = []
+    const morningCommutes = []
+    const afternoonCommutes = []
 
-    const setData = () => {
+    const setMorningData = () => {
         for(var activity of activities) {
-                if (activity.RideType = "Commute") {
+                if (activity.RideType == "Commute" && activity.Name == "Morning Ride") {
                 
                 var array = activity.ElapsedTime.split(":");
                 var seconds = (parseInt(array[0], 10) * 60 * 60) + (parseInt(array[1], 10) * 60) + parseInt(array[2], 10)
 
-                        data.push({
-                             x: activity.Date,
-                             y: seconds
+                        morningCommutes.push({
+                             Date: activity.Date,
+                             Time: seconds
                         })
                 }
         }
     };
 
-    setData();
+    const setAfternoonData = () => {
+        for(var activity of activities) {
+                if (activity.RideType == "Commute" && activity.Name == "Afternoon Ride" || activity.Name == "Evening Ride") {
+                
+                var array = activity.ElapsedTime.split(":");
+                var seconds = (parseInt(array[0], 10) * 60 * 60) + (parseInt(array[1], 10) * 60) + parseInt(array[2], 10)
+
+                        afternoonCommutes.push({
+                             Date: activity.Date,
+                             Time: seconds
+                        })
+                }
+        }
+    };
+
+    setMorningData();
+    setAfternoonData();
 
 
     return(
@@ -125,13 +142,66 @@ const HomePage = ({userDetails, userStats, initialStats, activities}) => {
           initialFarthestRidePolyline={initialFarthestRidePolyline()}
         /> */}
         <Box
-         height="20rem"
-         width="45rem"
-         overflow="scroll"
-         marginTop="2rem"
+           sx={{
+                display: "flex",
+                height: "100%"
+           }}
+           >
+        <Box
+         sx={{
+                height: "57%",
+                width: "45%",
+                //backgroundColor: "#332240",
+                overflow: "auto",
+                marginTop: "2rem",
+                marginLeft: "1.5rem",
+                '&:hover::-webkit-scrollbar': {
+                        display: 'block',
+                        },
+                        '&::-webkit-scrollbar': {
+                        display: 'none',
+                        width: '0.512rem',
+                        },
+                        '&::-webkit-scrollbar-track': {
+                        boxShadow: 'inset 0 0 2rem rgba(0,0,0,0.00)',
+                        webkitBoxShadow: 'inset 0 0 2rem rgba(0,0,0,0.00)',
+                        },
+                        '&::-webkit-scrollbar-thumb': {
+                        backgroundColor: '#8d8e90',
+                        height: '3rem',
+                        borderRadius: '1rem',
+                        },
+         }}
          >
-           {/* <LineChart data={data} /> */}
-           <LineChart2 data={data} />
+           <LineChart2 header={"Morning Commute Times"} data={morningCommutes} />
+        </Box>
+        <Box
+         sx={{
+                height: "57%",
+                width: "45%",
+                overflow: "auto",
+                marginTop: "2rem",
+                marginLeft: "1.5rem",
+                '&:hover::-webkit-scrollbar': {
+                        display: 'block',
+                        },
+                        '&::-webkit-scrollbar': {
+                        display: 'none',
+                        width: '0.512rem',
+                        },
+                        '&::-webkit-scrollbar-track': {
+                        boxShadow: 'inset 0 0 2rem rgba(0,0,0,0.00)',
+                        webkitBoxShadow: 'inset 0 0 2rem rgba(0,0,0,0.00)',
+                        },
+                        '&::-webkit-scrollbar-thumb': {
+                        backgroundColor: '#8d8e90',
+                        height: '3rem',
+                        borderRadius: '1rem',
+                        },
+         }}
+         >
+           <LineChart2 header={"Afternoon Commute Times"} data={afternoonCommutes} />
+        </Box>
         </Box>
     </div>
     
