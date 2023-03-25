@@ -6,6 +6,8 @@ import HomeStatsChartsContainer from './homeStatsChartsContainer.js';
 import polyline from '@mapbox/polyline';
 import "../../Styling/HomePage.css";
 import LineChart2 from "../../components/charts/lineChart/lineChart2.js";
+import BarChart2 from "../../components/charts/barChart/barChart2.js";
+import Filter from "../../components/lists/filter.js";
 
 const HomePage = ({userDetails, userStats, initialStats, activities, alpeDuZwiftEfforts}) => {
 
@@ -132,6 +134,43 @@ const HomePage = ({userDetails, userStats, initialStats, activities, alpeDuZwift
     setAfternoonData();
     setAlpeDuZwiftData();
 
+    let workoutStressScores = []
+    const workoutNames = [
+        {Header: "2 x 20 mins FTP"},
+        {Header: "2 x 30 mins FTP"},
+        {Header: "2 x 15 mins FTP"},
+        {Header: "3 x 15 mins FTP"},
+        {Header: "4 x 10 mins FTP"},
+        {Header: "4 x 12 mins FTP"},
+        {Header: "VO2 Max"},
+        {Header: "Zone 2"},
+        {Header: "Tempo"},
+        {Header: "Tempo with Surges"},
+        {Header: "SST"}
+    ]
+
+    const setWorkoutStressScores = ((item) => {
+        var array = [];
+
+        for(var activity of activities) {
+                if (activity.Name.includes(item.Header)) {
+                        array.push({
+                                name: activity.Name,
+                                score: activity.StressScore
+                        });
+                }
+        }
+        
+        workoutStressScores = array;
+
+        console.log(workoutStressScores);
+    });
+
+
+    const handleListSelect = ((item) => {
+        setWorkoutStressScores(item);
+        console.log(item)
+});
 
     return(
     <div id="home-page-container">
@@ -226,8 +265,9 @@ const HomePage = ({userDetails, userStats, initialStats, activities, alpeDuZwift
          <Box
            sx={{
                 display: "flex",
-                height: "100%",
-                marginTop: "2rem"
+                height: "60%",
+                marginTop: "2rem",
+                marginBottom: "0rem"
            }}
            >
         <Box
@@ -255,6 +295,17 @@ const HomePage = ({userDetails, userStats, initialStats, activities, alpeDuZwift
          }}
          >
            <LineChart2 header={"Alpe Du Zwift Segment Times"} data={alpes} chartWidth={650} />
+        </Box>
+        <Box
+         sx={{
+                height: "57%",
+                width: "45%",
+                overflow: "auto",
+                marginLeft: "1.5rem"
+         }}
+         >
+           <Filter list={workoutNames} handleListSelect={handleListSelect} />
+           {/* <BarChart2 header={"Stress Scores by Workout Type"} data={workoutStressScores} chartWidth={650} /> */}
         </Box>
         </Box>
     </div>

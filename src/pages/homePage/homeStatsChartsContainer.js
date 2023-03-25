@@ -6,7 +6,6 @@ import Map from "../../components/maps/map.js";
 import polyline from '@mapbox/polyline'
 import '../../Styling/HomeStatsChartsContainer.css'
 
-// const HomeStatsChartsContainer = ({userStats, initialRideTypesPieChartArray, initialWorkoutScoresPieChartArray, initialRideTimePieChartArray, initialRideTotalsTitle, initialRideTotalsArray, initialLongestRideTitle, initialLongestRideArray, initialFarthestRideTitle, initialFarthestRideArray, initialLongestRidePolyline, initialFarthestRidePolyline}) => {
     const HomeStatsChartsContainer = ({userStats, initialRideTypesPieChartArray, initialWorkoutScoresPieChartArray, initialRideTimePieChartArray, initialRideTotalsTitle, initialRideTotalsArray}) => {
 
     const [selectedItem, setSelectedItem] = useState(null);

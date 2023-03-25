@@ -14,7 +14,7 @@ const Filter = ({list, handleListSelect}) => {
     return(
     <div id="filter">
         <select onChange={handleChange} defaultValue="">
-            <option disabled value="">Select a time period</option>
+            <option disabled value="">Select an option</option>
             {listOptions}
         </select>
     </div>
