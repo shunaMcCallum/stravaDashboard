@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { Box } from "@mui/material";
 import SectionHeader from '../../components/headers/sectionHeader.js';
 import HomePageHeaderListContainer from "./homePageHeaderListContainer.js";
@@ -8,6 +8,7 @@ import "../../Styling/HomePage.css";
 import LineChart2 from "../../components/charts/lineChart/lineChart2.js";
 import BarChart2 from "../../components/charts/barChart/barChart2.js";
 import Filter from "../../components/lists/filter.js";
+import PieChart from "../../components/charts/pieChart/pieChart.js";
 
 const HomePage = ({userDetails, userStats, initialStats, activities, alpeDuZwiftEfforts}) => {
 
@@ -134,7 +135,7 @@ const HomePage = ({userDetails, userStats, initialStats, activities, alpeDuZwift
     setAfternoonData();
     setAlpeDuZwiftData();
 
-    let workoutStressScores = []
+    const [workoutStressScores, setWorkoutStressScores] = useState([["TotalNumberOfWorkouts", "NumberWithinStressScoreRange"]]);
     const workoutNames = [
         {Header: "2 x 20 mins FTP"},
         {Header: "2 x 30 mins FTP"},
@@ -144,33 +145,42 @@ const HomePage = ({userDetails, userStats, initialStats, activities, alpeDuZwift
         {Header: "4 x 12 mins FTP"},
         {Header: "VO2 Max"},
         {Header: "Zone 2"},
-        {Header: "Tempo"},
+        {Header: "Tempo Ride"},
         {Header: "Tempo with Surges"},
         {Header: "SST"}
-    ]
+    ];
 
-    const setWorkoutStressScores = ((item) => {
-        var array = [];
+
+    const populateWorkoutStressScoresPieChart = ((item) => {
+
+        let scoresBelow70 = ["0to70", 0];
+        let scores71to90 = ["71to90", 0];
+        let scores91to110 = ["91to110", 0];
+        let scoresAbove111 = ["110plus", 0];
 
         for(var activity of activities) {
                 if (activity.Name.includes(item.Header)) {
-                        array.push({
-                                name: activity.Name,
-                                score: activity.StressScore
-                        });
+                        if (activity.StressScore === null) {
+                                console.log(activity.StressScore);
+                        } else if (activity.StressScore < 71) {
+                                scoresBelow70[1] ++;
+                        } else if (activity.StressScore >= 71 && activity.StressScore < 91) {
+                                scores71to90[1] ++;
+                        } else if (activity.StressScore >= 91 && activity.StressScore < 111) {
+                                scores91to110[1] ++;
+                        } else if (activity.StressScore > 110) {
+                                scoresAbove111[1] ++;
+                        }
                 }
         }
         
-        workoutStressScores = array;
-
-        console.log(workoutStressScores);
+        setWorkoutStressScores([["TotalNumberOfWorkouts", "NumberWithinStressScoreRange"], scoresBelow70, scores71to90, scores91to110, scoresAbove111]);
     });
 
 
     const handleListSelect = ((item) => {
-        setWorkoutStressScores(item);
-        console.log(item)
-});
+        populateWorkoutStressScoresPieChart(item);
+    });
 
     return(
     <div id="home-page-container">
@@ -298,16 +308,37 @@ const HomePage = ({userDetails, userStats, initialStats, activities, alpeDuZwift
         </Box>
         <Box
          sx={{
-                height: "57%",
                 width: "45%",
-                overflow: "auto",
-                marginLeft: "1.5rem"
+                // overflow: "auto",
+                marginLeft: "3rem"
          }}
          >
-           <Filter list={workoutNames} handleListSelect={handleListSelect} />
-           {/* <BarChart2 header={"Stress Scores by Workout Type"} data={workoutStressScores} chartWidth={650} /> */}
+           <div id="stats-charts-container-header">
+                <h3>Workout Stress Scores</h3>
+                <Filter list={workoutNames} handleListSelect={handleListSelect} />
+           </div>
+           {workoutStressScores ?
+           <div id="pie-charts-container" className="pie-chart-with-header">
+                <PieChart chartArray={workoutStressScores} />
+           </div>
+           : null
+                }
         </Box>
         </Box>
+
+        {/* ROW 5 */}
+        <Box
+           sx={{
+                display: "flex",
+                height: "60%",
+                marginTop: "2rem",
+                marginBottom: "0rem"
+           }}>
+          <Box>
+                
+          </Box>
+        </Box>
+
     </div>
     
     );

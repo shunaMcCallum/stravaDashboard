@@ -3,6 +3,7 @@ import { Chart } from 'react-google-charts';
 
 const PieChart = ({ chartArray}) => {
 
+
     const chartOptions = {
         backgroundColor: "#332240",
         titleTextStyle: {

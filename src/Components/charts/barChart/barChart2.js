@@ -21,17 +21,11 @@ const BarChart2 = ({header, data, chartWidth}) => {
           }}
           data={data}>
         <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-        <XAxis dataKey="Date" />
+        <XAxis dataKey="x" />
         <YAxis />
         <Tooltip contentStyle={{color:"#000"}} itemStyle={{color:"#000"}} />
-        {/* <Line type="monotone"
-          dataKey="Time" 
-          name="Time"
-          stroke="#FC5200" 
-          activeDot={{ r: 6 }}
-          strokewidth={2} /> */}
         </BarChart>
-        <Bar dataKey="Time" name="Time" fill="#8884d8" />
+        <Bar dataKey="y" name="Time" fill="#8884d8" />
       </Box>
 
     );

@@ -17,11 +17,6 @@ function App() {
   const initialStats = { ...userStats[0] };
   const activityHeaders = { ...activities[0] };
 
-  // const fetchUserStats = () => {
-  //   fetch('http://localhost:5000/userStats')
-  //     .then(res => res.json())
-  //       .then(data => setUserStats(data.recordsets[0]));
-  // }
 
   useEffect(() => {
     fetch('http://localhost:5000/user')
