@@ -6,11 +6,10 @@ import HomeStatsChartsContainer from './homeStatsChartsContainer.js';
 import polyline from '@mapbox/polyline';
 import "../../Styling/HomePage.css";
 import LineChart2 from "../../components/charts/lineChart/lineChart2.js";
-import BarChart2 from "../../components/charts/barChart/barChart2.js";
 import Filter from "../../components/lists/filter.js";
 import PieChart from "../../components/charts/pieChart/pieChart.js";
 
-const HomePage = ({userDetails, userStats, initialStats, activities, alpeDuZwiftEfforts}) => {
+const HomePage = ({userDetails, userStats, initialStats, activities, alpeDuZwiftEfforts, thisWeekActivities, lastWeekActivities}) => {
 
     const text = `Welcome, ${userDetails.Firstname}!`;
     const headlineTitle = 'Current Statistics';
@@ -187,7 +186,7 @@ const HomePage = ({userDetails, userStats, initialStats, activities, alpeDuZwift
         <SectionHeader text={text} />
 
         {/* ROW 1 */}
-        <HomePageHeaderListContainer title={headlineTitle} list={headlineList} />          
+        <HomePageHeaderListContainer title={headlineTitle} list={headlineList} thisWeekActivities={thisWeekActivities} lastWeekActivities={lastWeekActivities} />          
         
         {/* ROW 2 */}
         <HomeStatsChartsContainer 

@@ -39,6 +39,18 @@ app.get('/alpeDuZwift', async(req, res) => {
     res.send(result);
 })
 
+app.get('/thisWeekActivities', async(req, res) => {
+    console.log('called thisWeekActivities');
+    const result = await dbOperation.getThisWeekActivities();
+    res.send(result);
+})
+
+app.get('/lastWeekActivities', async(req, res) => {
+    console.log('called lastWeekActivities');
+    const result = await dbOperation.getLastWeekActivities();
+    res.send(result);
+})
+
 app.put('/activities/:id', async(req, res) => {
     console.log('called updateActivity');
     const result = await dbOperation.updateActivityNotes(req);

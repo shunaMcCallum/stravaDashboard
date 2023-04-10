@@ -16,16 +16,16 @@ const BarChart2 = ({header, data, chartWidth}) => {
         <BarChart 
           width={chartWidth} 
           height={290} 
-          margin={{
-            top: 6
-          }}
+          // margin={{
+          //   top: 6
+          // }}
           data={data}>
-        <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+        <CartesianGrid stroke="#ffffff" strokeDasharray="5 5" />
         <XAxis dataKey="x" />
         <YAxis />
-        <Tooltip contentStyle={{color:"#000"}} itemStyle={{color:"#000"}} />
+        {/* <Tooltip contentStyle={{color:"#000"}} itemStyle={{color:"#000"}} /> */}
+        <Bar dataKey="y" fill="#ffffff" />
         </BarChart>
-        <Bar dataKey="y" name="Time" fill="#8884d8" />
       </Box>
 
     );
