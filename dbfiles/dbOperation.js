@@ -94,7 +94,7 @@ const getThisWeekActivities = async() => {
             'DECLARE @Start DATE = DATEADD(WEEK, DATEDIFF(WEEK, 0, GETDATE()), 0); ' +
             'DECLARE @End DATE = DATEADD(WEEK, DATEDIFF(WEEK, 0, GETDATE()), 0) + 6; ' +            
             'DROP TABLE IF EXISTS #Temp; ' +
-            'CREATE TABLE #Temp ([Date] DATE, DayOfTheWeek VARCHAR(10), NumActivities INT); ' +
+            'CREATE TABLE #Temp ([Date] DATE, DayOfTheWeek VARCHAR(10), NumActivities INT, Distance FLOAT, MovingTime INT); ' +
             'WITH Dates_CTE ([Date], DayOfTheWeek) AS ( ' +
                 'SELECT @Start, DATENAME(weekday, @Start) ' +
                 'UNION ALL ' +
@@ -106,7 +106,9 @@ const getThisWeekActivities = async() => {
             'SELECT [Date], DayOfTheWeek ' +
             'FROM Dates_CTE ' +
             'Update #Temp SET ' +
-            'NumActivities = (SELECT COUNT(*) FROM TrainingDB.dbo.Activities_Live_New src WHERE CAST(src.start_date_local AS DATE) = #Temp.[Date]) ' +
+            'NumActivities = (SELECT COUNT(*) FROM TrainingDB.dbo.Activities_Live_New src WHERE CAST(src.start_date_local AS DATE) = #Temp.[Date]), ' +
+            'Distance = (SELECT SUM(Distance) FROM TrainingDB.dbo.Activities_Live_New src WHERE CAST(src.start_date_local AS DATE) = #Temp.[Date]), ' +
+            `MovingTime = (SELECT CAST(SUM(DATEDIFF(SECOND, '00:00:00', MovingTime)) AS INT) FROM TrainingDB.dbo.Activities_Live_New src WHERE  CAST(src.start_date_local AS DATE) = #Temp.[Date]) ` +
             'SELECT * FROM #Temp '
             )
         return activities;
@@ -123,7 +125,7 @@ const getLastWeekActivities = async() => {
             'DECLARE @LastWeekStart DATE = DATEADD(WEEK, DATEDIFF(WEEK, 0, GETDATE()), 0) - 7; ' +
             'DECLARE @LastWeekEnd DATE = DATEADD(WEEK, DATEDIFF(WEEK, 0, GETDATE()), 0) - 1; ' +            
             'DROP TABLE IF EXISTS #Temp; ' +
-            'CREATE TABLE #Temp ([Date] DATE, DayOfTheWeek VARCHAR(10), NumActivities INT); ' +
+            'CREATE TABLE #Temp ([Date] DATE, DayOfTheWeek VARCHAR(10), NumActivities INT, Distance FLOAT, MovingTime INT); ' +
             'WITH Dates_CTE ([Date], DayOfTheWeek) AS ( ' +
                 'SELECT @LastWeekStart, DATENAME(weekday, @LastWeekStart) ' +
                 'UNION ALL ' +
@@ -135,7 +137,9 @@ const getLastWeekActivities = async() => {
             'SELECT [Date], DayOfTheWeek ' +
             'FROM Dates_CTE ' +
             'Update #Temp SET ' +
-            'NumActivities = (SELECT COUNT(*) FROM TrainingDB.dbo.Activities_Live_New src WHERE CAST(src.start_date_local AS DATE) = #Temp.[Date]) ' +
+            'NumActivities = (SELECT COUNT(*) FROM TrainingDB.dbo.Activities_Live_New src WHERE CAST(src.start_date_local AS DATE) = #Temp.[Date]), ' +
+            'Distance = (SELECT SUM(Distance) FROM TrainingDB.dbo.Activities_Live_New src WHERE CAST(src.start_date_local AS DATE) = #Temp.[Date]), ' +
+            `MovingTime = (SELECT CAST(SUM(DATEDIFF(SECOND, '00:00:00', MovingTime)) AS INT) FROM TrainingDB.dbo.Activities_Live_New src WHERE  CAST(src.start_date_local AS DATE) = #Temp.[Date]) ` +
             'SELECT * FROM #Temp '
         )
         // console.log(activities);
