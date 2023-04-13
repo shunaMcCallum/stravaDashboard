@@ -1,30 +1,39 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { Box } from "@mui/material";
 import StatsList from "../../components/lists/statsList";
 import BarChart2 from "../../components/charts/barChart/barChart2.js";
+import Filter from "../../components/lists/filter";
 //import '../../Styling/HomePageHeaderListContainer.css';
 
 const HomePageHeaderListContainer = ({title, list, thisWeekActivities, lastWeekActivities}) => {
-
-    //console.log(thisWeekActivities)
-
-    const placeholderList = ["Stat1: Stat", "Stat2: Stat", "Stat3: Stat"]
-    const placeholderHeader = "Stat Header"
 
     let thisWeekNum = 0;
     let thisWeekDistance = 0;
     let thisWeekTime = 0;
 
+    //const [num, setNum] = (null);
+
+
     let lastWeekNum = 0;
     let lastWeekDistance = 0;
     let lastWeekTime = 0;
 
-    const thisWeek = []
-    const lastWeek = [];
+    const [thisWeek, setThisWeek] = useState([]);
+    const [lastWeek, setLastWeek] = useState([]);
 
-    const setThisWeek = () => {
+    useEffect(() => {
+      setThisWeekDefault();
+    }, [thisWeekActivities])
+
+    useEffect(() => {
+      setLastWeekDefault();
+    }, [lastWeekActivities])
+
+    const setThisWeekDefault = () => {
+      const list = [];
+
       for (var day of thisWeekActivities) {
-        thisWeek.push({
+        list.push({
           x: day.DayOfTheWeek,
           y: day.NumActivities
         })
@@ -33,6 +42,7 @@ const HomePageHeaderListContainer = ({title, list, thisWeekActivities, lastWeekA
         thisWeekDistance += day.Distance
         thisWeekTime += day.MovingTime
       }
+
       const totalMinutes = Math.floor(thisWeekTime / 60);
       const seconds = thisWeekTime % 60;
       const hours = Math.floor(totalMinutes / 60);
@@ -40,11 +50,15 @@ const HomePageHeaderListContainer = ({title, list, thisWeekActivities, lastWeekA
       
       thisWeekTime = `${hours}hrs ${minutes}mins ${seconds}secs`
       thisWeekDistance = (thisWeekDistance * 1.60934).toFixed(2)
+
+      setThisWeek(list);
     };
 
-    const setLastWeek = () => {
+    const setLastWeekDefault = () => {
+      const list = [];
+
       for (var day of lastWeekActivities) {
-        lastWeek.push({
+        list.push({
           x: day.DayOfTheWeek,
           y: day.NumActivities
         })
@@ -60,14 +74,62 @@ const HomePageHeaderListContainer = ({title, list, thisWeekActivities, lastWeekA
       
       lastWeekTime = `${hours}hrs ${minutes}mins ${seconds}secs`
       lastWeekDistance = (lastWeekDistance * 1.60934).toFixed(2)
-    };
 
-    setThisWeek();
-    setLastWeek();
+      setLastWeek(list);
+    };
 
     const thisWeekList = [`No. of Activities: ${thisWeekNum}`, `Distance Travelled: ${thisWeekDistance}km`, `Time Spent: ${thisWeekTime}`]
     const lastWeekList = [`No. of Activities: ${lastWeekNum}`, `Distance Travelled: ${lastWeekDistance}km`, `Time Spent: ${lastWeekTime}`]
     
+    const filters = [
+      {Header: "No. of Activities"},
+      {Header: "Distance Travelled"},
+      {Header: "Time Spent"}
+    ];
+
+    const filterList = ((item, weekList) => {
+      const list = [];
+
+      if (item.Header === "No. of Activities") {
+        for (var day of weekList) {
+          list.push({
+            x: day.DayOfTheWeek,
+            y: day.NumActivities
+          })
+         }
+      } else if (item.Header === "Distance Travelled") {
+        for (var day of weekList) {
+          list.push({
+            x: day.DayOfTheWeek,
+            y: day.Distance
+          })
+         }
+      } else if (item.Header === "Time Spent") {
+        for (var day of weekList) {
+          list.push({
+            x: day.DayOfTheWeek,
+            y: day.MovingTime
+          })
+         }
+      }
+
+      if (weekList === thisWeekActivities) {
+        setThisWeek(list);
+      } else if (weekList === lastWeekActivities) {
+        setLastWeek(list);
+      }
+    })
+
+
+  const handleListSelectThisWeek = ((item) => {
+      thisWeek.length = 0;
+      filterList(item, thisWeekActivities);
+  });
+
+  const handleListSelectLastWeek = ((item) => {
+      lastWeek.length = 0;
+      filterList(item, lastWeekActivities);
+  });
 
     return(
       <Box
@@ -94,9 +156,17 @@ const HomePageHeaderListContainer = ({title, list, thisWeekActivities, lastWeekA
           <StatsList list={lastWeekList} listTitle={"Last Week Stats"}/>
         </Box>
         <Box sx={{ gridArea: 'thisGraph' }}>
+            <div id="stats-charts-container-header">
+                <h3>Filter Data</h3>
+                <Filter list={filters} handleListSelect={handleListSelectThisWeek} />
+           </div>
           <BarChart2 header={"This Week Activities"} data={thisWeek} chartWidth={1000} />
         </Box>
         <Box sx={{ gridArea: 'lastGraph' }}>
+            <div id="stats-charts-container-header">
+                <h3>Filter Data</h3>
+                <Filter list={filters} handleListSelect={handleListSelectLastWeek} />
+            </div>
           <BarChart2 header={"Last Week Activities"} data={lastWeek} chartWidth={1000} />
         </Box>
       </Box>
