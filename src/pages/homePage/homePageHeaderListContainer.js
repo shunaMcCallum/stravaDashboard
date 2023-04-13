@@ -7,16 +7,13 @@ import Filter from "../../components/lists/filter";
 
 const HomePageHeaderListContainer = ({title, list, thisWeekActivities, lastWeekActivities}) => {
 
-    let thisWeekNum = 0;
-    let thisWeekDistance = 0;
-    let thisWeekTime = 0;
+    const [thisWeekNum, setThisWeekNum] = useState(0);
+    const [thisWeekDistance, setThisWeekDistance] = useState(0);
+    const [thisWeekTime, setThisWeekTime] = useState(0);
 
-    //const [num, setNum] = (null);
-
-
-    let lastWeekNum = 0;
-    let lastWeekDistance = 0;
-    let lastWeekTime = 0;
+    const [lastWeekNum, setLastWeekNum] = useState(0);
+    const [lastWeekDistance, setLastWeekDistance] = useState(0);
+    const [lastWeekTime, setLastWeekTime] = useState(0);
 
     const [thisWeek, setThisWeek] = useState([]);
     const [lastWeek, setLastWeek] = useState([]);
@@ -31,6 +28,9 @@ const HomePageHeaderListContainer = ({title, list, thisWeekActivities, lastWeekA
 
     const setThisWeekDefault = () => {
       const list = [];
+      let act = 0;
+      let dist = 0;
+      let tim = 0;
 
       for (var day of thisWeekActivities) {
         list.push({
@@ -38,24 +38,30 @@ const HomePageHeaderListContainer = ({title, list, thisWeekActivities, lastWeekA
           y: day.NumActivities
         })
 
-        thisWeekNum += day.NumActivities
-        thisWeekDistance += day.Distance
-        thisWeekTime += day.MovingTime
+        act += day.NumActivities
+        dist += day.Distance
+        tim += day.MovingTime
       }
 
-      const totalMinutes = Math.floor(thisWeekTime / 60);
-      const seconds = thisWeekTime % 60;
+      const totalMinutes = Math.floor(tim / 60);
+      const seconds = tim % 60;
       const hours = Math.floor(totalMinutes / 60);
       const minutes = totalMinutes % 60;
       
-      thisWeekTime = `${hours}hrs ${minutes}mins ${seconds}secs`
-      thisWeekDistance = (thisWeekDistance * 1.60934).toFixed(2)
+      tim = `${hours}hrs ${minutes}mins ${seconds}secs`
+      dist = (dist * 1.60934).toFixed(2)
 
+      setThisWeekNum(act);
+      setThisWeekDistance(dist);
+      setThisWeekTime(tim);
       setThisWeek(list);
     };
 
     const setLastWeekDefault = () => {
       const list = [];
+      let act = 0;
+      let dist = 0;
+      let tim = 0;
 
       for (var day of lastWeekActivities) {
         list.push({
@@ -63,18 +69,21 @@ const HomePageHeaderListContainer = ({title, list, thisWeekActivities, lastWeekA
           y: day.NumActivities
         })
 
-        lastWeekNum += day.NumActivities
-        lastWeekDistance += day.Distance
-        lastWeekTime += day.MovingTime
+        act += day.NumActivities
+        dist += day.Distance
+        tim += day.MovingTime
       }
-      const totalMinutes = Math.floor(lastWeekTime / 60);
-      const seconds = lastWeekTime % 60;
+      const totalMinutes = Math.floor(tim / 60);
+      const seconds = tim % 60;
       const hours = Math.floor(totalMinutes / 60);
       const minutes = totalMinutes % 60;
       
-      lastWeekTime = `${hours}hrs ${minutes}mins ${seconds}secs`
-      lastWeekDistance = (lastWeekDistance * 1.60934).toFixed(2)
+      tim = `${hours}hrs ${minutes}mins ${seconds}secs`
+      dist = (dist * 1.60934).toFixed(2)
 
+      setLastWeekNum(act);
+      setLastWeekDistance(dist);
+      setLastWeekTime(tim);
       setLastWeek(list);
     };
 
