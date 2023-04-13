@@ -15,6 +15,8 @@ function App() {
   const [alpeDuZwiftEfforts, setAlpeDuZwiftEfforts] = useState([]);
   const [thisWeekActivities, setThisWeekActivities] = useState([]);
   const [lastWeekActivities, setLastWeekActivities] = useState([]);
+  const [thisMonthActivities, setThisMonthActivities] = useState([]);
+  const [lastMonthActivities, setLastMonthActivities] = useState([]);
 
   const initialStats = { ...userStats[0] };
   const activityHeaders = { ...activities[0] };
@@ -56,13 +58,25 @@ function App() {
       .then(data => setLastWeekActivities(data.recordsets[0]));
   }, [])
 
+  useEffect(() => {
+    fetch('http://localhost:5000/thisMonthActivities')
+      .then(res => res.json())
+      .then(data => setThisMonthActivities(data.recordsets[0]));
+  }, [])
+
+  useEffect(() => {
+    fetch('http://localhost:5000/lastMonthActivities')
+      .then(res => res.json())
+      .then(data => setLastMonthActivities(data.recordsets[0]));
+  }, [])
+
   return (
     <div className="App">
       <CssBaseline />
         <NavBar />
         <Routes>
         <Route path="/" element={<HomePage userDetails={userDetails} userStats={userStats} initialStats={initialStats} 
-            activities={activities} alpeDuZwiftEfforts={alpeDuZwiftEfforts} thisWeekActivities={thisWeekActivities} lastWeekActivities={lastWeekActivities} />} />
+            activities={activities} alpeDuZwiftEfforts={alpeDuZwiftEfforts} thisWeekActivities={thisWeekActivities} lastWeekActivities={lastWeekActivities} thisMonthActivities={thisMonthActivities} lastMonthActivities={lastMonthActivities} />} />
         <Route path="/activities" element={<ActivitiesPage activitiesList={activities} activityHeaders={activityHeaders} />} />
         </Routes>
     </div>

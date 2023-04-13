@@ -9,7 +9,7 @@ import LineChart2 from "../../components/charts/lineChart/lineChart2.js";
 import Filter from "../../components/lists/filter.js";
 import PieChart from "../../components/charts/pieChart/pieChart.js";
 
-const HomePage = ({userDetails, userStats, initialStats, activities, alpeDuZwiftEfforts, thisWeekActivities, lastWeekActivities}) => {
+const HomePage = ({userDetails, userStats, initialStats, activities, alpeDuZwiftEfforts, thisWeekActivities, lastWeekActivities, thisMonthActivities, lastMonthActivities}) => {
 
     const text = `Welcome, ${userDetails.Firstname}!`;
     const headlineTitle = 'Current Statistics';
@@ -186,7 +186,7 @@ const HomePage = ({userDetails, userStats, initialStats, activities, alpeDuZwift
         <SectionHeader text={text} />
 
         {/* ROW 1 */}
-        <HomePageHeaderListContainer title={headlineTitle} list={headlineList} thisWeekActivities={thisWeekActivities} lastWeekActivities={lastWeekActivities} />          
+        <HomePageHeaderListContainer title={headlineTitle} list={headlineList} thisWeekActivities={thisWeekActivities} lastWeekActivities={lastWeekActivities} thisMonthActivities={thisMonthActivities} lastMonthActivities={lastMonthActivities} />          
         
         {/* ROW 2 */}
         <HomeStatsChartsContainer 
@@ -204,7 +204,7 @@ const HomePage = ({userDetails, userStats, initialStats, activities, alpeDuZwift
         //   initialFarthestRidePolyline={initialFarthestRidePolyline()}
         />
       
-        {/* ROW 3 */}
+        {/* ROW 2 */}
         <Box
            sx={{
                 display: "flex",

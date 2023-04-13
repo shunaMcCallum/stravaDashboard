@@ -51,6 +51,18 @@ app.get('/lastWeekActivities', async(req, res) => {
     res.send(result);
 })
 
+app.get('/thisMonthActivities', async(req, res) => {
+    console.log('called thisMonthActivities');
+    const result = await dbOperation.getThisMonthActivities();
+    res.send(result);
+})
+
+app.get('/lastMonthActivities', async(req, res) => {
+    console.log('called lastMonthActivities');
+    const result = await dbOperation.getLastMonthActivities();
+    res.send(result);
+})
+
 app.put('/activities/:id', async(req, res) => {
     console.log('called updateActivity');
     const result = await dbOperation.updateActivityNotes(req);

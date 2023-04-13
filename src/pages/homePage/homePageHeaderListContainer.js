@@ -5,7 +5,7 @@ import BarChart2 from "../../components/charts/barChart/barChart2.js";
 import Filter from "../../components/lists/filter";
 //import '../../Styling/HomePageHeaderListContainer.css';
 
-const HomePageHeaderListContainer = ({title, list, thisWeekActivities, lastWeekActivities}) => {
+const HomePageHeaderListContainer = ({title, list, thisWeekActivities, lastWeekActivities, thisMonthActivities, lastMonthActivities}) => {
 
     const [thisWeekNum, setThisWeekNum] = useState(0);
     const [thisWeekDistance, setThisWeekDistance] = useState(0);
@@ -18,21 +18,40 @@ const HomePageHeaderListContainer = ({title, list, thisWeekActivities, lastWeekA
     const [thisWeek, setThisWeek] = useState([]);
     const [lastWeek, setLastWeek] = useState([]);
 
-    useEffect(() => {
-      setThisWeekDefault();
-    }, [thisWeekActivities])
+    const [thisMonthNum, setThisMonthNum] = useState(0);
+    const [thisMonthDistance, setThisMonthDistance] = useState(0);
+    const [thisMonthTime, setThisMonthTime] = useState(0);
+
+    const [lastMonthNum, setLastMonthNum] = useState(0);
+    const [lastMonthDistance, setLastMonthDistance] = useState(0);
+    const [lastMonthTime, setLastMonthTime] = useState(0);
+
+    const [thisMonth, setThisMonth] = useState([]);
+    const [lastMonth, setLastMonth] = useState([]);
 
     useEffect(() => {
-      setLastWeekDefault();
-    }, [lastWeekActivities])
+      setDefaults(thisWeekActivities);
+    }, [thisWeekActivities]);
 
-    const setThisWeekDefault = () => {
+    useEffect(() => {
+      setDefaults(lastWeekActivities);
+    }, [lastWeekActivities]);
+
+    useEffect(() => {
+      setDefaults(thisMonthActivities);
+    }, [thisMonthActivities]);
+
+    useEffect(() => {
+      setDefaults(lastMonthActivities);
+    }, [lastMonthActivities]);
+
+    const setDefaults = (activityList) => {
       const list = [];
       let act = 0;
       let dist = 0;
       let tim = 0;
 
-      for (var day of thisWeekActivities) {
+      for (var day of activityList) {
         list.push({
           x: day.DayOfTheWeek,
           y: day.NumActivities
@@ -51,44 +70,34 @@ const HomePageHeaderListContainer = ({title, list, thisWeekActivities, lastWeekA
       tim = `${hours}hrs ${minutes}mins ${seconds}secs`
       dist = (dist * 1.60934).toFixed(2)
 
-      setThisWeekNum(act);
-      setThisWeekDistance(dist);
-      setThisWeekTime(tim);
-      setThisWeek(list);
-    };
-
-    const setLastWeekDefault = () => {
-      const list = [];
-      let act = 0;
-      let dist = 0;
-      let tim = 0;
-
-      for (var day of lastWeekActivities) {
-        list.push({
-          x: day.DayOfTheWeek,
-          y: day.NumActivities
-        })
-
-        act += day.NumActivities
-        dist += day.Distance
-        tim += day.MovingTime
+      if (activityList === thisWeekActivities) {
+        setThisWeekNum(act);
+        setThisWeekDistance(dist);
+        setThisWeekTime(tim);
+        setThisWeek(list);
+      } else if (activityList === lastWeekActivities) {
+        setLastWeekNum(act);
+        setLastWeekDistance(dist);
+        setLastWeekTime(tim);
+        setLastWeek(list);
+      } else if (activityList === thisMonthActivities) {
+        setThisMonthNum(act);
+        setThisMonthDistance(dist);
+        setThisMonthTime(tim);
+        setThisMonth(list);
+      } else if (activityList === lastMonthActivities) {
+        setLastMonthNum(act);
+        setLastMonthDistance(dist);
+        setLastMonthTime(tim);
+        setLastMonth(list);
       }
-      const totalMinutes = Math.floor(tim / 60);
-      const seconds = tim % 60;
-      const hours = Math.floor(totalMinutes / 60);
-      const minutes = totalMinutes % 60;
-      
-      tim = `${hours}hrs ${minutes}mins ${seconds}secs`
-      dist = (dist * 1.60934).toFixed(2)
 
-      setLastWeekNum(act);
-      setLastWeekDistance(dist);
-      setLastWeekTime(tim);
-      setLastWeek(list);
     };
 
     const thisWeekList = [`No. of Activities: ${thisWeekNum}`, `Distance Travelled: ${thisWeekDistance}km`, `Time Spent: ${thisWeekTime}`]
     const lastWeekList = [`No. of Activities: ${lastWeekNum}`, `Distance Travelled: ${lastWeekDistance}km`, `Time Spent: ${lastWeekTime}`]
+    const thisMonthList = [`No. of Activities: ${thisMonthNum}`, `Distance Travelled: ${thisMonthDistance}km`, `Time Spent: ${thisMonthTime}`]
+    const lastMonthList = [`No. of Activities: ${lastMonthNum}`, `Distance Travelled: ${lastMonthDistance}km`, `Time Spent: ${lastMonthTime}`]
     
     const filters = [
       {Header: "No. of Activities"},
@@ -126,19 +135,33 @@ const HomePageHeaderListContainer = ({title, list, thisWeekActivities, lastWeekA
         setThisWeek(list);
       } else if (weekList === lastWeekActivities) {
         setLastWeek(list);
+      } else if (weekList === thisMonthActivities) {
+        setThisMonth(list);
+      } else if (weekList === lastMonthActivities) {
+        setLastMonth(list);
       }
     })
 
 
   const handleListSelectThisWeek = ((item) => {
-      thisWeek.length = 0;
+      setThisMonth([]);
       filterList(item, thisWeekActivities);
   });
 
   const handleListSelectLastWeek = ((item) => {
-      lastWeek.length = 0;
+      setLastWeek([]);
       filterList(item, lastWeekActivities);
   });
+
+  const handleListSelectThisMonth = ((item) => {
+    setThisMonth([]);
+    filterList(item, thisMonthActivities);
+});
+
+const handleListSelectLastMonth = ((item) => {
+    setLastMonth([]);
+    filterList(item, lastMonthActivities);
+});
 
     return(
       <Box
@@ -147,7 +170,9 @@ const HomePageHeaderListContainer = ({title, list, thisWeekActivities, lastWeekA
         gridTemplateColumns:"repeat(3, 1fr)",
         gridTemplateRows:"auto",
         gridTemplateAreas:`"overall thisWeek lastWeek"
-        "overall thisGraph lastGraph"`,
+        ". thisGraph lastGraph"
+        ". thisMonth lastMonth"
+        ". thisMonthGraph lastMonthGraph"`,
         gap:"0.9rem",
         justifyContent:"center",
         m:"1.5rem auto 0 auto",
@@ -177,6 +202,26 @@ const HomePageHeaderListContainer = ({title, list, thisWeekActivities, lastWeekA
                 <Filter list={filters} handleListSelect={handleListSelectLastWeek} />
             </div>
           <BarChart2 header={"Last Week Activities"} data={lastWeek} chartWidth={1000} />
+        </Box>
+        <Box sx={{ gridArea: 'thisMonth' }}>
+          <StatsList list={thisMonthList} listTitle={"This Month Stats"}/>
+        </Box>
+        <Box sx={{ gridArea: 'lastMonth' }}>
+          <StatsList list={lastMonthList} listTitle={"Last Month Stats"}/>
+        </Box>
+        <Box sx={{ gridArea: 'thisMonthGraph' }}>
+            <div id="stats-charts-container-header">
+                <h3>Filter Data</h3>
+                <Filter list={filters} handleListSelect={handleListSelectThisMonth} />
+           </div>
+          <BarChart2 header={"This Month Activities"} data={thisMonth} chartWidth={1000} />
+        </Box>
+        <Box sx={{ gridArea: 'lastMonthGraph' }}>
+            <div id="stats-charts-container-header">
+                <h3>Filter Data</h3>
+                <Filter list={filters} handleListSelect={handleListSelectLastMonth} />
+            </div>
+          <BarChart2 header={"Last Month Activities"} data={lastMonth} chartWidth={1000} />
         </Box>
       </Box>
 

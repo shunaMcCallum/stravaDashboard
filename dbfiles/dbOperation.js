@@ -150,6 +150,68 @@ const getLastWeekActivities = async() => {
     }
 }
 
+const getThisMonthActivities = async() => {
+    try {
+        let pool = await sql.connect(config);
+        let activities = await pool.request().query(
+            'DECLARE @Start DATE = DATEADD(MONTH, DATEDIFF(MONTH, 0, GETDATE()), 0); ' +
+            'DECLARE @End DATE = DATEADD(MONTH, DATEDIFF(MONTH, 0, GETDATE()) + 1, 0) - 1; ' +            
+            'DROP TABLE IF EXISTS #Temp; ' +
+            'CREATE TABLE #Temp ([Date] DATE, DayOfTheWeek VARCHAR(10), NumActivities INT, Distance FLOAT, MovingTime INT); ' +
+            'WITH Dates_CTE ([Date], DayOfTheWeek) AS ( ' +
+                'SELECT @Start, CONVERT(VARCHAR(10), @Start, 3) ' +
+                'UNION ALL ' +
+                'SELECT DATEADD(DAY, 1, [Date]), CONVERT(VARCHAR(10), DATEADD(DAY, 1, [Date]), 3) ' +
+                'FROM Dates_CTE ' +
+                'WHERE [Date] < @End ' +
+            ') ' +
+            'INSERT INTO #Temp ([Date], DayOfTheWeek) ' +
+            'SELECT [Date], DayOfTheWeek ' +
+            'FROM Dates_CTE ' +
+            'Update #Temp SET ' +
+            'NumActivities = (SELECT COUNT(*) FROM TrainingDB.dbo.Activities_Live_New src WHERE CAST(src.start_date_local AS DATE) = #Temp.[Date]), ' +
+            'Distance = (SELECT SUM(Distance) FROM TrainingDB.dbo.Activities_Live_New src WHERE CAST(src.start_date_local AS DATE) = #Temp.[Date]), ' +
+            `MovingTime = (SELECT CAST(SUM(DATEDIFF(SECOND, '00:00:00', MovingTime)) AS INT) FROM TrainingDB.dbo.Activities_Live_New src WHERE  CAST(src.start_date_local AS DATE) = #Temp.[Date]) ` +
+            'SELECT * FROM #Temp '
+            )
+        return activities;
+    }
+    catch(error) {
+        console.log(error);
+    }
+}
+
+const getLastMonthActivities = async() => {
+    try {
+        let pool = await sql.connect(config);
+        let activities = await pool.request().query(
+            'DECLARE @Start DATE = DATEADD(MONTH, DATEDIFF(MONTH, 0, GETDATE()) - 1, 0); ' +
+            'DECLARE @End DATE = DATEADD(MONTH, DATEDIFF(MONTH, 0, GETDATE()), 0) - 1; ' +            
+            'DROP TABLE IF EXISTS #Temp; ' +
+            'CREATE TABLE #Temp ([Date] DATE, DayOfTheWeek VARCHAR(10), NumActivities INT, Distance FLOAT, MovingTime INT); ' +
+            'WITH Dates_CTE ([Date], DayOfTheWeek) AS ( ' +
+                'SELECT @Start, CONVERT(VARCHAR(10), @Start, 3) ' +
+                'UNION ALL ' +
+                'SELECT DATEADD(DAY, 1, [Date]), CONVERT(VARCHAR(10), DATEADD(DAY, 1, [Date]), 3) ' +
+                'FROM Dates_CTE ' +
+                'WHERE [Date] < @End ' +
+            ') ' +
+            'INSERT INTO #Temp ([Date], DayOfTheWeek) ' +
+            'SELECT [Date], DayOfTheWeek ' +
+            'FROM Dates_CTE ' +
+            'Update #Temp SET ' +
+            'NumActivities = (SELECT COUNT(*) FROM TrainingDB.dbo.Activities_Live_New src WHERE CAST(src.start_date_local AS DATE) = #Temp.[Date]), ' +
+            'Distance = (SELECT SUM(Distance) FROM TrainingDB.dbo.Activities_Live_New src WHERE CAST(src.start_date_local AS DATE) = #Temp.[Date]), ' +
+            `MovingTime = (SELECT CAST(SUM(DATEDIFF(SECOND, '00:00:00', MovingTime)) AS INT) FROM TrainingDB.dbo.Activities_Live_New src WHERE  CAST(src.start_date_local AS DATE) = #Temp.[Date]) ` +
+            'SELECT * FROM #Temp '
+            )
+        return activities;
+    }
+    catch(error) {
+        console.log(error);
+    }
+}
+
 const updateActivityNotes = async(req) => {
     try {
         let pool = await sql.connect(config);
@@ -164,4 +226,4 @@ const updateActivityNotes = async(req) => {
 
 
 module.exports = {getUserDetails, getActivities, getUserStats, getUserStatsAll, getUserStatsRecent, getUserStatsYtd, 
-    getAlpeDuZwiftEfforts, getThisWeekActivities, getLastWeekActivities, updateActivityNotes}
+    getAlpeDuZwiftEfforts, getThisWeekActivities, getLastWeekActivities, getThisMonthActivities, getLastMonthActivities, updateActivityNotes}
