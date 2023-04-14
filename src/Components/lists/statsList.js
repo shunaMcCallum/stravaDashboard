@@ -11,7 +11,6 @@ const StatsList = ({list, listTitle}) => {
 
     return(
         <Box 
-            gridColumn="span 3"
             display="flex"
             flexDirection="column"
             alignItems="center"
@@ -20,7 +19,6 @@ const StatsList = ({list, listTitle}) => {
             padding="1rem 0.5rem 0.5rem 0"
             backgroundColor="#332240"
             boxShadow="0rem 0.15rem 1.5rem black"
-            borderRadius="1rem"
             >
               <Typography 
                 variant="h5"

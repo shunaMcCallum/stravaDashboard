@@ -8,16 +8,14 @@ import BarChart2 from "../../components/charts/barChart/barChart2";
 const ShortTermStatsWeek = ({thisWeekStatList, lastWeekStatList, filters, handleListSelectThisWeek, handleListSelectLastWeek, thisWeek, lastWeek}) => {
 
     return(
-    <Box
-        sx={{
-
-        }}>
+    <Box>
         {/* Stats Boxes */}
         <Box
             sx={{
                 display: "flex",
-                justifyContent: "center"
-            }}>
+                justifyContent: "space-evenly"
+            }}
+            >
           <StatsList list={thisWeekStatList} listTitle={"This Week Stats"}/>
           <StatsList list={lastWeekStatList} listTitle={"Last Week Stats"}/>
         </Box>

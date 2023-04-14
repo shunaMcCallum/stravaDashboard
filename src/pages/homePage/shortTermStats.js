@@ -130,9 +130,9 @@ const ShortTermStats = ({thisWeekActivities, lastWeekActivities, thisMonthActivi
       }
 
       if (weekList === thisWeekActivities) {
-        // setThisWeek(list);
+        setThisWeek(list);
       } else if (weekList === lastWeekActivities) {
-        // setLastWeek(list);
+        setLastWeek(list);
       } else if (weekList === thisMonthActivities) {
         setThisMonth(list);
       } else if (weekList === lastMonthActivities) {
@@ -141,7 +141,7 @@ const ShortTermStats = ({thisWeekActivities, lastWeekActivities, thisMonthActivi
     })
 
   const handleListSelectThisWeek = ((item) => {
-      setThisMonth([]);
+      setThisWeek([]);
       filterList(item, thisWeekActivities);
   });
 
@@ -166,7 +166,6 @@ const handleListSelectLastMonth = ((item) => {
         display:"flex",
         justifyContent:"space-evenly",
         m:"1.5rem 1rem 1.5rem 1rem",
-        width:"98%"
       }}
       >
         <ShortTermStatsWeek thisWeekStatList={thisWeekStatList} lastWeekStatList={lastWeekStatList} filters={filters} handleListSelectThisWeek={handleListSelectThisWeek} handleListSelectLastWeek={handleListSelectLastWeek} thisWeek={thisWeek} lastWeek={lastWeek} />

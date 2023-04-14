@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import { Box } from "@mui/material";
 import OverallStats from "./overallStats.js";
 import ShortTermStats from "./shortTermStats.js";
-import HomePageHeaderListContainer from "./homePageHeaderListContainer.js";
 import HomeStatsChartsContainer from './homeStatsChartsContainer.js';
 import polyline from '@mapbox/polyline';
 import "../../Styling/HomePage.css";
