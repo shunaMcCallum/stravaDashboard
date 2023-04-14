@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import { Box } from "@mui/material";
+import OverallStats from "./overallStats.js";
 import SectionHeader from '../../components/headers/sectionHeader.js';
 import HomePageHeaderListContainer from "./homePageHeaderListContainer.js";
 import HomeStatsChartsContainer from './homeStatsChartsContainer.js';
@@ -89,7 +90,7 @@ const HomePage = ({userDetails, userStats, initialStats, activities, alpeDuZwift
 
     const setMorningData = () => {
         for(var activity of activities) {
-                if (activity.RideType == "Commute" && activity.Name == "Morning Ride") {
+                if (activity.RideType = "Commute" && activity.Name === "Morning Ride") {
                 
                 var array = activity.ElapsedTime.split(":");
                 var seconds = (parseInt(array[0], 10) * 60 * 60) + (parseInt(array[1], 10) * 60) + parseInt(array[2], 10)
@@ -104,7 +105,7 @@ const HomePage = ({userDetails, userStats, initialStats, activities, alpeDuZwift
 
     const setAfternoonData = () => {
         for(var activity of activities) {
-                if (activity.RideType == "Commute" && activity.Name == "Afternoon Ride" || activity.Name == "Evening Ride") {
+                if (activity.RideType === "Commute" && activity.Name === "Afternoon Ride" || activity.Name === "Evening Ride") {
                 
                 var array = activity.ElapsedTime.split(":");
                 var seconds = (parseInt(array[0], 10) * 60 * 60) + (parseInt(array[1], 10) * 60) + parseInt(array[2], 10)
@@ -183,9 +184,8 @@ const HomePage = ({userDetails, userStats, initialStats, activities, alpeDuZwift
 
     return(
     <div id="home-page-container">
-        <SectionHeader text={text} />
-
         {/* ROW 1 */}
+        <OverallStats userDetails={userDetails} />
         <HomePageHeaderListContainer title={headlineTitle} list={headlineList} thisWeekActivities={thisWeekActivities} lastWeekActivities={lastWeekActivities} thisMonthActivities={thisMonthActivities} lastMonthActivities={lastMonthActivities} />          
         
         {/* ROW 2 */}
@@ -196,12 +196,12 @@ const HomePage = ({userDetails, userStats, initialStats, activities, alpeDuZwift
           initialRideTimePieChartArray={rideTimePieChartArray}
           initialRideTotalsTitle={rideTotalsTitle} 
           initialRideTotalsArray={rideTotalsArray}
-        //   initialLongestRideTitle={longestRideTitle}
-        //   initialLongestRideArray={longestRideArray}
-        //   initialFarthestRideTitle={farthestRideTitle}
-        //   initialFarthestRideArray={farthestRideArray}
-        //   initialLongestRidePolyline={initialLongestRidePolyline()}
-        //   initialFarthestRidePolyline={initialFarthestRidePolyline()}
+          initialLongestRideTitle={longestRideTitle}
+          initialLongestRideArray={longestRideArray}
+          initialFarthestRideTitle={farthestRideTitle}
+          initialFarthestRideArray={farthestRideArray}
+          initialLongestRidePolyline={initialLongestRidePolyline()}
+          initialFarthestRidePolyline={initialFarthestRidePolyline()}
         />
       
         {/* ROW 2 */}

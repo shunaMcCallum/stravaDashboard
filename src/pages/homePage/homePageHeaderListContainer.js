@@ -170,9 +170,9 @@ const handleListSelectLastMonth = ((item) => {
         gridTemplateColumns:"repeat(3, 1fr)",
         gridTemplateRows:"auto",
         gridTemplateAreas:`"overall thisWeek lastWeek"
-        ". thisGraph lastGraph"
-        ". thisMonth lastMonth"
-        ". thisMonthGraph lastMonthGraph"`,
+        "overall thisGraph lastGraph"
+        "overall thisMonth lastMonth"
+        "overall thisMonthGraph lastMonthGraph"`,
         gap:"0.9rem",
         justifyContent:"center",
         m:"1.5rem auto 0 auto",
@@ -180,9 +180,6 @@ const handleListSelectLastMonth = ((item) => {
       }}
         
       >
-        <Box sx={{ gridArea: 'overall' }}>
-          <StatsList list={list} listTitle={title}/>
-        </Box>
         <Box sx={{ gridArea: 'thisWeek' }}>
           <StatsList list={thisWeekList} listTitle={"This Week Stats"}/>
         </Box>

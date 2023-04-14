@@ -6,7 +6,7 @@ import Map from "../../components/maps/map.js";
 import polyline from '@mapbox/polyline'
 import '../../Styling/HomeStatsChartsContainer.css'
 
-    const HomeStatsChartsContainer = ({userStats, initialRideTypesPieChartArray, initialWorkoutScoresPieChartArray, initialRideTimePieChartArray, initialRideTotalsTitle, initialRideTotalsArray}) => {
+    const HomeStatsChartsContainer = ({userStats, initialRideTypesPieChartArray, initialWorkoutScoresPieChartArray, initialRideTimePieChartArray, initialRideTotalsTitle, initialRideTotalsArray, initialLongestRideTitle, initialLongestRideArray, initialFarthestRideTitle, initialFarthestRideArray, initialLongestRidePolyline, initialFarthestRidePolyline}) => {
 
     const [selectedItem, setSelectedItem] = useState(null);
 
@@ -112,7 +112,7 @@ import '../../Styling/HomeStatsChartsContainer.css'
                         <PieChart chartArray={rideTimePieChartArray} />
                     </div>
                 </div>
-                {/* <div id="bottom-charts-container">
+                <div id="bottom-charts-container">
                     <HomeStatsChartsListContainer title={rideTotalsTitle} list={rideTotalsArray} />
                     <div className="list-and-map">
                         <HomeStatsChartsListContainer title={longestRideTitle} list={longestRideArray} />
@@ -122,7 +122,7 @@ import '../../Styling/HomeStatsChartsContainer.css'
                         <HomeStatsChartsListContainer title={farthestRideTitle} list={farthestRideArray} />
                         <Map polyline={farthestPolylineArray} />
                     </div>
-                </div> */}
+                </div>
             </div> :
             <div>
                 <div id="pie-charts-container">
@@ -139,13 +139,13 @@ import '../../Styling/HomeStatsChartsContainer.css'
                         <PieChart chartArray={initialRideTimePieChartArray} />
                     </div>
                 </div>
-                {/* <div id="bottom-charts-container">
+                <div id="bottom-charts-container">
                     <HomeStatsChartsListContainer title={initialRideTotalsTitle} list={initialRideTotalsArray} />
                     <HomeStatsChartsListContainer title={initialLongestRideTitle} list={initialLongestRideArray} />
                     <Map polyline={initialLongestRidePolyline} />
                     <HomeStatsChartsListContainer title={initialFarthestRideTitle} list={initialFarthestRideArray} />
                     <Map polyline={initialFarthestRidePolyline} />
-                </div> */}
+                </div>
             </div>
             }
         </div>
