@@ -12,9 +12,7 @@ import PieChart from "../../components/charts/pieChart/pieChart.js";
 
 const HomePage = ({userDetails, userStats, initialStats, activities, alpeDuZwiftEfforts, thisWeekActivities, lastWeekActivities, thisMonthActivities, lastMonthActivities}) => {
 
-    const text = `Welcome, ${userDetails.Firstname}!`;
     const headlineTitle = 'Current Statistics';
-    const headlineList = [`FTP: 200W`, `Weight: ${userDetails.Weight}kg`, `Account Created: ${userDetails.AccountCreatedAt}`]
     
     const rideTypesPieChartArray = [
             ["Total number of rides", "Number of rides"], 
@@ -186,7 +184,7 @@ const HomePage = ({userDetails, userStats, initialStats, activities, alpeDuZwift
     <div id="home-page-container">
         {/* ROW 1 */}
         <OverallStats userDetails={userDetails} />
-        <HomePageHeaderListContainer title={headlineTitle} list={headlineList} thisWeekActivities={thisWeekActivities} lastWeekActivities={lastWeekActivities} thisMonthActivities={thisMonthActivities} lastMonthActivities={lastMonthActivities} />          
+        <HomePageHeaderListContainer title={headlineTitle} thisWeekActivities={thisWeekActivities} lastWeekActivities={lastWeekActivities} thisMonthActivities={thisMonthActivities} lastMonthActivities={lastMonthActivities} />          
         
         {/* ROW 2 */}
         <HomeStatsChartsContainer 

@@ -10,20 +10,21 @@ const StatsListSmall = ({list, listTitle}) => {
     })
 
     return(
-        <Box 
-            gridColumn="span 3"
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            justifyContent="center"
-            width="auto"
-            padding="1rem 0.5rem 0.5rem 0"
-            backgroundColor="#332240"
-            boxShadow="0rem 0.15rem 1.5rem black"
-            borderRadius="1rem"
+        <Box
+            sx={{
+                m: "auto",
+                padding:"1rem 0.5rem 0.5rem 0",
+                minWidth: "20rem",
+                height: "3.5rem",
+                alignItems: "center",
+                display: "flex",
+                justifyContent: "center",
+                backgroundColor: "#332240",
+                boxShadow: "0rem 0.15rem 1.5rem black",
+            }} 
             >
               <Typography 
-                variant="h7"
+                variant="h6"
                 lineHeight="1"
                 >
                {listItems}

@@ -1,12 +1,29 @@
 import React from "react";
-import '../../Styling/SectionHeader.css';
+import { Box, Typography } from "@mui/material";
 
 const SectionHeader = ({text}) => {
 
     return(
-    <div id="section-header-container">
-        <h2>{text}</h2>
-    </div>
+    <Box
+        sx={{
+            m: "auto",
+            width: "25rem",
+            height: "3.5rem",
+            alignItems: "center",
+            display: "flex",
+            justifyContent: "center",
+            backgroundColor: "#332240",
+            boxShadow: "0rem 0.15rem 1.5rem black",
+            // color: "#FC5200"
+        }}    
+    >
+        <Typography 
+            variant="h4"
+            lineHeight="1"
+        >
+            {text}
+        </Typography>
+    </Box>
     
     ); 
 }

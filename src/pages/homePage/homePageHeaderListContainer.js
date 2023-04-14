@@ -5,7 +5,7 @@ import BarChart2 from "../../components/charts/barChart/barChart2.js";
 import Filter from "../../components/lists/filter";
 //import '../../Styling/HomePageHeaderListContainer.css';
 
-const HomePageHeaderListContainer = ({title, list, thisWeekActivities, lastWeekActivities, thisMonthActivities, lastMonthActivities}) => {
+const HomePageHeaderListContainer = ({title, thisWeekActivities, lastWeekActivities, thisMonthActivities, lastMonthActivities}) => {
 
     const [thisWeekNum, setThisWeekNum] = useState(0);
     const [thisWeekDistance, setThisWeekDistance] = useState(0);

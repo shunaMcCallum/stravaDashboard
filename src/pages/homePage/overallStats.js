@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import { Box } from "@mui/material";
 import SectionHeader from "../../components/headers/sectionHeader";
 import StatsListSmall from "../../components/lists/statsListSmall";
@@ -7,8 +7,8 @@ const OverallStats = ({userDetails}) => {
 
     const text = `Welcome, ${userDetails.Firstname}!`;
     const headlineTitle = 'Current Statistics';
-    const ftp = ["FTP: 207W"]
-    const weight = [`Weight: ${userDetails.Weight}kg`]
+    const ftp = ["Current FTP: 207W"]
+    const weight = [`Current Weight: ${userDetails.Weight}kg`]
     const accCreated = [`Account Created: ${userDetails.AccountCreatedAt}`]
 
     return(
@@ -16,7 +16,7 @@ const OverallStats = ({userDetails}) => {
       sx={{
         display:"flex",
         justifyContent:"space-evenly",
-        m:"1.5rem auto 0 auto",
+        m:"1.5rem 1rem 1.5rem 1rem",
         width:"98%"
       }}
       >
