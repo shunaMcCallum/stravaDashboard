@@ -1,11 +1,9 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Box } from "@mui/material";
-import StatsList from "../../components/lists/statsList";
-import BarChart2 from "../../components/charts/barChart/barChart2.js";
-import Filter from "../../components/lists/filter";
-//import '../../Styling/HomePageHeaderListContainer.css';
+import ShortTermStatsWeek from "./shortTermStatsWeek";
+import ShortTermStatsMonth from "./shortTermStatsMonth";
 
-const HomePageHeaderListContainer = ({thisWeekActivities, lastWeekActivities, thisMonthActivities, lastMonthActivities}) => {
+const ShortTermStats = ({thisWeekActivities, lastWeekActivities, thisMonthActivities, lastMonthActivities}) => {
 
     const [thisWeekNum, setThisWeekNum] = useState(0);
     const [thisWeekDistance, setThisWeekDistance] = useState(0);
@@ -94,10 +92,10 @@ const HomePageHeaderListContainer = ({thisWeekActivities, lastWeekActivities, th
 
     };
 
-    const thisWeekList = [`No. of Activities: ${thisWeekNum}`, `Distance Travelled: ${thisWeekDistance}km`, `Time Spent: ${thisWeekTime}`]
-    const lastWeekList = [`No. of Activities: ${lastWeekNum}`, `Distance Travelled: ${lastWeekDistance}km`, `Time Spent: ${lastWeekTime}`]
-    const thisMonthList = [`No. of Activities: ${thisMonthNum}`, `Distance Travelled: ${thisMonthDistance}km`, `Time Spent: ${thisMonthTime}`]
-    const lastMonthList = [`No. of Activities: ${lastMonthNum}`, `Distance Travelled: ${lastMonthDistance}km`, `Time Spent: ${lastMonthTime}`]
+    const thisWeekStatList = [`No. of Activities: ${thisWeekNum}`, `Distance Travelled: ${thisWeekDistance}km`, `Time Spent: ${thisWeekTime}`]
+    const lastWeekStatList = [`No. of Activities: ${lastWeekNum}`, `Distance Travelled: ${lastWeekDistance}km`, `Time Spent: ${lastWeekTime}`]
+    const thisMonthStatList = [`No. of Activities: ${thisMonthNum}`, `Distance Travelled: ${thisMonthDistance}km`, `Time Spent: ${thisMonthTime}`]
+    const lastMonthStatList = [`No. of Activities: ${lastMonthNum}`, `Distance Travelled: ${lastMonthDistance}km`, `Time Spent: ${lastMonthTime}`]
     
     const filters = [
       {Header: "No. of Activities"},
@@ -132,16 +130,15 @@ const HomePageHeaderListContainer = ({thisWeekActivities, lastWeekActivities, th
       }
 
       if (weekList === thisWeekActivities) {
-        setThisWeek(list);
+        // setThisWeek(list);
       } else if (weekList === lastWeekActivities) {
-        setLastWeek(list);
+        // setLastWeek(list);
       } else if (weekList === thisMonthActivities) {
         setThisMonth(list);
       } else if (weekList === lastMonthActivities) {
         setLastMonth(list);
       }
     })
-
 
   const handleListSelectThisWeek = ((item) => {
       setThisMonth([]);
@@ -166,64 +163,18 @@ const handleListSelectLastMonth = ((item) => {
     return(
       <Box
       sx={{
-        display:"grid",
-        gridTemplateColumns:"repeat(3, 1fr)",
-        gridTemplateRows:"auto",
-        gridTemplateAreas:`"overall thisWeek lastWeek"
-        "overall thisGraph lastGraph"
-        "overall thisMonth lastMonth"
-        "overall thisMonthGraph lastMonthGraph"`,
-        gap:"0.9rem",
-        justifyContent:"center",
-        m:"1.5rem auto 0 auto",
+        display:"flex",
+        justifyContent:"space-evenly",
+        m:"1.5rem 1rem 1.5rem 1rem",
         width:"98%"
       }}
-        
       >
-        {/* <Box sx={{ gridArea: 'thisWeek' }}>
-          <StatsList list={thisWeekList} listTitle={"This Week Stats"}/>
-        </Box>
-        <Box sx={{ gridArea: 'lastWeek' }}>
-          <StatsList list={lastWeekList} listTitle={"Last Week Stats"}/>
-        </Box>
-        <Box sx={{ gridArea: 'thisGraph' }}>
-            <div id="stats-charts-container-header">
-                <h3>Filter Data</h3>
-                <Filter list={filters} handleListSelect={handleListSelectThisWeek} />
-           </div>
-          <BarChart2 header={"This Week Activities"} data={thisWeek} chartWidth={1000} />
-        </Box>
-        <Box sx={{ gridArea: 'lastGraph' }}>
-            <div id="stats-charts-container-header">
-                <h3>Filter Data</h3>
-                <Filter list={filters} handleListSelect={handleListSelectLastWeek} />
-            </div>
-          <BarChart2 header={"Last Week Activities"} data={lastWeek} chartWidth={1000} />
-        </Box> */}
-        <Box sx={{ gridArea: 'thisMonth' }}>
-          <StatsList list={thisMonthList} listTitle={"This Month Stats"}/>
-        </Box>
-        <Box sx={{ gridArea: 'lastMonth' }}>
-          <StatsList list={lastMonthList} listTitle={"Last Month Stats"}/>
-        </Box>
-        <Box sx={{ gridArea: 'thisMonthGraph' }}>
-            <div id="stats-charts-container-header">
-                <h3>Filter Data</h3>
-                <Filter list={filters} handleListSelect={handleListSelectThisMonth} />
-           </div>
-          <BarChart2 header={"This Month Activities"} data={thisMonth} chartWidth={1000} />
-        </Box>
-        <Box sx={{ gridArea: 'lastMonthGraph' }}>
-            <div id="stats-charts-container-header">
-                <h3>Filter Data</h3>
-                <Filter list={filters} handleListSelect={handleListSelectLastMonth} />
-            </div>
-          <BarChart2 header={"Last Month Activities"} data={lastMonth} chartWidth={1000} />
-        </Box>
+        <ShortTermStatsWeek thisWeekStatList={thisWeekStatList} lastWeekStatList={lastWeekStatList} filters={filters} handleListSelectThisWeek={handleListSelectThisWeek} handleListSelectLastWeek={handleListSelectLastWeek} thisWeek={thisWeek} lastWeek={lastWeek} />
+        <ShortTermStatsMonth thisMonthStatList={thisMonthStatList} lastMonthStatList={lastMonthStatList} filters={filters} handleListSelectThisMonth={handleListSelectThisMonth} handleListSelectLastMonth={handleListSelectLastMonth} thisMonth={thisMonth} lastMonth={lastMonth} />
       </Box>
 
     );
 
 }
 
-export default HomePageHeaderListContainer;
+export default ShortTermStats;

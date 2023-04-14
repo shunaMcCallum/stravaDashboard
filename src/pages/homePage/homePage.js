@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { Box } from "@mui/material";
 import OverallStats from "./overallStats.js";
-import SectionHeader from '../../components/headers/sectionHeader.js';
+import ShortTermStats from "./shortTermStats.js";
 import HomePageHeaderListContainer from "./homePageHeaderListContainer.js";
 import HomeStatsChartsContainer from './homeStatsChartsContainer.js';
 import polyline from '@mapbox/polyline';
@@ -12,8 +12,6 @@ import PieChart from "../../components/charts/pieChart/pieChart.js";
 
 const HomePage = ({userDetails, userStats, initialStats, activities, alpeDuZwiftEfforts, thisWeekActivities, lastWeekActivities, thisMonthActivities, lastMonthActivities}) => {
 
-    const headlineTitle = 'Current Statistics';
-    
     const rideTypesPieChartArray = [
             ["Total number of rides", "Number of rides"], 
             ["Workout rides", initialStats.RideWorkout], 
@@ -184,9 +182,11 @@ const HomePage = ({userDetails, userStats, initialStats, activities, alpeDuZwift
     <div id="home-page-container">
         {/* ROW 1 */}
         <OverallStats userDetails={userDetails} />
-        <HomePageHeaderListContainer title={headlineTitle} thisWeekActivities={thisWeekActivities} lastWeekActivities={lastWeekActivities} thisMonthActivities={thisMonthActivities} lastMonthActivities={lastMonthActivities} />          
-        
+
         {/* ROW 2 */}
+        <ShortTermStats thisWeekActivities={thisWeekActivities} lastWeekActivities={lastWeekActivities} thisMonthActivities={thisMonthActivities} lastMonthActivities={lastMonthActivities} />
+        
+        {/* ROW 3 */}
         <HomeStatsChartsContainer 
           userStats={userStats} 
           initialRideTypesPieChartArray={rideTypesPieChartArray} 
@@ -202,7 +202,7 @@ const HomePage = ({userDetails, userStats, initialStats, activities, alpeDuZwift
           initialFarthestRidePolyline={initialFarthestRidePolyline()}
         />
       
-        {/* ROW 2 */}
+        {/* ROW 4 */}
         <Box
            sx={{
                 display: "flex",
@@ -268,7 +268,7 @@ const HomePage = ({userDetails, userStats, initialStats, activities, alpeDuZwift
         </Box>
         </Box>
 
-         {/* ROW 4 */}
+         {/* ROW 5 */}
          <Box
            sx={{
                 display: "flex",
