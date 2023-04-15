@@ -177,12 +177,7 @@ const HomePage = ({userDetails, userStats, initialStats, activities, alpeDuZwift
     });
 
     return(
-    <Box
-        sx={{
-                // minHeight: "90%",
-                // maxWidth: "100%"
-        }}
-    >
+    <Box>
         {/* ROW 1 */}
         <OverallStats userDetails={userDetails} />
 

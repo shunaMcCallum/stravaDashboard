@@ -163,13 +163,12 @@ const handleListSelectLastMonth = ((item) => {
     return(
       <Box
       sx={{
-        display:"flex",
-        justifyContent:"space-evenly",
-        m:"1.5rem 0rem",
-        width: "100%",
-        // borderColor: "red",
-        // borderWidth: "2px",
-        // borderStyle: "solid",
+        display: "flex",
+        // justifyContent: "center",
+        // alignItems: "center",
+          // borderColor: "green",
+          // borderWidth: "2px",
+          // borderStyle: "solid"
       }}
       >
         <ShortTermStatsWeek thisWeekStatList={thisWeekStatList} lastWeekStatList={lastWeekStatList} filters={filters} handleListSelectThisWeek={handleListSelectThisWeek} handleListSelectLastWeek={handleListSelectLastWeek} thisWeek={thisWeek} lastWeek={lastWeek} />

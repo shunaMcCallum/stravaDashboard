@@ -3,16 +3,10 @@ import { Typography, Box } from "@mui/material";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
 
-const BarChart2 = ({header, data, chartWidth}) => {
+const BarChart2 = ({data, chartWidth}) => {
 
     return (
       <Box>
-        <Typography 
-          variant="h5"
-          lineHeight="2"
-          >
-          {header}
-        </Typography>
         <BarChart 
           width={chartWidth} 
           height={290} 

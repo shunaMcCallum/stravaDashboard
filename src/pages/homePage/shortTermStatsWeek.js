@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import StatsList from "../../components/lists/statsList";
 import Filter from "../../components/lists/filter";
 import BarChart2 from "../../components/charts/barChart/barChart2";
@@ -9,11 +9,12 @@ const ShortTermStatsWeek = ({thisWeekStatList, lastWeekStatList, filters, handle
 
     return(
     <Box
-        // sx={{
-        //     borderColor: "red",
-        //     borderWidth: "2px",
-        //     borderStyle: "solid"
-        // }}
+        sx={{
+            // borderColor: "red",
+            // borderWidth: "2px",
+            // borderStyle: "solid",
+            width: "50%"
+        }}
     >
         {/* Stats Boxes */}
         <Box
@@ -40,25 +41,66 @@ const ShortTermStatsWeek = ({thisWeekStatList, lastWeekStatList, filters, handle
             </Box>
         </Box>
         {/* Graphs */}
-        <Box 
-            sx={{ 
-                // borderColor: "red",
-                // borderWidth: "2px",
-                // borderStyle: "solid"
-            }}>
-            <Box>
-                <Box>
-                    <h3>Filter Data</h3>
+        <Box
+            sx={{
+                marginTop: "1.5rem",
+                marginLeft: "1.5rem"
+            }}
+        >
+            <Box
+                sx={{
+                    width: "97%",
+                    padding:"0.5rem 1rem 0.5rem -0.5rem",
+                    backgroundColor:"#332240",
+                    boxShadow:"0rem 0.15rem 1.5rem black"
+                }}
+            >
+                <Box
+                    sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        marginLeft: "4rem",
+                        marginRight: "2rem"
+                    }}
+                >
+                    <Typography 
+                        variant="h5"
+                        lineHeight="2"
+                    >
+                        This Week Activities
+                    </Typography>
                     <Filter list={filters} handleListSelect={handleListSelectThisWeek} />
                 </Box>
-                <BarChart2 header={"This Week Activities"} data={thisWeek} chartWidth={740} />
+                <BarChart2 data={thisWeek} chartWidth={700} />
             </Box>
-            <Box>
-                <Box>
-                    <h3>Filter Data</h3>
+            <Box
+                sx={{
+                    width: "97%",
+                    marginTop: "1.5rem",
+                    padding:"0.5rem 1rem 0.5rem -0.5rem",
+                    backgroundColor:"#332240",
+                    boxShadow:"0rem 0.15rem 1.5rem black"
+                }}
+            >
+                <Box
+                    sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        marginLeft: "4rem",
+                        marginRight: "2rem"
+                    }}
+                >
+                    <Typography 
+                        variant="h5"
+                        lineHeight="2"
+                    >
+                        Last Week Activities
+                    </Typography>
                     <Filter list={filters} handleListSelect={handleListSelectLastWeek} />
                 </Box>
-                <BarChart2 header={"Last Week Activities"} data={lastWeek} chartWidth={740} />
+                <BarChart2 data={lastWeek} chartWidth={700} />
             </Box>
         </Box>
     </Box>
