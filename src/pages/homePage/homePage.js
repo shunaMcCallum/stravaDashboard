@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import { Box } from "@mui/material";
 import OverallStats from "./overallStats.js";
 import ShortTermStats from "./shortTermStats.js";
+import Commutes from "./commutes.js";
 import HomeStatsChartsContainer from './homeStatsChartsContainer.js';
 import polyline from '@mapbox/polyline';
 import LineChart2 from "../../components/charts/lineChart/lineChart2.js";
@@ -78,39 +79,7 @@ const HomePage = ({userDetails, userStats, initialStats, activities, alpeDuZwift
         }
     };
 
-    const morningCommutes = []
-    const afternoonCommutes = []
     const alpes = []
-
-    const setMorningData = () => {
-        for(var activity of activities) {
-                if (activity.RideType = "Commute" && activity.Name === "Morning Ride") {
-                
-                var array = activity.ElapsedTime.split(":");
-                var seconds = (parseInt(array[0], 10) * 60 * 60) + (parseInt(array[1], 10) * 60) + parseInt(array[2], 10)
-
-                        morningCommutes.push({
-                             Date: activity.Date,
-                             Time: seconds
-                        })
-                }
-        }
-    };
-
-    const setAfternoonData = () => {
-        for(var activity of activities) {
-                if (activity.RideType === "Commute" && activity.Name === "Afternoon Ride" || activity.Name === "Evening Ride") {
-                
-                var array = activity.ElapsedTime.split(":");
-                var seconds = (parseInt(array[0], 10) * 60 * 60) + (parseInt(array[1], 10) * 60) + parseInt(array[2], 10)
-
-                        afternoonCommutes.push({
-                             Date: activity.Date,
-                             Time: seconds
-                        })
-                }
-        }
-    };
 
     const setAlpeDuZwiftData = () => {
         for(var alpe of alpeDuZwiftEfforts) {
@@ -125,8 +94,6 @@ const HomePage = ({userDetails, userStats, initialStats, activities, alpeDuZwift
                 }
         };
 
-    setMorningData();
-    setAfternoonData();
     setAlpeDuZwiftData();
 
     const [workoutStressScores, setWorkoutStressScores] = useState([["TotalNumberOfWorkouts", "NumberWithinStressScoreRange"]]);
@@ -185,6 +152,10 @@ const HomePage = ({userDetails, userStats, initialStats, activities, alpeDuZwift
         <ShortTermStats thisWeekActivities={thisWeekActivities} lastWeekActivities={lastWeekActivities} thisMonthActivities={thisMonthActivities} lastMonthActivities={lastMonthActivities} />
         
         {/* ROW 3 */}
+        {/* <Commutes morningCommutes={morningCommutes} afternoonCommutes={afternoonCommutes} /> */}
+        <Commutes activities={activities} />
+
+        {/* ROW 4 */}
         <HomeStatsChartsContainer 
           userStats={userStats} 
           initialRideTypesPieChartArray={rideTypesPieChartArray} 
@@ -199,72 +170,6 @@ const HomePage = ({userDetails, userStats, initialStats, activities, alpeDuZwift
           initialLongestRidePolyline={initialLongestRidePolyline()}
           initialFarthestRidePolyline={initialFarthestRidePolyline()}
         />
-      
-        {/* ROW 4 */}
-        <Box
-           sx={{
-                display: "flex",
-                height: "60%",
-                marginTop: "2rem",
-                marginBottom: "0rem"
-           }}
-           >
-        <Box
-         sx={{
-                height: "100%",
-                width: "45%",
-                //backgroundColor: "#332240",
-                overflow: "auto",
-                marginLeft: "1.5rem",
-                marginBottom: "0rem",
-                '&:hover::-webkit-scrollbar': {
-                        display: 'block',
-                        },
-                        '&::-webkit-scrollbar': {
-                        display: 'none',
-                        width: '0.512rem',
-                        },
-                        '&::-webkit-scrollbar-track': {
-                        boxShadow: 'inset 0 0 2rem rgba(0,0,0,0.00)',
-                        webkitBoxShadow: 'inset 0 0 2rem rgba(0,0,0,0.00)',
-                        },
-                        '&::-webkit-scrollbar-thumb': {
-                        backgroundColor: '#8d8e90',
-                        height: '3rem',
-                        borderRadius: '1rem',
-                        },
-         }}
-         >
-           <LineChart2 header={"Morning Commute Times"} data={morningCommutes} chartWidth={8000} />
-        </Box>
-        <Box
-         sx={{
-                height: "100%",
-                width: "45%",
-                overflow: "auto",
-                marginLeft: "1.5rem",
-                marginBottom: "0rem",
-                '&:hover::-webkit-scrollbar': {
-                        display: 'block',
-                        },
-                        '&::-webkit-scrollbar': {
-                        display: 'none',
-                        width: '0.512rem',
-                        },
-                        '&::-webkit-scrollbar-track': {
-                        boxShadow: 'inset 0 0 2rem rgba(0,0,0,0.00)',
-                        webkitBoxShadow: 'inset 0 0 2rem rgba(0,0,0,0.00)',
-                        },
-                        '&::-webkit-scrollbar-thumb': {
-                        backgroundColor: '#8d8e90',
-                        height: '3rem',
-                        borderRadius: '1rem',
-                        },
-         }}
-         >
-           <LineChart2 header={"Afternoon Commute Times"} data={afternoonCommutes} chartWidth={8000} />
-        </Box>
-        </Box>
 
          {/* ROW 5 */}
          <Box

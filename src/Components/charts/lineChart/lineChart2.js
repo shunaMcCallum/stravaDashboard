@@ -10,12 +10,15 @@ const LineChart2 = ({header, data, chartWidth}) => {
         <Typography 
           variant="h5"
           lineHeight="2"
+          display="flex"
+          justifyContent="flex-start"
+          marginLeft="3.75rem"
           >
           {header}
         </Typography>
         <LineChart 
           width={chartWidth} 
-          height={290} 
+          height={250} 
           margin={{
             top: 6
           }}

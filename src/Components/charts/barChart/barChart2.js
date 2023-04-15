@@ -9,7 +9,7 @@ const BarChart2 = ({data, chartWidth}) => {
       <Box>
         <BarChart 
           width={chartWidth} 
-          height={290} 
+          height={250} 
           // margin={{
           //   top: 6
           // }}
