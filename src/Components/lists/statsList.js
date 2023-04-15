@@ -11,14 +11,16 @@ const StatsList = ({list, listTitle}) => {
 
     return(
         <Box 
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            justifyContent="center"
-            width="auto"
-            padding="1rem 0.5rem 0.5rem 0"
-            backgroundColor="#332240"
-            boxShadow="0rem 0.15rem 1.5rem black"
+            sx={{
+              display:"flex",
+              flexDirection:"column",
+              alignItems:"center",
+              justifyContent:"center",
+              minWidth:"21rem",
+              padding:"1rem 0.5rem 0.5rem 0",
+              backgroundColor:"#332240",
+              boxShadow:"0rem 0.15rem 1.5rem black"
+            }}
             >
               <Typography 
                 variant="h5"

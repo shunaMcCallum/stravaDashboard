@@ -165,7 +165,11 @@ const handleListSelectLastMonth = ((item) => {
       sx={{
         display:"flex",
         justifyContent:"space-evenly",
-        m:"1.5rem 1rem 1.5rem 1rem",
+        m:"1.5rem 0rem",
+        width: "100%",
+        // borderColor: "red",
+        // borderWidth: "2px",
+        // borderStyle: "solid",
       }}
       >
         <ShortTermStatsWeek thisWeekStatList={thisWeekStatList} lastWeekStatList={lastWeekStatList} filters={filters} handleListSelectThisWeek={handleListSelectThisWeek} handleListSelectLastWeek={handleListSelectLastWeek} thisWeek={thisWeek} lastWeek={lastWeek} />

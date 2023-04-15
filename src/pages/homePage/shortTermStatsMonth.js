@@ -9,36 +9,54 @@ const ShortTermStatsMonth = ({thisMonthStatList, lastMonthStatList, filters, han
 
     return(
     <Box
-        sx={{
+        // sx={{
 
-        }}>
+        // }}
+    >
         {/* Stats Boxes */}
         <Box
             sx={{
                 display: "flex",
-                justifyContent: "center"
-            }}>
-          <StatsList list={thisMonthStatList} listTitle={"This Month Stats"}/>
-          <StatsList list={lastMonthStatList} listTitle={"Last Month Stats"}/>
+                justifyContent: "center",
+            }}
+            >
+            <Box
+                sx={{
+                    marginLeft: "1.5rem",
+                    marginRight: "1.5rem"
+                }}
+            >
+                <StatsList list={thisMonthStatList} listTitle={"This Month Stats"}/>
+            </Box>
+            <Box
+                sx={{
+                    marginLeft: "1.5rem",
+                    marginRight: "1.5rem"
+                }}
+            >
+                <StatsList list={lastMonthStatList} listTitle={"Last Month Stats"}/>
+            </Box>
         </Box>
         {/* Graphs */}
         <Box 
             sx={{ 
-                
+                // borderColor: "red",
+                // borderWidth: "2px",
+                // borderStyle: "solid"
             }}>
             <Box>
                 <Box>
                     <h3>Filter Data</h3>
                     <Filter list={filters} handleListSelect={handleListSelectThisMonth} />
                 </Box>
-                <BarChart2 header={"This Month Activities"} data={thisMonth} chartWidth={1000} />
+                <BarChart2 header={"This Month Activities"} data={thisMonth} chartWidth={740} />
             </Box>
             <Box>
                 <Box>
                     <h3>Filter Data</h3>
                     <Filter list={filters} handleListSelect={handleListSelectLastMonth} />
                 </Box>
-                <BarChart2 header={"Last Month Activities"} data={lastMonth} chartWidth={1000} />
+                <BarChart2 header={"Last Month Activities"} data={lastMonth} chartWidth={740} />
             </Box>
         </Box>
     </Box>

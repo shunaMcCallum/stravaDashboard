@@ -4,7 +4,6 @@ import OverallStats from "./overallStats.js";
 import ShortTermStats from "./shortTermStats.js";
 import HomeStatsChartsContainer from './homeStatsChartsContainer.js';
 import polyline from '@mapbox/polyline';
-import "../../Styling/HomePage.css";
 import LineChart2 from "../../components/charts/lineChart/lineChart2.js";
 import Filter from "../../components/lists/filter.js";
 import PieChart from "../../components/charts/pieChart/pieChart.js";
@@ -178,7 +177,12 @@ const HomePage = ({userDetails, userStats, initialStats, activities, alpeDuZwift
     });
 
     return(
-    <div id="home-page-container">
+    <Box
+        sx={{
+                // minHeight: "90%",
+                // maxWidth: "100%"
+        }}
+    >
         {/* ROW 1 */}
         <OverallStats userDetails={userDetails} />
 
@@ -335,7 +339,7 @@ const HomePage = ({userDetails, userStats, initialStats, activities, alpeDuZwift
           </Box>
         </Box>
 
-    </div>
+    </Box>
     
     );
     
