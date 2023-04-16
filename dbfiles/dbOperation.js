@@ -91,8 +91,8 @@ const getThisWeekActivities = async() => {
     try {
         let pool = await sql.connect(config);
         let activities = await pool.request().query(
-            'DECLARE @Start DATE = DATEADD(WEEK, DATEDIFF(WEEK, 0, GETDATE()), 0); ' +
-            'DECLARE @End DATE = DATEADD(WEEK, DATEDIFF(WEEK, 0, GETDATE()), 0) + 6; ' +            
+            'DECLARE @Start DATE = DATEADD(WEEK, DATEDIFF(WEEK, 0, GETDATE()) - 1, 0); ' +
+            'DECLARE @End DATE = DATEADD(WEEK, DATEDIFF(WEEK, 0, GETDATE()) - 1, 0) + 6; ' +            
             'DROP TABLE IF EXISTS #Temp; ' +
             'CREATE TABLE #Temp ([Date] DATE, DayOfTheWeek VARCHAR(10), NumActivities INT, Distance FLOAT, MovingTime INT); ' +
             'WITH Dates_CTE ([Date], DayOfTheWeek) AS ( ' +
@@ -122,8 +122,8 @@ const getLastWeekActivities = async() => {
     try {
         let pool = await sql.connect(config);
         let activities = await pool.request().query(
-            'DECLARE @LastWeekStart DATE = DATEADD(WEEK, DATEDIFF(WEEK, 0, GETDATE()), 0) - 7; ' +
-            'DECLARE @LastWeekEnd DATE = DATEADD(WEEK, DATEDIFF(WEEK, 0, GETDATE()), 0) - 1; ' +            
+            'DECLARE @LastWeekStart DATE = DATEADD(WEEK, DATEDIFF(WEEK, 0, GETDATE()) - 1, 0) - 7; ' +
+            'DECLARE @LastWeekEnd DATE = DATEADD(WEEK, DATEDIFF(WEEK, 0, GETDATE()) - 1, 0) - 1; ' +            
             'DROP TABLE IF EXISTS #Temp; ' +
             'CREATE TABLE #Temp ([Date] DATE, DayOfTheWeek VARCHAR(10), NumActivities INT, Distance FLOAT, MovingTime INT); ' +
             'WITH Dates_CTE ([Date], DayOfTheWeek) AS ( ' +

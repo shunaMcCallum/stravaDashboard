@@ -160,6 +160,8 @@ const handleListSelectLastMonth = ((item) => {
     filterList(item, lastMonthActivities);
 });
 
+console.log(lastWeekActivities)
+
     return(
       <Box
       sx={{
