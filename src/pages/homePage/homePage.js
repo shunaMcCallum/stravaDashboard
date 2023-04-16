@@ -3,81 +3,12 @@ import { Box } from "@mui/material";
 import OverallStats from "./overallStats.js";
 import ShortTermStats from "./shortTermStats.js";
 import Commutes from "./commutes.js";
-import HomeStatsChartsContainer from './homeStatsChartsContainer.js';
-import polyline from '@mapbox/polyline';
+import LongTermStats from "./longTermStats.js";
 import LineChart2 from "../../components/charts/lineChart/lineChart2.js";
 import Filter from "../../components/lists/filter.js";
 import PieChart from "../../components/charts/pieChart/pieChart.js";
 
 const HomePage = ({userDetails, userStats, initialStats, activities, alpeDuZwiftEfforts, thisWeekActivities, lastWeekActivities, thisMonthActivities, lastMonthActivities}) => {
-
-    const rideTypesPieChartArray = [
-            ["Total number of rides", "Number of rides"], 
-            ["Workout rides", initialStats.RideWorkout], 
-            ["Commutes", initialStats.RideCommute], 
-            ["Virtual fun rides", initialStats.RideVirtual],
-            ["Outdoor fun rides", initialStats.RideOutdoor]
-    ];
-
-    const workoutScoresPieChartArray = [
-            ["Total Number of Scores", "Score"], 
-            ["Score 0 - 70", initialStats.Score0to70], 
-            ["Score 71 - 90", initialStats.Score71to90], 
-            ["Score 91 - 110", initialStats.Score91to110],
-            ["Score 111 and above", initialStats.Score111Plus]
-    ];
-
-    const rideTimePieChartArray = [
-            ["Total Time", "Time Spent on Each Ride Type"], 
-            ["Workout ride time", initialStats.RideWorkout_Time], 
-            ["Commute ride time", initialStats.RideCommute_Time], 
-            ["Virtual fun ride time", initialStats.RideVirtual_Time],
-            ["Outdoor fun ride time", initialStats.RideOutdoor_Time]
-    ];
-
-    const rideTotalsTitle = `Ride Totals for ${initialStats.Header}`;
-    const rideTotalsArray = [
-            `Total distance ridden (miles): ${initialStats.DistanceMiles}`,
-            `Total distance ridden (kilometers): ${initialStats.DistanceKM}`,
-            `Total moving time: ${initialStats.MovingTime}`,
-            `Total elapsed time: ${initialStats.ElapsedTime}`,
-            `Total ascent (ft): ${initialStats.ElevationGainFt}`,
-            `Total ascent (metres): ${initialStats.ElevationGainMetres}`
-    ];
-
-    const longestRideTitle = `Longest Ride for ${initialStats.Header}`;
-    const longestRideArray = [
-            `Date: ${initialStats.LongestRideDate}`,
-            `Title: ${initialStats.LongestRideTitle}`,
-            `Distance: ${initialStats.LongestRideDistance}`,
-            `Time: ${initialStats.LongestRideTime}`
-    ];
-
-    const farthestRideTitle = `Farthest Ride for ${initialStats.Header}`;
-    const farthestRideArray = [
-            `Date: ${initialStats.FarthestRideDate}`,
-            `Title: ${initialStats.FarthestRideTitle}`,
-            `Distance: ${initialStats.FarthestRideDistance}`,
-            `Time: ${initialStats.FarthestRideTime}`
-    ];
-
-    const initialLongestRidePolyline = () => {
-        if (initialStats.LongestRidePolyline) {
-                //console.log("initialStats")
-                return polyline.decode(initialStats.LongestRidePolyline);
-        } else {
-                //console.log("noStats")
-                return null
-        }
-    };
-
-    const initialFarthestRidePolyline = () => {
-        if (initialStats.FarthestRidePolyline) {
-                return polyline.decode(initialStats.FarthestRidePolyline);
-        } else {
-                return null
-        }
-    };
 
     const alpes = []
 
@@ -156,20 +87,8 @@ const HomePage = ({userDetails, userStats, initialStats, activities, alpeDuZwift
         <Commutes activities={activities} />
 
         {/* ROW 4 */}
-        <HomeStatsChartsContainer 
-          userStats={userStats} 
-          initialRideTypesPieChartArray={rideTypesPieChartArray} 
-          initialWorkoutScoresPieChartArray={workoutScoresPieChartArray} 
-          initialRideTimePieChartArray={rideTimePieChartArray}
-          initialRideTotalsTitle={rideTotalsTitle} 
-          initialRideTotalsArray={rideTotalsArray}
-          initialLongestRideTitle={longestRideTitle}
-          initialLongestRideArray={longestRideArray}
-          initialFarthestRideTitle={farthestRideTitle}
-          initialFarthestRideArray={farthestRideArray}
-          initialLongestRidePolyline={initialLongestRidePolyline()}
-          initialFarthestRidePolyline={initialFarthestRidePolyline()}
-        />
+        <LongTermStats userStats={userStats} initialStats={initialStats} />
+
 
          {/* ROW 5 */}
          <Box

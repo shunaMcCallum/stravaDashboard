@@ -160,17 +160,10 @@ const handleListSelectLastMonth = ((item) => {
     filterList(item, lastMonthActivities);
 });
 
-console.log(lastWeekActivities)
-
     return(
       <Box
       sx={{
         display: "flex",
-        // justifyContent: "center",
-        // alignItems: "center",
-          // borderColor: "green",
-          // borderWidth: "2px",
-          // borderStyle: "solid"
       }}
       >
         <ShortTermStatsWeek thisWeekStatList={thisWeekStatList} lastWeekStatList={lastWeekStatList} filters={filters} handleListSelectThisWeek={handleListSelectThisWeek} handleListSelectLastWeek={handleListSelectLastWeek} thisWeek={thisWeek} lastWeek={lastWeek} />

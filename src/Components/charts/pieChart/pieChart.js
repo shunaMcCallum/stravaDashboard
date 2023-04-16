@@ -10,8 +10,8 @@ const PieChart = ({ chartArray}) => {
             color: "white"
         },
         legend: {position: "none"},
-        width: "25rem",
-        height: "20rem",
+        width: "20rem",
+        height: "15rem",
         chartArea: {
             width: "90%", 
             height: "90%",

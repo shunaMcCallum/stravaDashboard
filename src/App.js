@@ -21,7 +21,6 @@ function App() {
   const initialStats = { ...userStats[0] };
   const activityHeaders = { ...activities[0] };
 
-
   useEffect(() => {
     fetch('http://localhost:5000/user')
       .then(res => res.json())
