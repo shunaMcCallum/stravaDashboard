@@ -20,8 +20,8 @@ const LongTermStats = ({userStats, initialStats, activities}) => {
     const [farthestRideTitle, setFarthestRideTitle] = useState(null);
     const [farthestRideArray, setFarthestRideArray] = useState([]);
 
-    const [longestPolylineArray, setLongestPolylineArray] = useState([0,0]);
-    const [farthestPolylineArray, setFarthestPolylineArray] = useState([0,0]);
+    const [longestPolylineArray, setLongestPolylineArray] = useState(null);
+    const [farthestPolylineArray, setFarthestPolylineArray] = useState(null);
 
     useEffect(() => {
         populateRideTypesPieChart(initialStats);
@@ -199,10 +199,12 @@ const LongTermStats = ({userStats, initialStats, activities}) => {
         <LongTermRideStatsRides
             longestRideTitle={longestRideTitle}
             longestRideArray={longestRideArray}
-            longestRidePolyline={initialLongestRidePolyline()}
+            // longestRidePolyline={initialLongestRidePolyline()}
+            longestRidePolyline={longestPolylineArray}
             farthestRideTitle={farthestRideTitle}
             farthestRideArray={farthestRideArray}
-            farthestRidePolyline={initialFarthestRidePolyline()}
+            // farthestRidePolyline={initialFarthestRidePolyline()}
+            farthestRidePolyline={farthestPolylineArray}
             handleListSelect={handleListSelect}
             workoutNames={workoutNames}
             handleStressListSelect={handleStressListSelect}
@@ -211,10 +213,12 @@ const LongTermStats = ({userStats, initialStats, activities}) => {
         <LongTermRideStatsRides
             longestRideTitle={longestRideTitle}
             longestRideArray={longestRideArray}
-            longestRidePolyline={longestPolylineArray}
+            longestRidePolyline={initialLongestRidePolyline()}
+            // longestRidePolyline={longestPolylineArray}
             farthestRideTitle={farthestRideTitle}
             farthestRideArray={farthestRideArray}
-            farthestRidePolyline={farthestPolylineArray}
+            farthestRidePolyline={initialFarthestRidePolyline()}
+            // farthestRidePolyline={farthestPolylineArray}
             handleListSelect={handleListSelect}
             workoutNames={workoutNames}
             handleStressListSelect={handleStressListSelect}

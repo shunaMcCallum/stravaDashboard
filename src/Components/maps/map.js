@@ -31,12 +31,10 @@ const Map = ({polyline}) => {
                 {/* Layers is a custom component we are importing, which in this case is enabling us to choose different types of map */}
                 <Layers />
                 <ZoomControl position='topright' />
-                <Polyline positions={polyline} />
+                <Polyline positions={polyline} color={'blue'} weight={4} />
             </MapContainer>
             : null }
-        </Box>
-
-    
+        </Box>   
     );
     
 }
