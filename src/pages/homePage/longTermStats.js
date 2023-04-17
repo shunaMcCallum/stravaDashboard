@@ -6,7 +6,8 @@ import LongTermRideStatsRides from "./longTermRideStatsRides";
 import polyline from '@mapbox/polyline';
 
 const LongTermStats = ({userStats, initialStats}) => {
-    // console.log(initialStats)
+    //  console.log(initialStats)
+    //  console.log(userStats)
 
     const [rideTypesPieChartArray, setRideTypesPieChartArray] = useState([]);
     const [workoutScoresPieChartArray, setWorkoutScoresPieChartArray] = useState([]);
@@ -21,12 +22,12 @@ const LongTermStats = ({userStats, initialStats}) => {
     const [farthestRideTitle, setFarthestRideTitle] = useState(null);
     const [farthestRideArray, setFarthestRideArray] = useState([]);
 
-    const [longestPolylineArray, setLongestPolylineArray] = useState([]);
-    const [farthestPolylineArray, setFarthestPolylineArray] = useState([]);
+    const [longestPolylineArray, setLongestPolylineArray] = useState([0,0]);
+    const [farthestPolylineArray, setFarthestPolylineArray] = useState([0,0]);
 
     useEffect(() => {
         populateRideTypesPieChart(initialStats);
-    }, userStats[0]);
+    }, [userStats[0]]);
 
     useEffect(() => {
         populateWorkoutScoresPieChart(initialStats);
@@ -48,27 +49,19 @@ const LongTermStats = ({userStats, initialStats}) => {
         populateFarthestRideList(initialStats);
     }, [userStats[0]]);
 
-    useEffect(() => {
-        setLongestPolylineArray(initialLongestRidePolyline())
-    }, [userStats[0]]);
-
     const initialLongestRidePolyline = () => {
         if (initialStats.LongestRidePolyline) {
             return polyline.decode(initialStats.LongestRidePolyline);
         } else {
-            return null
+            return null;
         }
     };
-
-    useEffect(() => {
-        setFarthestPolylineArray(initialFarthestRidePolyline())
-    }, [userStats[0]]);
 
     const initialFarthestRidePolyline = () => {
         if (initialStats.FarthestRidePolyline) {
             return polyline.decode(initialStats.FarthestRidePolyline);
         } else {
-            return null
+            return null;
         }
     };
 
@@ -156,7 +149,17 @@ const LongTermStats = ({userStats, initialStats}) => {
             rideTotalsTitle={rideTotalsTitle} 
             rideTotalsArray={rideTotalsArray}
         />
-        {/* <LongTermRideStatsRides
+        {longestPolylineArray ? 
+        <LongTermRideStatsRides
+            longestRideTitle={longestRideTitle}
+            longestRideArray={longestRideArray}
+            longestRidePolyline={initialLongestRidePolyline()}
+            farthestRideTitle={farthestRideTitle}
+            farthestRideArray={farthestRideArray}
+            farthestRidePolyline={initialFarthestRidePolyline()}
+            handleListSelect={handleListSelect}
+        /> : 
+        <LongTermRideStatsRides
             longestRideTitle={longestRideTitle}
             longestRideArray={longestRideArray}
             longestRidePolyline={longestPolylineArray}
@@ -164,8 +167,9 @@ const LongTermStats = ({userStats, initialStats}) => {
             farthestRideArray={farthestRideArray}
             farthestRidePolyline={farthestPolylineArray}
             handleListSelect={handleListSelect}
-
-        /> */}
+        />
+        }
+        
       </Box>
 
     );

@@ -3,9 +3,9 @@ import { Box, Typography } from "@mui/material";
 
 const StatsListSmall = ({list, listTitle}) => {
 
-    const listItems = list.map((item) => {
+    const listItems = list.map((item, index) => {
         return(
-            <p>{item}</p>
+            <p key={index}>{item}</p>
         )
     })
 

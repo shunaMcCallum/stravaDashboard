@@ -1,4 +1,5 @@
 import React from "react";
+import { Box } from "@mui/material";
 
 const Filter = ({list, handleListSelect}) => {
 
@@ -12,12 +13,12 @@ const Filter = ({list, handleListSelect}) => {
     }
 
     return(
-    <div id="filter">
+    <Box>
         <select onChange={handleChange} defaultValue="">
-            <option disabled value="">{listOptions[0]}</option>
+            <option disabled value="">Select an option</option>
             {listOptions}
         </select>
-    </div>
+    </Box>
     
     );
     

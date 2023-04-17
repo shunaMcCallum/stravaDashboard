@@ -2,7 +2,6 @@ import React from "react";
 import { Box, Typography } from "@mui/material";
 import StatsList from "../../components/lists/statsList.js";
 import Map from "../../components/maps/map.js";
-import polyline from '@mapbox/polyline'
 
     const LongTermRideStatsRides = ({longestRideTitle, longestRideArray, longestRidePolyline, farthestRideTitle, farthestRideArray, farthestRidePolyline}) => {
 

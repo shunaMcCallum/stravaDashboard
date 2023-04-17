@@ -1,5 +1,6 @@
-import '../../Styling/Map.css'
-import { MapContainer, Polyline, ZoomControl, useMap } from 'react-leaflet'
+// import '../../Styling/Map.css'
+import { Box } from '@mui/material';
+import { MapContainer, Polyline, ZoomControl, useMap } from 'react-leaflet';
 import Layers from './layers.js';
 
 const Map = ({polyline}) => {
@@ -16,9 +17,16 @@ const Map = ({polyline}) => {
     }
 
     return(
-        <div id="map-container">
+        <Box
+            sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                marginTop: "1.5rem"
+            }}
+        >
             {polyline ?
-            <MapContainer id="map" center={polyline[0]} zoom={13} scrollWheelZoom={false}>
+            <MapContainer style={{height: "300px", width: "400px"}} center={polyline[0]} zoom={13} scrollWheelZoom={false}>
                 <ChangeView lat={polyline[0][0]} lng={polyline[0][1]} />
                 {/* Layers is a custom component we are importing, which in this case is enabling us to choose different types of map */}
                 <Layers />
@@ -26,7 +34,7 @@ const Map = ({polyline}) => {
                 <Polyline positions={polyline} />
             </MapContainer>
             : null }
-        </div>
+        </Box>
 
     
     );
