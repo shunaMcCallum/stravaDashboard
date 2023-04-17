@@ -5,9 +5,7 @@ import LongTermRideStatsTotals from "./longTermRideStatsTotals";
 import LongTermRideStatsRides from "./longTermRideStatsRides";
 import polyline from '@mapbox/polyline';
 
-const LongTermStats = ({userStats, initialStats}) => {
-    //  console.log(initialStats)
-    //  console.log(userStats)
+const LongTermStats = ({userStats, initialStats, activities}) => {
 
     const [rideTypesPieChartArray, setRideTypesPieChartArray] = useState([]);
     const [workoutScoresPieChartArray, setWorkoutScoresPieChartArray] = useState([]);
@@ -48,22 +46,6 @@ const LongTermStats = ({userStats, initialStats}) => {
     useEffect(() => {
         populateFarthestRideList(initialStats);
     }, [userStats[0]]);
-
-    const initialLongestRidePolyline = () => {
-        if (initialStats.LongestRidePolyline) {
-            return polyline.decode(initialStats.LongestRidePolyline);
-        } else {
-            return null;
-        }
-    };
-
-    const initialFarthestRidePolyline = () => {
-        if (initialStats.FarthestRidePolyline) {
-            return polyline.decode(initialStats.FarthestRidePolyline);
-        } else {
-            return null;
-        }
-    };
 
     const populateRideTypesPieChart = ((item) => {
         setRideTypesPieChartArray([["Total number of rides", "Number of rides"], ["Workout rides", item.RideWorkout],
@@ -115,6 +97,22 @@ const LongTermStats = ({userStats, initialStats}) => {
         ]);
     });
 
+    const initialLongestRidePolyline = () => {
+        if (initialStats.LongestRidePolyline) {
+            return polyline.decode(initialStats.LongestRidePolyline);
+        } else {
+            return null;
+        }
+    };
+
+    const initialFarthestRidePolyline = () => {
+        if (initialStats.FarthestRidePolyline) {
+            return polyline.decode(initialStats.FarthestRidePolyline);
+        } else {
+            return null;
+        }
+    };
+
     const handleListSelect = ((item) => {
                 populateRideTypesPieChart(item);
                 populateWorkoutScoresPieChart(item);
@@ -124,6 +122,54 @@ const LongTermStats = ({userStats, initialStats}) => {
                 populateFarthestRideList(item);
                 setLongestPolylineArray(polyline.decode(item.LongestRidePolyline));
                 setFarthestPolylineArray(polyline.decode(item.FarthestRidePolyline));
+    });
+
+    const workoutNames = [
+        {Header: "2 x 20 mins FTP"},
+        {Header: "2 x 30 mins FTP"},
+        {Header: "2 x 15 mins FTP"},
+        {Header: "3 x 15 mins FTP"},
+        {Header: "4 x 10 mins FTP"},
+        {Header: "4 x 12 mins FTP"},
+        {Header: "VO2 Max"},
+        {Header: "Zone 2"},
+        {Header: "Tempo Ride"},
+        {Header: "Tempo with Surges"},
+        {Header: "SST"}
+    ];
+    const [workoutStressScores, setWorkoutStressScores] = useState([]);
+
+    useEffect(() => {
+        populateWorkoutStressScoresPieChart(workoutNames[0]);
+    }, [])
+
+    const populateWorkoutStressScoresPieChart = ((item) => {
+        let scoresBelow70 = ["0to70", 0];
+        let scores71to90 = ["71to90", 0];
+        let scores91to110 = ["91to110", 0];
+        let scoresAbove111 = ["110plus", 0];
+
+        for(var activity of activities) {
+                if (activity.Name.includes(item.Header)) {
+                        if (activity.StressScore === null) {
+                        } else if (activity.StressScore < 71) {
+                                scoresBelow70[1] ++;
+                        } else if (activity.StressScore >= 71 && activity.StressScore < 91) {
+                                scores71to90[1] ++;
+                        } else if (activity.StressScore >= 91 && activity.StressScore < 111) {
+                                scores91to110[1] ++;
+                        } else if (activity.StressScore > 110) {
+                                scoresAbove111[1] ++;
+                        }
+                }
+        }
+        
+        setWorkoutStressScores([["TotalNumberOfWorkouts", "NumberWithinStressScoreRange"], scoresBelow70, scores71to90, scores91to110, scoresAbove111]);
+    });
+
+
+    const handleStressListSelect = ((item) => {
+        populateWorkoutStressScoresPieChart(item);
     });
 
 
@@ -158,6 +204,9 @@ const LongTermStats = ({userStats, initialStats}) => {
             farthestRideArray={farthestRideArray}
             farthestRidePolyline={initialFarthestRidePolyline()}
             handleListSelect={handleListSelect}
+            workoutNames={workoutNames}
+            handleStressListSelect={handleStressListSelect}
+            workoutStressScores={workoutStressScores}
         /> : 
         <LongTermRideStatsRides
             longestRideTitle={longestRideTitle}
@@ -167,6 +216,9 @@ const LongTermStats = ({userStats, initialStats}) => {
             farthestRideArray={farthestRideArray}
             farthestRidePolyline={farthestPolylineArray}
             handleListSelect={handleListSelect}
+            workoutNames={workoutNames}
+            handleStressListSelect={handleStressListSelect}
+            workoutStressScores={workoutStressScores}
         />
         }
         

@@ -26,7 +26,7 @@ const Map = ({polyline}) => {
             }}
         >
             {polyline ?
-            <MapContainer style={{height: "300px", width: "400px"}} center={polyline[0]} zoom={13} scrollWheelZoom={false}>
+            <MapContainer style={{height: "25rem", width: "30rem"}} center={polyline[0]} zoom={13} scrollWheelZoom={false}>
                 <ChangeView lat={polyline[0][0]} lng={polyline[0][1]} />
                 {/* Layers is a custom component we are importing, which in this case is enabling us to choose different types of map */}
                 <Layers />

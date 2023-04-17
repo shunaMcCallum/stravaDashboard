@@ -27,53 +27,6 @@ const HomePage = ({userDetails, userStats, initialStats, activities, alpeDuZwift
 
     setAlpeDuZwiftData();
 
-    const [workoutStressScores, setWorkoutStressScores] = useState([["TotalNumberOfWorkouts", "NumberWithinStressScoreRange"]]);
-    const workoutNames = [
-        {Header: "2 x 20 mins FTP"},
-        {Header: "2 x 30 mins FTP"},
-        {Header: "2 x 15 mins FTP"},
-        {Header: "3 x 15 mins FTP"},
-        {Header: "4 x 10 mins FTP"},
-        {Header: "4 x 12 mins FTP"},
-        {Header: "VO2 Max"},
-        {Header: "Zone 2"},
-        {Header: "Tempo Ride"},
-        {Header: "Tempo with Surges"},
-        {Header: "SST"}
-    ];
-
-
-    const populateWorkoutStressScoresPieChart = ((item) => {
-
-        let scoresBelow70 = ["0to70", 0];
-        let scores71to90 = ["71to90", 0];
-        let scores91to110 = ["91to110", 0];
-        let scoresAbove111 = ["110plus", 0];
-
-        for(var activity of activities) {
-                if (activity.Name.includes(item.Header)) {
-                        if (activity.StressScore === null) {
-                                console.log(activity.StressScore);
-                        } else if (activity.StressScore < 71) {
-                                scoresBelow70[1] ++;
-                        } else if (activity.StressScore >= 71 && activity.StressScore < 91) {
-                                scores71to90[1] ++;
-                        } else if (activity.StressScore >= 91 && activity.StressScore < 111) {
-                                scores91to110[1] ++;
-                        } else if (activity.StressScore > 110) {
-                                scoresAbove111[1] ++;
-                        }
-                }
-        }
-        
-        setWorkoutStressScores([["TotalNumberOfWorkouts", "NumberWithinStressScoreRange"], scoresBelow70, scores71to90, scores91to110, scoresAbove111]);
-    });
-
-
-    const handleListSelect = ((item) => {
-        populateWorkoutStressScoresPieChart(item);
-    });
-
     return(
     <Box>
         {/* ROW 1 */}
@@ -86,11 +39,11 @@ const HomePage = ({userDetails, userStats, initialStats, activities, alpeDuZwift
         {/* <Commutes morningCommutes={morningCommutes} afternoonCommutes={afternoonCommutes} /> */}
         <Commutes activities={activities} />
 
-        {/* ROW 4 */}
-        <LongTermStats userStats={userStats} initialStats={initialStats} />
+        {/* ROW 4 & 5 */}
+        <LongTermStats userStats={userStats} initialStats={initialStats} activities={activities} />
 
 
-         {/* ROW 5 */}
+         {/* ROW 6 */}
          <Box
            sx={{
                 display: "flex",
@@ -124,24 +77,6 @@ const HomePage = ({userDetails, userStats, initialStats, activities, alpeDuZwift
          }}
          >
            <LineChart2 header={"Alpe Du Zwift Segment Times"} data={alpes} chartWidth={650} />
-        </Box>
-        <Box
-         sx={{
-                width: "45%",
-                // overflow: "auto",
-                marginLeft: "3rem"
-         }}
-         >
-           <div id="stats-charts-container-header">
-                <h3>Workout Stress Scores</h3>
-                <Filter list={workoutNames} handleListSelect={handleListSelect} />
-           </div>
-           {workoutStressScores ?
-           <div id="pie-charts-container" className="pie-chart-with-header">
-                <PieChart chartArray={workoutStressScores} />
-           </div>
-           : null
-                }
         </Box>
         </Box>
 

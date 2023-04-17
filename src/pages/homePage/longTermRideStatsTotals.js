@@ -27,7 +27,7 @@ import polyline from '@mapbox/polyline'
                 }}
             >
                 <Typography variant="h5" lineHeight="2">Ride Types</Typography>
-                <PieChart chartArray={rideTypesPieChartArray} />
+                <PieChart chartArray={rideTypesPieChartArray} width={"20rem"} height={"15rem"} />
             </Box>
             <Box
                 sx={{
@@ -36,7 +36,7 @@ import polyline from '@mapbox/polyline'
                 }}
             >
                 <Typography variant="h5" lineHeight="2">Ride Workout Scores</Typography>
-                <PieChart chartArray={workoutScoresPieChartArray} />
+                <PieChart chartArray={workoutScoresPieChartArray} width={"20rem"} height={"15rem"} />
             </Box>
             <Box
                 sx={{
@@ -45,7 +45,7 @@ import polyline from '@mapbox/polyline'
                 }}
             >
                 <Typography variant="h5" lineHeight="2">Ride Time by Type</Typography>
-                <PieChart chartArray={rideTimePieChartArray} />
+                <PieChart chartArray={rideTimePieChartArray} width={"20rem"} height={"15rem"} />
             </Box>
             <Box
                 sx={{

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Chart } from 'react-google-charts';
 
-const PieChart = ({ chartArray}) => {
+const PieChart = ({ chartArray, width, height}) => {
 
 
     const chartOptions = {
@@ -10,8 +10,8 @@ const PieChart = ({ chartArray}) => {
             color: "white"
         },
         legend: {position: "none"},
-        width: "20rem",
-        height: "15rem",
+        width: width,
+        height: height,
         chartArea: {
             width: "90%", 
             height: "90%",
