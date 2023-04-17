@@ -17,46 +17,8 @@ const getActivities = async() => {
     try {
         let pool = await sql.connect(config);
         let activities = await pool.request().query('SELECT * FROM dbo.Activities_Live_New ORDER BY [start_date_local] DESC')
-        //let activities = await pool.request().query('SELECT * FROM dbo.Activities_Live')
-        //let activities = await pool.request().query('SELECT * FROM dbo.Activities_Live_New')
         //console.log(activities);
         return activities;
-    }
-    catch(error) {
-        console.log(error);
-    }
-}
-
-const getUserStatsAll = async() => {
-    try {
-        let pool = await sql.connect(config);
-        let userStats = await pool.request().query('SELECT * FROM dbo.App_UserStats')
-        // console.log(userStats);
-        return userStats;
-    }
-    catch(error) {
-        console.log(error);
-    }
-}
-
-const getUserStatsRecent = async() => {
-    try {
-        let pool = await sql.connect(config);
-        let userStats = await pool.request().query('SELECT * FROM dbo.App_UserStats_Recent')
-        // console.log(userStats);
-        return userStats;
-    }
-    catch(error) {
-        console.log(error);
-    }
-}
-
-const getUserStatsYtd = async() => {
-    try {
-        let pool = await sql.connect(config);
-        let userStats = await pool.request().query('SELECT * FROM dbo.App_UserStats_Ytd')
-        // console.log(userStats);
-        return userStats;
     }
     catch(error) {
         console.log(error);

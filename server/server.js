@@ -68,30 +68,6 @@ app.put('/activities/:id', async(req, res) => {
     const result = await dbOperation.updateActivityNotes(req);
 })
 
-
-// app.get('/userStatsAll', async(req, res) => {
-//     console.log('called userStatsAll');
-//     const resultAll = await dbOperation.getUserStatsAll();
-//     res.send(resultAll);
-// })
-
-// app.get('/userStatsRecent', async(req, res) => {
-//     console.log('called userStatsRecent');
-//     const resultRecent = await dbOperation.getUserStatsRecent();
-//     res.send(resultRecent);
-// })
-
-// app.get('/userStatsYtd', async(req, res) => {
-//     console.log('called userStatsYtd');
-//     const resultYtd = await dbOperation.getUserStatsYtd();
-//     res.send(resultYtd);
-// })
-
-// dbOperation.getUserStats()
-// .then(res => res.json())
-// .then(data => console.log(data));
-
-
 app.listen(API_PORT, function() {
     console.log(`Listening on port ${API_PORT}`);
 })
