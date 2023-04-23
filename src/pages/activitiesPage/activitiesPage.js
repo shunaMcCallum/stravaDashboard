@@ -1,12 +1,10 @@
+import React, {useState} from "react";
+import {Link} from "react-router-dom";
 import {Box} from "@mui/material";
-import SectionHeader from "../../components/headers/sectionHeader";
 import ActivitiesPageGrid from "./activitiesPageGrid";
-import "../../Styling/ActivitiesPage.css";
 import ColourCodeBox from "../../components/dataGridFeatures/colourCodeBox";
 
 const ActivitiesPage = ({activitiesList, activityHeaders}) => {
-
-    const text = "Activities List"
 
     let columnValues = Object.entries(activityHeaders);
 
@@ -94,7 +92,8 @@ const ActivitiesPage = ({activitiesList, activityHeaders}) => {
                 field: x[0],
                 headerAlign: "left",
                 align: "left",
-                flex: 2
+                flex: 2,
+                renderCell: (params) => <Link to={`/activities/${params.id}`}>{params.value}</Link>
             }
         } else if (x[0] == "Notes") {
             return {
@@ -114,14 +113,12 @@ const ActivitiesPage = ({activitiesList, activityHeaders}) => {
                 flex: 0.5,
             }   
         }
-    })
-    
+    })  
 
     return(
-        <div id="activities-page-container">
-            {/* <SectionHeader text={text} /> */}
+        <Box sx={{height: '90%'}}>
             <ActivitiesPageGrid columns={columns} rowData={activitiesList} />
-        </div>
+        </Box>
     );
 }
 

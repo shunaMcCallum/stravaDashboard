@@ -24,8 +24,6 @@ const ActivitiesPageGrid = ({columns, rowData}) => {
     handleSubmit(event.id, { Id: event.id, Notes: event.value });
   }, []);
 
-//<button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall MuiDataGrid-menuIconButton css-1pe4mpk-MuiButtonBase-root-MuiIconButton-root" tabindex="-1" type="button" aria-label="Menu" title="Menu" aria-haspopup="true" aria-controls=":rg:" id=":rh:"><svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-ptiqhd-MuiSvgIcon-root" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="TripleDotsVerticalIcon"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path></svg><span class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"></span></button>
-
     return (
             <Box
                  m="0.4rem 0 0 0"

@@ -174,6 +174,18 @@ const getLastMonthActivities = async() => {
     }
 }
 
+const getActivity = async(req) => {
+    try {
+        let pool = await sql.connect(config);
+        let activity = await pool.request().query(`SELECT * FROM dbo.Activities_Live_New WHERE id = ${req.params.id}`)
+        // console.log(activity);
+        return activity;
+    }
+    catch(error) {
+        console.log(error);
+    }
+}
+
 const updateActivityNotes = async(req) => {
     try {
         let pool = await sql.connect(config);
@@ -188,4 +200,4 @@ const updateActivityNotes = async(req) => {
 
 
 module.exports = {getUserDetails, getActivities, getUserStats, getAlpeDuZwiftEfforts, getThisWeekActivities, getLastWeekActivities, 
-                    getThisMonthActivities, getLastMonthActivities, updateActivityNotes}
+                    getThisMonthActivities, getLastMonthActivities, updateActivityNotes, getActivity}

@@ -68,6 +68,12 @@ app.put('/activities/:id', async(req, res) => {
     const result = await dbOperation.updateActivityNotes(req);
 })
 
+app.get('/activities/:id', async(req, res) => {
+    console.log('called getActivity');
+    const result = await dbOperation.getActivity(req);
+    res.send(result);
+})
+
 app.listen(API_PORT, function() {
     console.log(`Listening on port ${API_PORT}`);
 })
