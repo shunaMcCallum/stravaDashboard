@@ -187,5 +187,5 @@ const updateActivityNotes = async(req) => {
 
 
 
-module.exports = {getUserDetails, getActivities, getUserStats, getUserStatsAll, getUserStatsRecent, getUserStatsYtd, 
-    getAlpeDuZwiftEfforts, getThisWeekActivities, getLastWeekActivities, getThisMonthActivities, getLastMonthActivities, updateActivityNotes}
+module.exports = {getUserDetails, getActivities, getUserStats, getAlpeDuZwiftEfforts, getThisWeekActivities, getLastWeekActivities, 
+                    getThisMonthActivities, getLastMonthActivities, updateActivityNotes}

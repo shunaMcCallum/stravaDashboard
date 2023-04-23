@@ -60,7 +60,7 @@ const SegmentStats = ({alpeDuZwiftEfforts}) => {
                 
             }}
         >
-            <LineChart2 header={"Alpe Du Zwift Segment Times"} data={alpes} chartWidth={2500} />
+            <LineChart2 header={"Alpe Du Zwift Segment Times"} data={alpes} chartWidth={2500} xDataKey={"Date"} lineDataKey={"Time"} lineName={"Time"} />
         </Box>
     </Box>
     );

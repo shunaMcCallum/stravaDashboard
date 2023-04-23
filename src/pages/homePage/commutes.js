@@ -78,7 +78,7 @@ const Commutes = ({activities}) => {
                 
             }}
         >
-            <LineChart2 header={"Morning Commute Times"} data={morningCommutes} chartWidth={8000} />
+            <LineChart2 header={"Morning Commute Times"} data={morningCommutes} chartWidth={8000} xDataKey={"Date"} lineDataKey={"Time"} lineName={"Time"} />
         </Box>
         <Box
             sx={{
@@ -109,7 +109,7 @@ const Commutes = ({activities}) => {
                     },
             }}
         >
-            <LineChart2 header={"Afternoon Commute Times"} data={afternoonCommutes} chartWidth={8000} />
+            <LineChart2 header={"Afternoon Commute Times"} data={afternoonCommutes} chartWidth={8000} xDataKey={"Date"} lineDataKey={"Time"} lineName={"Time"} />
         </Box>
     </Box>
     );

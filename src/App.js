@@ -5,6 +5,7 @@ import './App.css';
 import NavBar from "./components/navBar/navBar";
 import HomePage from './pages/homePage/homePage';
 import ActivitiesPage from './pages/activitiesPage/activitiesPage';
+import ActivityPage from "./pages/activitiesPage/activityPage/activityPage";
 import SectionHeader from "./components/headers/sectionHeader";
 
 function App() {
@@ -77,6 +78,7 @@ function App() {
         <Route path="/" element={<HomePage userDetails={userDetails} userStats={userStats} initialStats={initialStats} 
             activities={activities} alpeDuZwiftEfforts={alpeDuZwiftEfforts} thisWeekActivities={thisWeekActivities} lastWeekActivities={lastWeekActivities} thisMonthActivities={thisMonthActivities} lastMonthActivities={lastMonthActivities} />} />
         <Route path="/activities" element={<ActivitiesPage activitiesList={activities} activityHeaders={activityHeaders} />} />
+        <Route path="/activity" element={<ActivityPage />} />
         </Routes>
     </div>
   );

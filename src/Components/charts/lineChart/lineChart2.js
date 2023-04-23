@@ -3,7 +3,7 @@ import { Typography, Box } from "@mui/material";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
 
-const LineChart2 = ({header, data, chartWidth}) => {
+const LineChart2 = ({header, data, chartWidth, xDataKey, lineDataKey, lineName}) => {
 
     return (
       <Box>
@@ -24,12 +24,12 @@ const LineChart2 = ({header, data, chartWidth}) => {
           }}
           data={data}>
         <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-        <XAxis dataKey="Date" />
+        <XAxis dataKey="Time" />
         <YAxis />
         <Tooltip contentStyle={{color:"#000"}} itemStyle={{color:"#000"}} />
         <Line type="monotone"
-          dataKey="Time" 
-          name="Time"
+          dataKey="Heartrate" 
+          name="Heartrate"
           stroke="#FC5200" 
           activeDot={{ r: 6 }}
           strokewidth={2} />
