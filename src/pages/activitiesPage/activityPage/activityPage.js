@@ -1,6 +1,10 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {Box} from "@mui/material";
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import SectionHeaderSubHeader from "../../../components/headers/sectionHeaderSubHeader";
+import SectionHeader from "../../../components/headers/sectionHeader";
+import StatsList from "../../../components/lists/statsList";
+import StatsListSmall from "../../../components/lists/statsListSmall";
 import LineChart2 from "../../../components/charts/lineChart/lineChart2";
 
 const ActivityPage = ({activities}) => {
@@ -379,64 +383,119 @@ const ActivityPage = ({activities}) => {
     //     5347,5348,5349,5350,5351,5352,5353,5354,5355,5356,5357,5358,5359,5360,5361,5362,5363,5364,5365,5366,5367,5368,5369,5370,5371,
     //     5372,5373,5374,5375,5376,5377,5378,5379,5380,5381,5382,5383,5384,5385,5386,5387,5388,5389,5390,5391,5392,5393,5394,5395,5396,
     //     5397,5398,5399,5400,5401,5402,5403,5404,5405,5406,5407]
+    const { id } = useParams();
+    const activity = activities.find((a) => a.id == id);
 
-    //     const stats = []
+    console.log(activity)
 
-    //     const setData = () => {
-    //         let x = 0;
+    const stats = []
 
-    //         for(var t of tm) {
-    //             x = tm.indexOf(t);
+    let n = 0;
 
-    //             stats.push({
-    //                 Time: t,
-    //                 Heartrate: hr[x]
-    //             })
-    //         };
-    //     }
+    const setData2 = () => {
+        let x = 0;
 
-    //     let n = 0;
+        for(var t of activity.TimeList) {
+            x = activity.TimeList.indexOf(t);
 
-    //     const setData2 = () => {
-    //         let x = 0;
-
-    //         for(var t of tm) {
-    //             x = tm.indexOf(t);
-
-    //             if (x === 0) {
-    //                 stats.push({
-    //                     Time: t,
-    //                     Heartrate: hr[x]
-    //                 })
-    //             } else if (hr[x] === hr[x - 1]) {
-    //                 n ++;
-    //             } else {
-    //                 stats.push({
-    //                     Time: t,
-    //                     Heartrate: hr[x]
-    //                 })
-    //             } 
-    //         };
-    //     }
+            if (x === 0) {
+                stats.push({
+                    Time: t,
+                    Heartrate: activity.HRList[x]
+                })
+            } else if (activity.HRList[x] === activity.HRList[x - 1]) {
+                n ++;
+            } else {
+                stats.push({
+                    Time: t,
+                    Heartrate: activity.HRList[x]
+                })
+            } 
+        };
+    }
     
-        // setData2();
+        setData2();
 
-        const [activity, setActivity] = useState([]);
-        const { id } = useParams();
-        // const activity = activities.find((a) => a.id == id);
-
-        useEffect(() => {
-            fetch(`http://localhost:5000/activities/${id}`)
-                .then(res => res.json())
-                .then(data => setActivity(data.recordset[0]));
-        }, []);
-
+        const list1 = [`Elapsed Time: ${activity.ElapsedTime}`, `Stress Score: ${activity.StressScore}`, `Distance: ${activity.Distance}`, `Elevation Gain: ${activity.ElevationGain}`]
+        const list2 = [`Average Speed: ${activity.AvgSpeed}`, `Average Power: ${activity.AvgPower}`, `Average Cadence: ${activity.AvgCadence}`, `Average HeartRate: ${activity.AvgHeartRate}`]
 
     return(
-        <Box>
-            <h1>Hello</h1>
-            <h2>{activity.Name}</h2>
-            {/* <LineChart2 header={"Activity Stats"} data={stats} chartWidth={1500} xDataKey={"Time"} lineDataKey={"Heartrate"} lineName={"Heartrate"} /> */}
+        <Box
+        sx={{
+            display:"flex",
+            flexDirection: "column",
+            justifyContent:"space-evenly",
+            m:"1.5rem 1rem 1.5rem 1rem",
+            width:"98%"
+          }}>
+            {/* ROW 1 */}
+            <Box>
+                <SectionHeaderSubHeader header={activity.Name} subheader={activity.RideType} />
+            </Box>
+
+            {/* ROW 2 */}
+            <Box>
+                <h2>Graph Here</h2>
+                <LineChart2 header={"Performance Stats"} data={stats} chartWidth={1500} xDataKey={"Time"} lineDataKey={"Heartrate"} lineName={"Heartrate"} />
+            </Box>
+
+            {/* ROW 3 */}
+            <Box
+            sx={{
+                display: "flex",
+                flexDirection: "column",
+                marginTop: "1.5rem"
+            }}>
+                <Box
+                sx={{
+                    display: "flex",
+                    justifyContent: "space-evenly"
+                }}>
+                                        <Box>
+                        <SectionHeader text={`Activity ID: ${activity.id}`} />
+                    </Box>
+                    <Box>
+                        <SectionHeader text={`Date: ${activity.Date}`} />
+                    </Box>
+                    <Box>
+                        <SectionHeader text={`Time: ${activity.StartTime}`} />
+                    </Box>
+                </Box>
+
+                <Box
+                sx={{
+                    marginTop: "1.5rem",
+                    display: "flex",
+                    justifyContent: "space-evenly"
+                }}>
+                    <Box
+                    sx={{
+                        marginLeft: "1.5rem",
+                        marginRight: "1.5rem",
+                        width: "20rem"
+                    }}
+                    >
+                        <StatsList list={list1} listTitle={""}/>
+                    </Box>
+                    <Box
+                    sx={{
+                        marginLeft: "1.5rem",
+                        marginRight: "1.5rem",
+                        width: "20rem"
+                    }}
+                    >
+                        <StatsList list={list2} listTitle={""}/>
+                    </Box>
+                </Box>
+
+            </Box>
+
+
+
+
+            <p>Notes: {activity.Notes}</p>
+            
+            
         </Box>
     );
 }
