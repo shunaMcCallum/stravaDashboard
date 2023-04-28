@@ -10,7 +10,7 @@ const SectionHeaderSubHeader = ({header, subheader}) => {
             p: "1rem 0",
             minWidth: "20rem",
             maxWidth: "50rem",
-            minHeight: "3.5rem",
+            minHeight: "4rem",
             alignItems: "center",
             display: "flex",
             flexDirection: "column",

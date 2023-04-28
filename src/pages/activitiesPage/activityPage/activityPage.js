@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import {Box} from "@mui/material";
 import { useParams } from 'react-router-dom';
 import polyline from "@mapbox/polyline";
@@ -13,13 +13,29 @@ const ActivityPage = ({activities}) => {
     const { id } = useParams();
     const activity = activities.find((a) => a.id == id);
 
-    // console.log(activities)
-
-    const stats = []
-    const timeList = activity.TimeList.split(',');
-    const hrList = activity.HRList.split(',');
-
     let n = 0;
+
+    let stats = [];
+    let timeList = [];
+    let hrList = [];
+    let distanceList = [];
+    let cadenceList = [];
+
+    if (activity.TimeList != null) {
+        timeList = activity.TimeList.split(',');
+    }
+
+    if (activity.HRList != null) {
+        hrList = activity.HRList.split(',');
+    }
+
+    if (activity.DistanceList != null) {
+        distanceList = activity.DistanceList.split(',');
+    }
+
+    if (activity.CadenceList != null) {
+        cadenceList = activity.CadenceList.split(',');
+    }
 
     const setData = () => {
         let x = 0;
@@ -42,7 +58,7 @@ const ActivityPage = ({activities}) => {
             } 
         };
     }
-    
+
         setData();
 
         const list1 = [`Elapsed Time: ${activity.ElapsedTime}`, `Stress Score: ${activity.StressScore}`]
@@ -61,6 +77,9 @@ const ActivityPage = ({activities}) => {
             m:"1.5rem 1rem 1.5rem 1rem",
             width:"98%"
           }}>
+            {activity.SportType === "VirtualRide" || activity.SportType === "Ride" ? 
+            // If Activity is a ride
+            <Box>
             {/* ROW 1 */}
             <Box>
                 <SectionHeaderSubHeader header={activity.Name} subheader={activity.RideType} />
@@ -188,6 +207,81 @@ const ActivityPage = ({activities}) => {
             >
                 <Map polyline={pol} />
             </Box>
+            </Box> :
+
+            // If Activity is not a ride
+            <Box>
+            <Box>
+            {/* ROW 1 */}
+            <Box>
+                <SectionHeaderSubHeader header={activity.Name} subheader={activity.SportType} />
+            </Box>
+
+            {/* ROW 2 */}
+            <Box
+            sx={{
+                display: "flex",
+                flexDirection: "column",
+                marginTop: "1.5rem"
+            }}
+            >
+                <Box
+                    sx={{
+                        display: "flex",
+                        justifyContent: "space-evenly"
+                    }}>
+                        <Box>
+                            <SectionHeader text={`Activity ID: ${activity.id}`} />
+                        </Box>
+                        <Box>
+                            <SectionHeader text={`Date: ${activity.Date}`} />
+                        </Box>
+                        <Box>
+                            <SectionHeader text={`Time: ${activity.StartTime}`} />
+                        </Box>
+                    </Box>
+                </Box>
+                </Box>
+
+            {/* ROW 3 */}
+            <Box
+            sx={{
+                display: "flex",
+                flexDirection: "column",
+                marginTop: "1.5rem"
+            }}>
+                <Box
+                sx={{
+                    marginTop: "1.5rem",
+                    display: "flex",
+                    justifyContent: "space-evenly"
+                }}>
+                    <Box
+                    sx={{
+                        marginLeft: "1.5rem",
+                        marginRight: "1.5rem",
+                    }}
+                    >
+                        <StatsList list={list1} />
+                    </Box>
+                    <Box
+                    sx={{
+                        marginLeft: "1.5rem",
+                        marginRight: "1.5rem",
+                    }}
+                    >
+                        <StatsList list={list2} />
+                    </Box>
+                </Box>
+                <Box
+                    sx={{
+                        m: "1.5rem"
+                    }}
+                    >
+                        <StatsList list={[`Notes: ${activity.Notes}`]} />
+                    </Box>
+            </Box>
+            </Box> }
         </Box>
     );
 }

@@ -9,7 +9,7 @@ const ActivitiesPage = ({activitiesList, activityHeaders}) => {
     let columnValues = Object.entries(activityHeaders);
 
     let columns = columnValues.map((x, i) => {
-        if (x[0] == "StressScore") {
+        if (x[0] === "StressScore") {
             return {
                 field: x[0],
                 type: 'number',
@@ -18,7 +18,7 @@ const ActivitiesPage = ({activitiesList, activityHeaders}) => {
                 flex: 0.5,
                 renderCell: (params) => <ColourCodeBox params={params} high={110} mediumBottom={90} mediumTop={109} lowBottom={70} lowTop={89} />
             }
-        } else if (x[0] == "AvgHeartRate") {
+        } else if (x[0] === "AvgHeartRate") {
             return {
                 field: x[0],
                 type: 'number',
@@ -27,7 +27,7 @@ const ActivitiesPage = ({activitiesList, activityHeaders}) => {
                 flex: 0.5,
                 renderCell: (params) => <ColourCodeBox params={params} high={140} mediumBottom={130} mediumTop={139} lowBottom={120} lowTop={129} />      
             }
-        } else if (x[0] == "MaxHeartRate") {
+        } else if (x[0] === "MaxHeartRate") {
             return {
                 field: x[0],
                 type: 'number',
@@ -36,7 +36,7 @@ const ActivitiesPage = ({activitiesList, activityHeaders}) => {
                 flex: 0.5,
                 renderCell: (params) => <ColourCodeBox params={params} high={160} mediumBottom={150} mediumTop={159} lowBottom={140} lowTop={149} />         
             }
-        } else if (x[0] == "MaxWatts") {
+        } else if (x[0] === "MaxWatts") {
             return {
                 field: x[0],
                 type: 'number',
@@ -45,7 +45,7 @@ const ActivitiesPage = ({activitiesList, activityHeaders}) => {
                 flex: 0.5,
                 renderCell: (params) => <ColourCodeBox params={params} high={250} mediumBottom={220} mediumTop={249} lowBottom={200} lowTop={219} />            
             }
-        } else if (x[0] == "AvgPower") {
+        } else if (x[0] === "AvgPower") {
             return {
                 field: x[0],
                 type: 'number',
@@ -54,7 +54,7 @@ const ActivitiesPage = ({activitiesList, activityHeaders}) => {
                 flex: 0.5,
                 renderCell: (params) => <ColourCodeBox params={params} high={160} mediumBottom={150} mediumTop={159} lowBottom={140} lowTop={149} />          
             }
-        } else if (x[0] == "AvgCadence"){
+        } else if (x[0] === "AvgCadence"){
             return {
                 field: x[0],
                 type: 'number',
@@ -87,7 +87,7 @@ const ActivitiesPage = ({activitiesList, activityHeaders}) => {
                     }
                 }
             }
-        } else if (x[0] == "Name") {
+        } else if (x[0] === "Name") {
             return {
                 field: x[0],
                 headerAlign: "left",
@@ -95,7 +95,7 @@ const ActivitiesPage = ({activitiesList, activityHeaders}) => {
                 flex: 2,
                 renderCell: (params) => <Link to={`/activities/${params.id}`}>{params.value}</Link>
             }
-        } else if (x[0] == "Notes") {
+        } else if (x[0] === "Notes") {
             return {
                 field: x[0],
                 headerAlign: "left",
