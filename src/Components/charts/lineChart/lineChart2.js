@@ -24,12 +24,12 @@ const LineChart2 = ({header, data, chartWidth, xDataKey, lineDataKey, lineName})
           }}
           data={data}>
         <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-        <XAxis dataKey="Time" />
+        <XAxis dataKey={xDataKey} />
         <YAxis />
         <Tooltip contentStyle={{color:"#000"}} itemStyle={{color:"#000"}} />
         <Line type="monotone"
-          dataKey="Heartrate" 
-          name="Heartrate"
+          dataKey={lineDataKey} 
+          name={lineName}
           stroke="#FC5200" 
           activeDot={{ r: 6 }}
           strokewidth={2} />

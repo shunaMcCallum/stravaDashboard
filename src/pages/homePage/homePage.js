@@ -7,7 +7,6 @@ import LongTermStats from "./longTermStats.js";
 import SegmentStats from "./segmentStats.js";
 
 const HomePage = ({userDetails, userStats, initialStats, activities, alpeDuZwiftEfforts, thisWeekActivities, lastWeekActivities, thisMonthActivities, lastMonthActivities}) => {
-    console.log(lastWeekActivities)
 
     return(
     <Box>
@@ -18,7 +17,6 @@ const HomePage = ({userDetails, userStats, initialStats, activities, alpeDuZwift
         <ShortTermStats thisWeekActivities={thisWeekActivities} lastWeekActivities={lastWeekActivities} thisMonthActivities={thisMonthActivities} lastMonthActivities={lastMonthActivities} />
         
         {/* ROW 3 */}
-        {/* <Commutes morningCommutes={morningCommutes} afternoonCommutes={afternoonCommutes} /> */}
         <Commutes activities={activities} />
 
         {/* ROW 4 */}
