@@ -1,14 +1,22 @@
 import React, {useState, useEffect} from "react";
 import {Box} from "@mui/material";
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
 import { useParams } from 'react-router-dom';
 import polyline from "@mapbox/polyline";
 import SectionHeaderSubHeader from "../../../components/headers/sectionHeaderSubHeader";
 import SectionHeader from "../../../components/headers/sectionHeader";
 import StatsList from "../../../components/lists/statsList";
-import LineChart2 from "../../../components/charts/lineChart/lineChart2";
+// import LineChart2 from "../../../components/charts/lineChart/lineChart2";
+import LineChart3 from "../../../components/charts/lineChart/lineChart3";
 import Map from "../../../components/maps/map";
 
 const ActivityPage = ({activities}) => {
+
+    const [hrChecked, setHrChecked] = useState(true);
+    const [cadenceChecked, setCadenceChecked] = useState(false);
+    const [distanceChecked, setDistanceChecked] = useState(false);
 
     const { id } = useParams();
     const activity = activities.find((a) => a.id == id);
@@ -46,14 +54,18 @@ const ActivityPage = ({activities}) => {
             if (x === 0) {
                 stats.push({
                     Time: t,
-                    Heartrate: hrList[x]
+                    Heartrate: hrList[x],
+                    Cadence: cadenceList[x],
+                    Distance: distanceList[x]
                 })
             } else if (hrList[x] === hrList[x - 1]) {
                 n ++;
             } else {
                 stats.push({
                     Time: t,
-                    Heartrate: hrList[x]
+                    Heartrate: hrList[x],
+                    Cadence: cadenceList[x],
+                    Distance: distanceList[x]
                 })
             } 
         };
@@ -67,6 +79,30 @@ const ActivityPage = ({activities}) => {
         const list4 = [`Average Cadence: ${activity.AvgCadence}`, `Average HeartRate: ${activity.AvgHeartRate}`]
 
         const pol = polyline.decode(activity.MapPolyline);
+
+        const handleHeartRateChange = (event) => {
+            if (event.target.checked === true) {
+                setHrChecked(true);
+            } else {
+                setHrChecked(false);
+            }
+        }
+
+        const handleCadenceChange = (event) => {
+            if (event.target.checked === true) {
+                setCadenceChecked(true);
+            } else {
+                setCadenceChecked(false);
+            }
+        }
+
+        const handleDistanceChange = (event) => {
+            if (event.target.checked === true) {
+                setDistanceChecked(true);
+            } else {
+                setDistanceChecked(false);
+            }
+        }
 
     return(
         <Box
@@ -111,7 +147,7 @@ const ActivityPage = ({activities}) => {
                 </Box>
             <Box
             sx={{
-                height: "21rem",
+                height: "22rem",
                 backgroundColor:"#332240",
                 boxShadow:"0rem 0.15rem 1.5rem black",
                 padding:"0.5rem 1rem 0.5rem -0.5rem",
@@ -137,7 +173,16 @@ const ActivityPage = ({activities}) => {
                     },
             }}
             >
-                <LineChart2 header={"Performance Stats"} data={stats} chartWidth={1400} xDataKey={"Time"} lineDataKey={"Heartrate"} lineName={"Heartrate"} />
+                <Box 
+                sx={{
+                    display: "flex",
+                    marginLeft: "3.5rem"
+                }}>
+                    <FormControlLabel control={<Checkbox defaultChecked />} label="Heart Rate" onChange={handleHeartRateChange} />
+                    <FormControlLabel control={<Checkbox />} label="Cadence" onChange={handleCadenceChange} />
+                    <FormControlLabel control={<Checkbox />} label="Distance" onChange={handleDistanceChange} />
+                </Box>
+                <LineChart3 header={"Performance Stats"} data={stats} chartWidth={1400} hrChecked={hrChecked} cadenceChecked={cadenceChecked} distanceChecked={distanceChecked} />
             </Box>
 
             {/* ROW 3 */}
