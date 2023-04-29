@@ -3,7 +3,14 @@ import { Typography, Box } from "@mui/material";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 
 
-const LineChart3 = ({header, data, chartWidth, hrChecked, cadenceChecked, distanceChecked}) => {
+const LineChart3 = ({header, data, chartWidth, pwrChecked, hrChecked, cadenceChecked, distanceChecked}) => {
+
+    const pwrs = data.map(object => {
+        return object.Power;
+    });
+
+    const max = Math.max(...pwrs);
+    console.log(max)
 
     return (
       <Box>
@@ -25,15 +32,23 @@ const LineChart3 = ({header, data, chartWidth, hrChecked, cadenceChecked, distan
           data={data}>
         <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
         <XAxis dataKey="Time" />
-        <YAxis />
+        <YAxis type="number" domain={[0, max]} />
+        {/* <YAxis /> */}
         <Tooltip contentStyle={{color:"#000"}} itemStyle={{color:"#000"}} />
+        {/* Power Line */}
+        { pwrChecked ? <Line connectNulls
+          type="linear"
+          dataKey="Power" 
+          name="Power"
+          dot={false}
+          stroke="#EDFF7A" 
+          strokewidth={2} /> : null}
         {/* Heart Rate Line */}
         { hrChecked ? <Line connectNulls
           type="linear"
           dataKey="Heartrate" 
           name="Heartrate"
           dot={false}
-
           stroke="#ABDAFC" 
           strokewidth={2} /> : null}
           {/* Cadence Line */}
@@ -50,7 +65,6 @@ const LineChart3 = ({header, data, chartWidth, hrChecked, cadenceChecked, distan
           dataKey="Distance" 
           name="Distance"
           dot={false}
-
           stroke="#8AEA92" 
           strokewidth={2} /> : null }
         </LineChart>

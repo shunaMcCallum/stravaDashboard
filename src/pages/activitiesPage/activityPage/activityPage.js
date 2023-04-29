@@ -14,6 +14,7 @@ import Map from "../../../components/maps/map";
 const ActivityPage = ({activities}) => {
 
     const [hrChecked, setHrChecked] = useState(true);
+    const [pwrChecked, setPwrChecked] = useState(true);
     const [cadenceChecked, setCadenceChecked] = useState(true);
     const [distanceChecked, setDistanceChecked] = useState(true);
 
@@ -25,6 +26,7 @@ const ActivityPage = ({activities}) => {
     let stats = [];
     let timeList = [];
     let hrList = [];
+    let pwrList = [];
     let distanceList = [];
     let cadenceList = [];
 
@@ -32,6 +34,12 @@ const ActivityPage = ({activities}) => {
         activity.TimeList = activity.TimeList.replace('[', '');
         activity.TimeList = activity.TimeList.replace(']', '');
         timeList = activity.TimeList.split(',');
+    }
+
+    if (activity.PowerList != null) {
+        activity.PowerList = activity.PowerList.replace('[', '');
+        activity.PowerList = activity.PowerList.replace(']', '');
+        pwrList = activity.PowerList.split(',');
     }
 
     if (activity.HRList != null) {
@@ -72,21 +80,22 @@ const ActivityPage = ({activities}) => {
 
             time = hours + ":" + minutes + ":" + seconds;
             
-            if (x === 0) {
+            // if (x === 0) {
                 stats.push({
                     Time: time,
+                    Power: pwrList[x],
                     Heartrate: hrList[x],
                     Cadence: cadenceList[x],
                     Distance: (distanceList[x] / 1609).toFixed(2)
                 })
-            } else {
-                stats.push({
-                    Time: time,
-                    Heartrate: hrList[x],
-                    Cadence: cadenceList[x],
-                    Distance: (distanceList[x] / 1609).toFixed(2)
-                })
-            } 
+            // } else {
+            //     stats.push({
+            //         Time: time,
+            //         Heartrate: hrList[x],
+            //         Cadence: cadenceList[x],
+            //         Distance: (distanceList[x] / 1609).toFixed(2)
+            //     })
+            // } 
         };
     }
 
@@ -104,6 +113,14 @@ const ActivityPage = ({activities}) => {
                 setHrChecked(true);
             } else {
                 setHrChecked(false);
+            }
+        }
+
+        const handlePowerChange = (event) => {
+            if (event.target.checked === true) {
+                setPwrChecked(true);
+            } else {
+                setPwrChecked(false);
             }
         }
 
@@ -197,11 +214,12 @@ const ActivityPage = ({activities}) => {
                     display: "flex",
                     marginLeft: "3.5rem"
                 }}>
+                    <FormControlLabel control={<Checkbox defaultChecked />} label="Power" onChange={handlePowerChange} />
                     <FormControlLabel control={<Checkbox defaultChecked />} label="Heart Rate" onChange={handleHeartRateChange} />
                     <FormControlLabel control={<Checkbox defaultChecked />} label="Cadence" onChange={handleCadenceChange} />
                     <FormControlLabel control={<Checkbox defaultChecked />} label="Distance" onChange={handleDistanceChange} />
                 </Box>
-                <LineChart3 header={"Performance Stats"} data={stats} chartWidth={1400} hrChecked={hrChecked} cadenceChecked={cadenceChecked} distanceChecked={distanceChecked} />
+                <LineChart3 header={"Performance Stats"} data={stats} chartWidth={1400} pwrChecked={pwrChecked} hrChecked={hrChecked} cadenceChecked={cadenceChecked} distanceChecked={distanceChecked} />
             </Box>
 
             {/* ROW 3 */}

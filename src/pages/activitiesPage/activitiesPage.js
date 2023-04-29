@@ -93,7 +93,7 @@ const ActivitiesPage = ({activitiesList, activityHeaders}) => {
                 headerAlign: "left",
                 align: "left",
                 flex: 2,
-                renderCell: (params) => <Link to={`/activities/${params.id}`}>{params.value}</Link>
+                renderCell: (params) => <Link to={`/activities/${params.id}`} style={{ color: '#FFF' }}>{params.value}</Link>
             }
         } else if (x[0] === "Notes") {
             return {
