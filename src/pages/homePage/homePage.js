@@ -7,7 +7,7 @@ import LongTermStats from "./longTermStats.js";
 import SegmentStats from "./segmentStats.js";
 
 const HomePage = ({userDetails, userStats, initialStats, activities, alpeDuZwiftEfforts, thisWeekActivities, lastWeekActivities, thisMonthActivities, lastMonthActivities}) => {
-
+    
     return(
     <Box>
         {/* ROW 1 */}

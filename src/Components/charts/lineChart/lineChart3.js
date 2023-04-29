@@ -1,6 +1,6 @@
 import React from 'react';
 import { Typography, Box } from "@mui/material";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 
 
 const LineChart3 = ({header, data, chartWidth, hrChecked, cadenceChecked, distanceChecked}) => {
@@ -28,25 +28,30 @@ const LineChart3 = ({header, data, chartWidth, hrChecked, cadenceChecked, distan
         <YAxis />
         <Tooltip contentStyle={{color:"#000"}} itemStyle={{color:"#000"}} />
         {/* Heart Rate Line */}
-        { hrChecked ? <Line type="monotone"
+        { hrChecked ? <Line connectNulls
+          type="linear"
           dataKey="Heartrate" 
           name="Heartrate"
-          stroke="#FC5200" 
-          activeDot={{ r: 6 }}
+          dot={false}
+
+          stroke="#ABDAFC" 
           strokewidth={2} /> : null}
           {/* Cadence Line */}
-          { cadenceChecked ? <Line type="monotone"
+          { cadenceChecked ? <Line connectNulls
+          type="linear"
           dataKey="Cadence" 
           name="Cadence"
-          stroke="#FC5200" 
-          activeDot={{ r: 6 }}
+          dot={false}
+          stroke="#D1345B" 
           strokewidth={2} /> : null }
           {/* Distance Line */}
-          { distanceChecked ? <Line type="monotone"
+          { distanceChecked ? <Line connectNulls 
+          type="linear"
           dataKey="Distance" 
           name="Distance"
-          stroke="#FC5200" 
-          activeDot={{ r: 6 }}
+          dot={false}
+
+          stroke="#8AEA92" 
           strokewidth={2} /> : null }
         </LineChart>
       </Box>

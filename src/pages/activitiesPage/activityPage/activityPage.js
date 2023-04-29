@@ -8,15 +8,14 @@ import polyline from "@mapbox/polyline";
 import SectionHeaderSubHeader from "../../../components/headers/sectionHeaderSubHeader";
 import SectionHeader from "../../../components/headers/sectionHeader";
 import StatsList from "../../../components/lists/statsList";
-// import LineChart2 from "../../../components/charts/lineChart/lineChart2";
 import LineChart3 from "../../../components/charts/lineChart/lineChart3";
 import Map from "../../../components/maps/map";
 
 const ActivityPage = ({activities}) => {
 
     const [hrChecked, setHrChecked] = useState(true);
-    const [cadenceChecked, setCadenceChecked] = useState(false);
-    const [distanceChecked, setDistanceChecked] = useState(false);
+    const [cadenceChecked, setCadenceChecked] = useState(true);
+    const [distanceChecked, setDistanceChecked] = useState(true);
 
     const { id } = useParams();
     const activity = activities.find((a) => a.id == id);
@@ -30,42 +29,62 @@ const ActivityPage = ({activities}) => {
     let cadenceList = [];
 
     if (activity.TimeList != null) {
+        activity.TimeList = activity.TimeList.replace('[', '');
+        activity.TimeList = activity.TimeList.replace(']', '');
         timeList = activity.TimeList.split(',');
     }
 
     if (activity.HRList != null) {
+        activity.HRList = activity.HRList.replace('[', '');
+        activity.HRList = activity.HRList.replace(']', '');
         hrList = activity.HRList.split(',');
     }
 
     if (activity.DistanceList != null) {
+        activity.DistanceList = activity.DistanceList.replace('[', '');
+        activity.DistanceList = activity.DistanceList.replace(']', '');
         distanceList = activity.DistanceList.split(',');
     }
 
     if (activity.CadenceList != null) {
+        activity.CadenceList = activity.CadenceList.replace('[', '');
+        activity.CadenceList = activity.CadenceList.replace(']', '');
         cadenceList = activity.CadenceList.split(',');
     }
 
     const setData = () => {
         let x = 0;
+        let hours = 0;
+        let minutes = 0;
+        let seconds = 0;
+        let time;
 
         for(var t of timeList) {
             x = timeList.indexOf(t);
+
+            hours = Math.floor((t % (3600 * 24)) / 3600);
+            minutes = Math.floor((t % 3600) / 60);
+            seconds = Math.floor(t % 60);
+
+            hours = hours < 10 ? "0" + hours : hours;
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            time = hours + ":" + minutes + ":" + seconds;
             
             if (x === 0) {
                 stats.push({
-                    Time: t,
+                    Time: time,
                     Heartrate: hrList[x],
                     Cadence: cadenceList[x],
-                    Distance: distanceList[x]
+                    Distance: (distanceList[x] / 1609).toFixed(2)
                 })
-            } else if (hrList[x] === hrList[x - 1]) {
-                n ++;
             } else {
                 stats.push({
-                    Time: t,
+                    Time: time,
                     Heartrate: hrList[x],
                     Cadence: cadenceList[x],
-                    Distance: distanceList[x]
+                    Distance: (distanceList[x] / 1609).toFixed(2)
                 })
             } 
         };
@@ -74,9 +93,9 @@ const ActivityPage = ({activities}) => {
         setData();
 
         const list1 = [`Elapsed Time: ${activity.ElapsedTime}`, `Stress Score: ${activity.StressScore}`]
-        const list2 = [`Distance: ${activity.Distance}`, `Elevation Gain: ${activity.ElevationGain}`]
-        const list3 = [`Average Speed: ${activity.AvgSpeed}`, `Average Power: ${activity.AvgPower}`]
-        const list4 = [`Average Cadence: ${activity.AvgCadence}`, `Average HeartRate: ${activity.AvgHeartRate}`]
+        const list2 = [`Distance: ${activity.Distance} miles`, `Elevation Gain: ${activity.ElevationGain} ft`]
+        const list3 = [`Average Speed: ${activity.AvgSpeed} mph`, `Average Power: ${activity.AvgPower} W`]
+        const list4 = [`Average Cadence: ${activity.AvgCadence} rpm`, `Average HeartRate: ${activity.AvgHeartRate} bpm`]
 
         const pol = polyline.decode(activity.MapPolyline);
 
@@ -179,8 +198,8 @@ const ActivityPage = ({activities}) => {
                     marginLeft: "3.5rem"
                 }}>
                     <FormControlLabel control={<Checkbox defaultChecked />} label="Heart Rate" onChange={handleHeartRateChange} />
-                    <FormControlLabel control={<Checkbox />} label="Cadence" onChange={handleCadenceChange} />
-                    <FormControlLabel control={<Checkbox />} label="Distance" onChange={handleDistanceChange} />
+                    <FormControlLabel control={<Checkbox defaultChecked />} label="Cadence" onChange={handleCadenceChange} />
+                    <FormControlLabel control={<Checkbox defaultChecked />} label="Distance" onChange={handleDistanceChange} />
                 </Box>
                 <LineChart3 header={"Performance Stats"} data={stats} chartWidth={1400} hrChecked={hrChecked} cadenceChecked={cadenceChecked} distanceChecked={distanceChecked} />
             </Box>
