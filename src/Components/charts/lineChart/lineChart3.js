@@ -5,12 +5,35 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts'
 
 const LineChart3 = ({header, data, chartWidth, pwrChecked, hrChecked, cadenceChecked, distanceChecked}) => {
 
-    const pwrs = data.map(object => {
-        return object.Power;
+    const maxPwr = data.map(object => {
+        if (object.Power != undefined) {
+            return object.Power;
+        } else {
+            return 0;
+        }
     });
 
-    const max = Math.max(...pwrs);
-    console.log(max)
+    const maxHr = data.map(object => {
+        if (object.Heartrate != undefined) {
+            return object.Heartrate;
+        } else {
+            return 0;
+        }
+    });
+
+    const maxDist = data.map(object => {
+        if (object.Distance != undefined) {
+            return object.Distance;
+        } else {
+            return 0;
+        }
+    });
+
+    const max1 = Math.max(...maxPwr);
+    const max2 = Math.max(...maxHr);
+    const max3 = Math.max(...maxDist);
+    const max4 = [max1, max2, max3];
+    const chartMax = Math.max(...max4);
 
     return (
       <Box>
@@ -32,7 +55,7 @@ const LineChart3 = ({header, data, chartWidth, pwrChecked, hrChecked, cadenceChe
           data={data}>
         <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
         <XAxis dataKey="Time" />
-        <YAxis type="number" domain={[0, max]} />
+        <YAxis type="number" domain={[0, chartMax]} />
         {/* <YAxis /> */}
         <Tooltip contentStyle={{color:"#000"}} itemStyle={{color:"#000"}} />
         {/* Power Line */}
