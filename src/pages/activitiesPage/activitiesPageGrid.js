@@ -66,7 +66,12 @@ const ActivitiesPageGrid = ({columns, rowData}) => {
                         MaxSpeed: false,
                         AvgSpeed: false,
                         Commute: false,
-                        SportType: false
+                        SportType: false,
+                        TimeList: false,
+                        HRList: false,
+                        PowerList: false,
+                        CadenceList: false,
+                        DistanceList: false
                     }
                   }}}
                   onCellEditCommit={onCellValueChanged}
