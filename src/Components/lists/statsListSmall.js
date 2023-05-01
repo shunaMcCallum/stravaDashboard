@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
 
-const StatsListSmall = ({list, listTitle}) => {
+const StatsListSmall = ({list}) => {
 
     const listItems = list.map((item, index) => {
         return(

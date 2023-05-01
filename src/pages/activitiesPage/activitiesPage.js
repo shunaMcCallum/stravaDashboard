@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import {Link} from "react-router-dom";
 import {Box} from "@mui/material";
 import ActivitiesPageGrid from "./activitiesPageGrid";
@@ -6,9 +6,15 @@ import ColourCodeBox from "../../components/dataGridFeatures/colourCodeBox";
 
 const ActivitiesPage = ({activitiesList, activityHeaders}) => {
 
+    // get column headers by tunring activityheaders object into list
     let columnValues = Object.entries(activityHeaders);
 
+    // loop through the column headers and implement specific formatting for each column where relevant
     let columns = columnValues.map((x, i) => {
+        // certain columns will contain colour coded boxes to display their data, indicating how hard the workout was
+        // to implement custom formatting for a cell, renderCell is used - the data displayed in that cell can then be passed as
+        // parameters to a custom component which will render in a particular way depending on the value of the parameter
+        // in this case we have created a custom component called ColourCodeBox
         if (x[0] === "StressScore") {
             return {
                 field: x[0],
@@ -61,6 +67,8 @@ const ActivitiesPage = ({activitiesList, activityHeaders}) => {
                 headerAlign: "left",
                 align: "left",
                 flex: 0.5,
+                // here, where there is no cadence recorded with the activity the column will display a blank - however I want to
+                // display -- instead, so again I use renderCell to say if this parameter is null, give me back a box with -- inside
                 renderCell: (params) => {
                     if (params.value === null) {
                         return <Box 
@@ -93,10 +101,13 @@ const ActivitiesPage = ({activitiesList, activityHeaders}) => {
                 headerAlign: "left",
                 align: "left",
                 flex: 2,
+                // here, in the column showing the name of the activity, I want the name to act as a link to the individual activity page
+                // so again I use renderCell to generate a Link which leads to the route I have created for viewing individuak activities
                 renderCell: (params) => <Link to={`/activities/${params.id}`} style={{ color: '#FFF' }}>{params.value}</Link>
             }
         } else if (x[0] === "Notes") {
             return {
+                // the "editable" property of the Notes column is set to true so that data can be entered into there and saved to the database
                 field: x[0],
                 headerAlign: "left",
                 align: "left",
@@ -104,6 +115,7 @@ const ActivitiesPage = ({activitiesList, activityHeaders}) => {
                 editable: true,
             }
         }
+        // all columns not specified above are rendered as per this else statement
         else {
             return {
                 field: x[0],

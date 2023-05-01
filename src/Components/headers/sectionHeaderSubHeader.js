@@ -17,7 +17,6 @@ const SectionHeaderSubHeader = ({header, subheader}) => {
             justifyContent: "center",
             backgroundColor: "#332240",
             boxShadow: "0rem 0.15rem 1.5rem black",
-            // color: "#FC5200"
         }}    
     >
         <Typography 

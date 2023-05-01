@@ -1,4 +1,3 @@
-// import '../../Styling/Map.css'
 import { Box } from '@mui/material';
 import { MapContainer, Polyline, ZoomControl, useMap } from 'react-leaflet';
 import Layers from './layers.js';

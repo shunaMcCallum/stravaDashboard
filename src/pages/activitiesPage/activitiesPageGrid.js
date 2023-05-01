@@ -5,7 +5,8 @@ import {Box} from "@mui/material";
 
 const ActivitiesPageGrid = ({columns, rowData}) => {
 
-  //Takes the data from the Notes column and updates the corresponding record in the database
+  // takes the data from the Notes column and updates the corresponding record in the database
+  // takes in the id of the corresponding workout, with the data entered into the Notes column as the payload
   const handleSubmit = async (id, payload) => {
     try {
       fetch(`http://localhost:5000/activities/${id}`, {
@@ -18,8 +19,8 @@ const ActivitiesPageGrid = ({columns, rowData}) => {
     }
 }
 
-  //Handles the submission of new data into the Notes column in the data grid
-  //Calls the handlesubmit function above which sends that data to the database
+  // handles the submission of new data into the Notes column in the data grid
+  // calls the handlesubmit function above which sends that data to the database
   const onCellValueChanged = useCallback((event) => {
     handleSubmit(event.id, { Id: event.id, Notes: event.value });
   }, []);

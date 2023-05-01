@@ -12,7 +12,6 @@ const CustomBox = ({text, textColour, backgroundColour}) => {
             alignItems: "center",
             backgroundColor: backgroundColour,
             borderRadius: "0.75rem",
-            //boxShadow: "0rem 0rem 0.7rem 0rem #0B0A0A"
         }}
         >
         {text}

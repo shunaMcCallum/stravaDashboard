@@ -1,6 +1,6 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import { Typography, Box } from "@mui/material";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 
 
 const LineChart2 = ({header, data, chartWidth, xDataKey, lineDataKey, lineName}) => {
