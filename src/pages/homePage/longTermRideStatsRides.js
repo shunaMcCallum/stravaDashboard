@@ -12,11 +12,7 @@ import Map from "../../components/maps/map.js";
                 display: "flex",
                 flexDirection: "row",
                 justifyContent: "flex-start",
-                // alignItems: "center",
-                marginTop: "1.5rem",
-                // borderColor: "green",
-                // borderWidth: "2px",
-                // borderStyle: "solid"
+                marginTop: "1.5rem"
             }}
         >
             <Box

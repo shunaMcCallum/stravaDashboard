@@ -4,8 +4,11 @@ import LineChart2 from "../../components/charts/lineChart/lineChart2";
 
 const SegmentStats = ({alpeDuZwiftEfforts}) => {
 
+    // again we need to display a list of data in correct format, so we declare an empty list
     const alpes = []
 
+    // and using the data fed through to this component, we calculate the data we want to view in the correct format for a line chart.
+    // including changing the time to HH:MM:SS format from seconds
     const setAlpeDuZwiftData = () => {
         for(var alpe of alpeDuZwiftEfforts) {
                 

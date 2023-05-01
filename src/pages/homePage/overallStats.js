@@ -5,8 +5,8 @@ import StatsListSmall from "../../components/lists/statsListSmall";
 
 const OverallStats = ({userDetails}) => {
 
+    // declare static variables for displaying basic user data - each variable is fed through to one of our custom components below
     const text = `Welcome, ${userDetails.Firstname}!`;
-    const headlineTitle = 'Current Statistics';
     const ftp = ["Current FTP: 207W"]
     const weight = [`Current Weight: ${userDetails.Weight}kg`]
     const accCreated = [`Account Created: ${userDetails.AccountCreatedAt}`]

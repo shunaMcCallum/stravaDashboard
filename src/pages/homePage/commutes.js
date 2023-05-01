@@ -4,9 +4,14 @@ import LineChart2 from "../../components/charts/lineChart/lineChart2";
 
 const Commutes = ({activities}) => {
 
+    // declare lists for holding just commute activities from the full activity list
     const morningCommutes = []
     const afternoonCommutes = []
 
+    // function for populating each commute list with correctly formatted data for dispalying in line charts
+    // start by searching for commute rides, then split them into morning and afternoon commutes
+    // then grab the length of each commute and format the time into HH:MM:SS
+    // then push the date and time data into the list in the format correct for displaying in our LineChart component
     const setMorningData = () => {
         for(var activity of activities) {
                 if (activity.RideType = "Commute" && activity.Name === "Morning Ride") {

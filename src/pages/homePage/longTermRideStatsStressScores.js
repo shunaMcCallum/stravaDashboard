@@ -10,10 +10,7 @@ import PieChart from "../../components/charts/pieChart/pieChart.js";
             sx={{
                 display: "flex",
                 flexDirection: "column",
-                justifyContent: "space-evenly",
-                // borderColor: "green",
-                // borderWidth: "2px",
-                // borderStyle: "solid"
+                justifyContent: "space-evenly"
             }}
         >
             <Box>

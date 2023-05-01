@@ -7,10 +7,12 @@ import polyline from '@mapbox/polyline';
 
 const LongTermStats = ({userStats, initialStats, activities}) => {
 
+    // declare variables for populating the pie charts
     const [rideTypesPieChartArray, setRideTypesPieChartArray] = useState([]);
     const [workoutScoresPieChartArray, setWorkoutScoresPieChartArray] = useState([]);
     const [rideTimePieChartArray, setRideTimePieChartArray] = useState([]);
 
+    // declare variables for populating stat boxes
     const [rideTotalsTitle, setRideTotalsTitle] = useState(null);
     const [rideTotalsArray, setRideTotalsArray] = useState([]);
 
@@ -20,9 +22,11 @@ const LongTermStats = ({userStats, initialStats, activities}) => {
     const [farthestRideTitle, setFarthestRideTitle] = useState(null);
     const [farthestRideArray, setFarthestRideArray] = useState([]);
 
+    // declare variables for populating maps
     const [longestPolylineArray, setLongestPolylineArray] = useState(null);
     const [farthestPolylineArray, setFarthestPolylineArray] = useState(null);
 
+    // calculate the values for all of these variables when the page is rendered
     useEffect(() => {
         populateRideTypesPieChart(initialStats);
     }, [userStats[0]]);
@@ -47,6 +51,10 @@ const LongTermStats = ({userStats, initialStats, activities}) => {
         populateFarthestRideList(initialStats);
     }, [userStats[0]]);
 
+    // three functions for populating the pie charts - the data needs to be formatted in the correct way, which we do here using
+    // a list of numbers for different statistics we want to see
+    // and "item" is fed into each function - the item will either be the default stats loaded with the page, or a selection from
+    // a filter which will control the data shown in all three pie charts
     const populateRideTypesPieChart = ((item) => {
         setRideTypesPieChartArray([["Total number of rides", "Number of rides"], ["Workout rides", item.RideWorkout],
                 ["Commutes", item.RideCommute], ["Virtual fun rides", item.RideVirtual],
@@ -65,6 +73,7 @@ const LongTermStats = ({userStats, initialStats, activities}) => {
                 ["Outdoor fun ride time", item.RideOutdoor_Time]]);
     });
 
+    // similar to the pie charts we populate our three stat boxes with nicely formatted data, which will updated with the filter too
     const populateRideTotalsList = ((item) => {
         setRideTotalsTitle(`Ride Totals for ${item.Header}`)
         setRideTotalsArray([
@@ -97,6 +106,7 @@ const LongTermStats = ({userStats, initialStats, activities}) => {
         ]);
     });
 
+    // and finally we need to format the polyline data in order to feed it through to our map
     const initialLongestRidePolyline = () => {
         if (initialStats.LongestRidePolyline) {
             return polyline.decode(initialStats.LongestRidePolyline);
@@ -113,6 +123,8 @@ const LongTermStats = ({userStats, initialStats, activities}) => {
         }
     };
 
+    // event handler function - this is fed through to the filter which will control the data for each of the Pie Chart, Stat Box
+    // and Map components in this section of the page
     const handleListSelect = ((item) => {
                 populateRideTypesPieChart(item);
                 populateWorkoutScoresPieChart(item);
@@ -124,6 +136,9 @@ const LongTermStats = ({userStats, initialStats, activities}) => {
                 setFarthestPolylineArray(polyline.decode(item.FarthestRidePolyline));
     });
 
+    // we have one final component which displays stress scores for different types of workout - I couldn't be bothered wrangling
+    // the data from the activities list so I've hard coded in each of the workouts I'd like to see in this component - this is the
+    // filter list which will determine which stress scores we are viewing at any one time
     const workoutNames = [
         {Header: "2 x 20 mins FTP"},
         {Header: "2 x 30 mins FTP"},
@@ -137,6 +152,8 @@ const LongTermStats = ({userStats, initialStats, activities}) => {
         {Header: "Tempo with Surges"},
         {Header: "SST"}
     ];
+
+    // and we declare a variable for holding the stress scores, and a function for calculating them depending on the chosen filter
     const [workoutStressScores, setWorkoutStressScores] = useState([]);
 
     useEffect(() => {
@@ -167,7 +184,7 @@ const LongTermStats = ({userStats, initialStats, activities}) => {
         setWorkoutStressScores([["TotalNumberOfWorkouts", "NumberWithinStressScoreRange"], scoresBelow70, scores71to90, scores91to110, scoresAbove111]);
     });
 
-
+    // and an event handler for this filter
     const handleStressListSelect = ((item) => {
         populateWorkoutStressScoresPieChart(item);
     });
@@ -178,10 +195,7 @@ const LongTermStats = ({userStats, initialStats, activities}) => {
       sx={{
         display: "flex",
         flexDirection: "column",
-        marginTop: "1.5rem",
-        //   borderColor: "green",
-        //   borderWidth: "2px",
-        //   borderStyle: "solid"
+        marginTop: "1.5rem"
       }}
       >
         <Box>
@@ -199,11 +213,9 @@ const LongTermStats = ({userStats, initialStats, activities}) => {
         <LongTermRideStatsRides
             longestRideTitle={longestRideTitle}
             longestRideArray={longestRideArray}
-            // longestRidePolyline={initialLongestRidePolyline()}
             longestRidePolyline={longestPolylineArray}
             farthestRideTitle={farthestRideTitle}
             farthestRideArray={farthestRideArray}
-            // farthestRidePolyline={initialFarthestRidePolyline()}
             farthestRidePolyline={farthestPolylineArray}
             handleListSelect={handleListSelect}
             workoutNames={workoutNames}
@@ -214,11 +226,9 @@ const LongTermStats = ({userStats, initialStats, activities}) => {
             longestRideTitle={longestRideTitle}
             longestRideArray={longestRideArray}
             longestRidePolyline={initialLongestRidePolyline()}
-            // longestRidePolyline={longestPolylineArray}
             farthestRideTitle={farthestRideTitle}
             farthestRideArray={farthestRideArray}
             farthestRidePolyline={initialFarthestRidePolyline()}
-            // farthestRidePolyline={farthestPolylineArray}
             handleListSelect={handleListSelect}
             workoutNames={workoutNames}
             handleStressListSelect={handleStressListSelect}

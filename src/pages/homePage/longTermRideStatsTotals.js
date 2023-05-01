@@ -2,8 +2,6 @@ import React from "react";
 import { Box, Typography } from "@mui/material";
 import PieChart from "../../components/charts/pieChart/pieChart.js";
 import StatsList from "../../components/lists/statsList.js";
-import Map from "../../components/maps/map.js";
-import polyline from '@mapbox/polyline'
 
     const LongTermRideStatsTotals = ({rideTypesPieChartArray, workoutScoresPieChartArray, rideTimePieChartArray, rideTotalsTitle, rideTotalsArray}) => {
 
@@ -14,10 +12,7 @@ import polyline from '@mapbox/polyline'
                 flexDirection: "row",
                 justifyContent: "space-evenly",
                 alignItems: "center",
-                marginTop: "1.5rem",
-                // borderColor: "green",
-                // borderWidth: "2px",
-                // borderStyle: "solid"
+                marginTop: "1.5rem"
             }}
         >
             <Box
