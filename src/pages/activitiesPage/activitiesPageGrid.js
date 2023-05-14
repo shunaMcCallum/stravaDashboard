@@ -5,6 +5,9 @@ import {Box} from "@mui/material";
 
 const ActivitiesPageGrid = ({columns, rowData}) => {
 
+  console.log(columns)
+  console.log(rowData)
+
   // takes the data from the Notes column and updates the corresponding record in the database
   // takes in the id of the corresponding workout, with the data entered into the Notes column as the payload
   const handleSubmit = async (id, payload) => {

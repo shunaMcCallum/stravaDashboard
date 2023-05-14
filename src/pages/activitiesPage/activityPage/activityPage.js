@@ -1,15 +1,12 @@
-import React, {useState, useEffect} from "react";
-import {Box} from "@mui/material";
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
+import React, {useState} from "react";
 import { useParams } from 'react-router-dom';
+import {Box} from "@mui/material";
 import polyline from "@mapbox/polyline";
-import SectionHeaderSubHeader from "../../../components/headers/sectionHeaderSubHeader";
-import SectionHeader from "../../../components/headers/sectionHeader";
-import StatsList from "../../../components/lists/statsList";
-import LineChart3 from "../../../components/charts/lineChart/lineChart3";
-import Map from "../../../components/maps/map";
+import ActivityPageHeaders from "./activityPageHeaders";
+import ActivityPageHeaderStats from "./activityPageHeaderStats";
+import ActivityPageLineGraph from "./activityPageLineGraph";
+import ActivityPageBottomStats from "./activityPageBottomStats";
+import ActivityPageMap from "./activityPageMap";
 
 const ActivityPage = ({activities}) => {
 
@@ -109,6 +106,7 @@ const ActivityPage = ({activities}) => {
         const list2 = [`Distance: ${activity.Distance} miles`, `Elevation Gain: ${activity.ElevationGain} ft`]
         const list3 = [`Average Speed: ${activity.AvgSpeed} mph`, `Average Power: ${activity.AvgPower} W`]
         const list4 = [`Average Cadence: ${activity.AvgCadence} rpm`, `Average HeartRate: ${activity.AvgHeartRate} bpm`]
+        const list5 = [`Notes: ${activity.Notes}`]
 
         // and a polyline variable created to store the polyline for activities that have one
         const pol = polyline.decode(activity.MapPolyline);
@@ -160,217 +158,25 @@ const ActivityPage = ({activities}) => {
             {activity.SportType === "VirtualRide" || activity.SportType === "Ride" ? 
             // If Activity is a ride display this:
             <Box>
-            {/* ROW 1 */}
-            <Box>
-                <SectionHeaderSubHeader header={activity.Name} subheader={activity.RideType} />
-            </Box>
+                <ActivityPageHeaders activity={activity} />
 
-            {/* ROW 2 */}
-            <Box
-            sx={{
-                display: "flex",
-                flexDirection: "column",
-                marginTop: "1.5rem"
-            }}
-            >
-                <Box
-                    sx={{
-                        display: "flex",
-                        justifyContent: "space-evenly"
-                    }}>
-                        <Box>
-                            <SectionHeader text={`Activity ID: ${activity.id}`} />
-                        </Box>
-                        <Box>
-                            <SectionHeader text={`Date: ${activity.Date}`} />
-                        </Box>
-                        <Box>
-                            <SectionHeader text={`Time: ${activity.StartTime}`} />
-                        </Box>
-                    </Box>
-                </Box>
-            <Box
-            sx={{
-                height: "22rem",
-                backgroundColor:"#332240",
-                boxShadow:"0rem 0.15rem 1.5rem black",
-                padding:"0.5rem 1rem 0.5rem -0.5rem",
-                overflow: "auto",
-                marginTop: "1.5rem",
-                marginLeft: "1.5rem",
-                marginRight: "1.5rem",
-                marginBottom: "0rem",
-                '&:hover::-webkit-scrollbar': {
-                    display: 'block',
-                    },
-                '&::-webkit-scrollbar': {
-                    width: '0.512rem',
-                    },
-                '&::-webkit-scrollbar-track': {
-                    boxShadow: 'inset 0 0 2rem rgba(0,0,0,0.00)',
-                    webkitBoxShadow: 'inset 0 0 2rem rgba(0,0,0,0.00)',
-                    },
-                '&::-webkit-scrollbar-thumb': {
-                    backgroundColor: '#8d8e90',
-                    height: '3rem',
-                    borderRadius: '1rem',
-                    },
-            }}
-            >
-                <Box 
-                sx={{
-                    display: "flex",
-                    marginLeft: "3.5rem"
-                }}>
-                    <FormControlLabel control={<Checkbox defaultChecked />} label="Power" onChange={handlePowerChange} />
-                    <FormControlLabel control={<Checkbox defaultChecked />} label="Heart Rate" onChange={handleHeartRateChange} />
-                    <FormControlLabel control={<Checkbox defaultChecked />} label="Cadence" onChange={handleCadenceChange} />
-                    <FormControlLabel control={<Checkbox defaultChecked />} label="Distance" onChange={handleDistanceChange} />
-                </Box>
-                <LineChart3 header={"Performance Stats"} data={stats} chartWidth={1400} pwrChecked={pwrChecked} hrChecked={hrChecked} cadenceChecked={cadenceChecked} distanceChecked={distanceChecked} />
-            </Box>
+                <ActivityPageHeaderStats activity={activity} />
 
-            {/* ROW 3 */}
-            <Box
-            sx={{
-                display: "flex",
-                flexDirection: "column",
-                marginTop: "1.5rem"
-            }}>
-                <Box
-                sx={{
-                    marginTop: "1.5rem",
-                    display: "flex",
-                    justifyContent: "space-evenly"
-                }}>
-                    <Box
-                    sx={{
-                        marginLeft: "1.5rem",
-                        marginRight: "1.5rem",
-                    }}
-                    >
-                        <StatsList list={list1} />
-                    </Box>
-                    <Box
-                    sx={{
-                        marginLeft: "1.5rem",
-                        marginRight: "1.5rem",
-                    }}
-                    >
-                        <StatsList list={list2} />
-                    </Box>
-                    <Box
-                    sx={{
-                        marginLeft: "1.5rem",
-                        marginRight: "1.5rem",
-                    }}
-                    >
-                        <StatsList list={list3} />
-                    </Box>
-                    <Box
-                    sx={{
-                        marginLeft: "1.5rem",
-                        marginRight: "1.5rem",
-                    }}
-                    >
-                        <StatsList list={list4} />
-                    </Box>
-                </Box>
-                <Box
-                    sx={{
-                        m: "1.5rem"
-                    }}
-                    >
-                        <StatsList list={[`Notes: ${activity.Notes}`]} />
-                    </Box>
-            </Box>
+                <ActivityPageLineGraph stats={stats} pwrChecked={pwrChecked} hrChecked={hrChecked} cadenceChecked={cadenceChecked} distanceChecked={distanceChecked} handlePowerChange={handlePowerChange} handleHeartRateChange={handleHeartRateChange} handleCadenceChange={handleCadenceChange} handleDistanceChange={handleDistanceChange} />
 
-            {/* ROW 4 */}
-            <Box
-                sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    marginBottom: "2rem"
-                }}
-            >
-                <Map polyline={pol} />
-            </Box>
+                <ActivityPageBottomStats list1={list1} list2={list2} list3={list3} list4={list4} list5={list5} />
+
+                <ActivityPageMap pol={pol} />
+
             </Box> :
 
             // If Activity is not a ride display this instead:
             <Box>
-            <Box>
-            {/* ROW 1 */}
-            <Box>
-                <SectionHeaderSubHeader header={activity.Name} subheader={activity.SportType} />
-            </Box>
+                <ActivityPageHeaders activity={activity} />
 
-            {/* ROW 2 */}
-            <Box
-            sx={{
-                display: "flex",
-                flexDirection: "column",
-                marginTop: "1.5rem"
-            }}
-            >
-                <Box
-                    sx={{
-                        display: "flex",
-                        justifyContent: "space-evenly"
-                    }}>
-                        <Box>
-                            <SectionHeader text={`Activity ID: ${activity.id}`} />
-                        </Box>
-                        <Box>
-                            <SectionHeader text={`Date: ${activity.Date}`} />
-                        </Box>
-                        <Box>
-                            <SectionHeader text={`Time: ${activity.StartTime}`} />
-                        </Box>
-                    </Box>
-                </Box>
-                </Box>
+                <ActivityPageHeaderStats activity={activity} />
 
-            {/* ROW 3 */}
-            <Box
-            sx={{
-                display: "flex",
-                flexDirection: "column",
-                marginTop: "1.5rem"
-            }}>
-                <Box
-                sx={{
-                    marginTop: "1.5rem",
-                    display: "flex",
-                    justifyContent: "space-evenly"
-                }}>
-                    <Box
-                    sx={{
-                        marginLeft: "1.5rem",
-                        marginRight: "1.5rem",
-                    }}
-                    >
-                        <StatsList list={list1} />
-                    </Box>
-                    <Box
-                    sx={{
-                        marginLeft: "1.5rem",
-                        marginRight: "1.5rem",
-                    }}
-                    >
-                        <StatsList list={list2} />
-                    </Box>
-                </Box>
-                <Box
-                    sx={{
-                        m: "1.5rem"
-                    }}
-                    >
-                        <StatsList list={[`Notes: ${activity.Notes}`]} />
-                    </Box>
-            </Box>
+                <ActivityPageBottomStats list1={list1} list2={list2} list3={list3} list4={list4} list5={list5} />
             </Box> }
         </Box>
     );
